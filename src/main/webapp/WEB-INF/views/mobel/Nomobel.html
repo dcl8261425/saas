@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+  <link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap_exc/bootstrap.min.css}" />
+  <link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap_exc/ionicons.min.css}" />
+  <link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/js/libs/layer/skin/layer.min.css}" />
+  <link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap_exc/font-awesome.min.css}" />
+  
+  <link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap_exc/AdminLTE.css}" />
+    <link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/js/libs/AmazeUI/css/amazeui.min.css}" />
+      <link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/js/libs/mobel_alert/modelalert.css}" />
+  <style>
+</style>
+  <link rel="stylesheet" th:href="@{/css/mobel.css}" />
+  <script type="text/javascript" src="../../js/libs/jquery-1.9.1.js" th:src="@{/js/libs/jquery-1.9.1.min.js}"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.1.1.js" th:src="@{/js/libs/bootstrap_exc/jquery-ui-1.10.3.min.js}"></script>
+  <script type="text/javascript" src="../../js/libs/jquery-1.9.1.js" th:src="@{/js/libs/layer/layer.min.js}"></script>
+
+    <script type="text/javascript" src="../../js/libs/jquery-1.9.1.js" th:src="@{/js/libs/pagejs/itemPage/weixin/weixin_web.js}"></script>
+	<script th:inline="javascript">
+	var ctx = /*[[${#httpServletRequest.contextPath}+'/']]*/'/';
+	function weixin_model_row_delete(id){
+		$("#row_"+id).remove();
+	}
+	</script>
+	
+</head>
+<body class="skin-blue">
+
+
+<div id="content">
+
+	<div class="content" th:utext="${html}">
+	</div>
+</div>
+
+</body>
+</html>

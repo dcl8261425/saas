@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="Shortcut Icon" th:href="@{/img/Logo.png}"/>
+<link rel="Bookmark" th:href="@{/img/Logo.png}"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<div th:include="banckManager/mainTemplate::guanjianzi" th:remove="tag"></div>
+<title>企业管理软件-----海达科技提供</title>
+<div th:include="banckManager/mainTemplate::jscss_admin" th:remove="tag"></div>
+<script src="" th:src="@{/js/libs/pagejs/itemPage/lookAllStu.js}"></script>
+<script src="" th:src="@{/js/libs/pagejs/itemPage/SystemPermission.js}"></script>
+<script src="" th:src="@{/js/libs/pagejs/itemPage/crm/crm.js}"></script>
+<script src="" th:src="@{/js/libs/pagejs/itemPage/goods/goods.js}"></script>
+<script src="" th:src="@{/js/libs/pagejs/itemPage/hr/hr.js}"></script>
+<script src="" th:src="@{/js/libs/pagejs/itemPage/weixin/weixin.js}"></script>
+<script src="" th:src="@{/js/libs/pagejs/itemPage/message/message.js}"></script>
+</head>
+<body class="skin-blue">
+       <div id="header" th:include="banckManager/mainTemplate::header_admin" th:remove="tag"></div>
+     	<div class="wrapper row-offcanvas row-offcanvas-left">
+     		 <div id="header" th:include="banckManager/mainTemplate::item" th:remove="tag"></div>
+     		 <aside class="right-side" id="html_content">
+             </aside><!-- /.right-side -->
+     	</div>
+     	<div id="function_page"></div>
+     	<div id="function_page2"></div>
+     	<div id="function_page3"></div>
+     	<div id="function_page4"></div>
+     	<div id="select_page1"></div>
+     	<div id="select_page2"></div>
+     	<div id="select_page3"></div>
+     	<div id="select_page4"></div>
+     	<div id="select_page5"></div>
+</body>
+<script type="text/x-jsrender" id="message_list_item">
+<!--
+ <li onclick="message_onclick({{>id}})">
+                                            <a href="#">
+                                                <i class="ion ion-ios7-person danger"></i>{{>title}}
+                                            </a>
+                                        </li>
+ -->
+</script>
+<script type="text/x-jsrender" id="message_content_type_1">
+<!--
+<div class="box-body table-responsive" style="max-height: 800px;min-height: 300px">
+									<div class="row">
+										<div class="col-xs-12" id="message_content_type_message">
+											
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="createChance_input_CustomerName">
+												<input type="text" class="form-control" id="createChance_CustomerName" placeholder="请输入客户名称" value="{{>customerName}}" disabled="disabled">
+											</div>
+										</div>
+
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="createChance_input_CustomerAddress">
+												<input type="text" class="form-control" id="createChance_CustomerAddress" placeholder="客户地址"  value="{{>customerAddress}}" disabled="disabled">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-6">
+											<div class="form-group" id="createChance_input_CustomerType">
+												<input type="text" class="form-control" id="createChance_CustomerType" placeholder="客户类别" value="{{>customerType}}" disabled="disabled">
+											</div>
+
+										</div>
+										<div class="col-xs-6">
+											<div class="form-group" id="createChance_input_CustomerLevel">
+												<select class="form-control" id="createChance_CustomerLevel" disabled="disabled">
+{{if customerLevel==0}}
+													<option value="">客户级别</option>
+{{else customerLevel==1}}
+													<option value="1" selected="selectes">普通客户</option>
+{{else customerLevel==2}}
+													<option value="2" selected="selectes">中等客户</option>
+{{else customerLevel==3}}
+													<option value="3" selected="selectes">重级客户</option>
+{{else customerLevel==4}}
+													<option value="4" selected="selectes">特级客户</option>
+{{/if}}
+												</select>
+											</div>
+
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="createChance_input_CustomerMark">
+												<textarea rows="5" cols="80" placeholder="客户备注信息"  id="createChance_CustomerMark" class="form-control" disabled="disabled">{{>customerMark}}</textarea>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="createChance_input_CreateManMark">
+												<textarea rows="5" cols="80"  placeholder="创建人 简介，介绍客户描述客户" id="createChance_CreateManMark" class="form-control" disabled="disabled">{{>createManMark}}</textarea>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-6">
+											<div class="form-group" id="createChance_input_NotesUserId">
+											<div id="createChance_NotesUserId"></div>
+												<div class="input-group">
+													<input type="text" name="table_search" id="createChance_NotesUserId_text" value="{{>notesUserName}}" disabled="disabled" class="form-control input-sm" style="width: 150px;" placeholder="指派人">
+													<input type="text" name="table_search" id="createChance_NotesUserId_id" value="{{>notesUserName}}" class="form-control input-sm" style="width: 150px;display: none;" placeholder="指派人Id" disabled="disabled">
+														<button class="btn btn-sm btn-default" id="createChance_NotesUserId_id_but" onclick="queryGroupUser('createChance_NotesUserId_id','createChance_NotesUserId_text')" disabled="disabled">
+															<i class="fa fa-search"></i>
+														</button>
+														<button class="btn btn-sm btn-default" id="createChance_NotesUserId_id_clear" onclick="queryGroupUser_clear()" disabled="disabled">
+															<i class="fa fa-power-off"></i>
+														</button>
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-6">
+											<div class="form-group" id="createChance_input_State">
+												<select class="form-control" id="createChance_State" disabled="disabled">
+{{if state==1}}
+													<option value="1">普通机会</option>
+{{else state==2}}
+													<option value="2">优质机会</option>
+{{else state==3}}
+													<option value="3">已成客户</option>
+{{/if}}
+												</select>
+											</div>
+
+										</div>
+									</div>
+								</div>
+ -->
+</script>
+<div class="modal fade" id="window_list_layout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">添加功能块</h4>
+      </div>
+      <div class="modal-body" id="groupRoleList">
+							<div class="box box-primary">
+
+								<div class="box-body table-responsive" style="overflow: auto;max-height: 800px;">
+									<table id="example1" class="table table-bordered table-hover input-sm">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">名称</th>
+												<th style="text-align: center;">备注</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="window_list_layout_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+       	
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+</html>
+<script type="text/x-jsrender" id="window_list_layout_tr">
+<!--
+	<tr>
+								<td width="10%" align="center">{{>num}}</td>
+								<td width="30%" align="center">{{>name}}</td>
+								<td width="40%" align="center">{{>mark}}</td>
+								<td width="20%" align="center">
+										<button type="button" onclick="add_window_layout_right('{{>url}}','{{>mainUrl}}')" class="btn btn-danger btn-sm">添加左边列</button>
+										<button type="button" onclick="add_window_layout_left('{{>url}}','{{>mainUrl}}')" class="btn btn-danger btn-sm">添加右边列</button>
+								</td>
+							</tr>
+-->
+</script>
+<div class="modal fade" id="message_item_content" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">信息内容</h4>
+      </div>
+      <div class="modal-body" id="groupRoleList">
+							<div class="box box-primary">
+
+								<div class="box-body table-responsive" id="message_item_content_body" style="overflow: auto;max-height: 800px;">
+									
+								</div>
+
+							</div>
+       	
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>

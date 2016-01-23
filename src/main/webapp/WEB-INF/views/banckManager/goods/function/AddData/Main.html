@@ -1,0 +1,139 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/goods/function/AddData/main.js}"></script>
+<div class="modal fade" id="good_addData_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">商品添加</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div id="good_addData_window_AlertDiv"></div>
+							<div class="box box-primary">
+								<div class="box-header">
+									<h3 class="box-title">添加商品</h3>
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right"
+													onclick="good_addData_window_enter_add()">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="good_addData_window_input_goodname">
+												<div id="good_addData_window_goodname"></div>
+												<div class="input-group" style="width: 100%">
+													<input type="text" style="width: 95%;" class="form-control input-sm" id="good_addData_window_goodname_value" placeholder="请输入货物名" />
+													<button class="btn btn-sm btn-default" id="good_addData_window_Storehouse_id_but" onclick="good_addData_window_query_goods()">
+																<i class="fa fa-search"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+
+									</div>
+									
+									<div class="row">
+										<div class="col-xs-4">
+											<div class="form-group" id="good_addData_window_input_goodsNum">
+												<input type="text" class="form-control input-sm" id="good_addData_window_goodsNum" placeholder="进货数量"></input>
+											</div>
+
+										</div>
+										<div class="col-xs-4">
+											<div class="form-group" id="good_addData_window_input_goodsType">
+												<input type="text" class="form-control input-sm" id="good_addData_window_goodsType" placeholder="单位"></input>
+											</div>
+
+										</div>
+										<div class="col-xs-4">
+											<div class="form-group" id="good_addData_window_input_price">
+												<input type="text" class="form-control input-sm" id="good_addData_window_price" placeholder="售价"></input>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-4">
+											<div class="form-group" id="good_addData_window_nput_inPrice">
+												<input type="text" class="form-control input-sm" id="good_addData_window_inPrice" placeholder="进价"></input>
+											</div>
+
+										</div>
+										<div class="col-xs-4">
+											<div class="form-group" id="good_addData_window_input_score">
+												<input type="text" class="form-control input-sm" id="good_addData_window_score" placeholder="积分"></input>
+											</div>
+
+										</div>
+										<div class="col-xs-4">
+											<div class="form-group" id="good_addData_window_input_spell">
+												<input type="text" class="form-control input-sm" id="good_addData_window_spell" placeholder="拼音首字母"></input>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-4">
+											<div class="form-group" id="good_addData_window_input_goodsModel">
+												<input type="text" class="form-control input-sm" id="good_addData_window_goodsModel" placeholder="产品型号"></input>
+											</div>
+										</div>
+										<div class="col-xs-4">
+											<div class="form-group" id="good_addData_window_input_SourseId">
+											<div id="good_addData_window_sourseId"></div>
+												<div class="input-group">
+													<input type="text" name="table_search" id="good_addData_window_input_SourseId_text" disabled="disabled" class="form-control input-sm"
+														style="width: 150px;" placeholder="厂家" />
+													<input type="text" name="table_search"  id="good_addData_window_input_SourseId_id" class="form-control input-sm"
+														style="width: 150px;display: none;" placeholder="指派人Id" />
+														<button class="btn btn-sm btn-default" id="good_addData_window_id_but" onclick="good_addData_window_query_GoodSource('good_addData_window_input_SourseId_id','good_addData_window_input_SourseId_text')">
+															<i class="fa fa-search"></i>
+														</button>
+														<button class="btn btn-sm btn-default" id="cgood_addData_window_id_clear" onclick="good_addData_window_query_GoodSource_clear()">
+															<i class="fa fa-power-off"></i>
+														</button>
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-4">
+											<div class="form-group" id="good_addData_window_input_storehouseId">
+											<div id="good_addData_window_storehouseId"></div>
+												<div class="input-group">
+													<input type="text" name="table_search" id="good_addData_window_input_StorehouseId_text" disabled="disabled" class="form-control input-sm"
+														style="width: 150px;" placeholder="进入的仓库" />
+													<input type="text" name="table_search"  id="good_addData_window_input_StorehouseId_id" class="form-control input-sm"
+														style="width: 150px;display: none;" placeholder="指派人Id" />
+														<button class="btn btn-sm btn-default" id="good_addData_window_Storehouse_id_but" onclick="good_addData_window_query_Storehouse('good_addData_window_input_StorehouseId_id','good_addData_window_input_StorehouseId_text')">
+															<i class="fa fa-search"></i>
+														</button>
+														<button class="btn btn-sm btn-default" id="cgood_addData_window_id_Storehouse_clear" onclick="good_addData_window_query_Storehouse_clear()">
+															<i class="fa fa-power-off"></i>
+														</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<div id="addDate_window"></div>
+</div>

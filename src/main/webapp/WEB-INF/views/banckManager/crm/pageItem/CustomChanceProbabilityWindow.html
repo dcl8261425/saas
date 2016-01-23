@@ -1,0 +1,70 @@
+
+<script src="" th:src="@{/js/libs/pagejs/itemPage/crm/pageItem/CustomChanceProbabilityWindow.js}"></script>
+
+<div class="box box-primary" id="crm_window_layout_char_window">
+	<div class="box-header">
+		<!-- tools box -->
+		<div class="pull-right box-tools">
+			<button onclick="window_layout_close(this,'crm/window/CustomChanceProbabilityWindow')"
+				class="btn btn-danger btn-sm refresh-btn" data-toggle="tooltip" title="Reload">
+				<i class="fa fa-times"></i>
+			</button>
+		</div>
+		<!-- /. tools -->
+		<i class="fa fa-cloud"></i>
+		<h3 class="box-title">客户机会统计</h3>
+	</div>
+	<!-- /.box-header -->
+	<div class="box-body no-padding">
+		<div class="row">
+		<div class="col-sm-12">
+		<div id="crm_window_layout_char_alert_div"></div>
+		<div class="col-sm-5">
+			<div class="form-group" id="crm_window_layout_char">
+						<div class="input-group date"  id="crm_window_layout_char_startDate">
+							 <input type="text" value="开始日期" id="crm_window_layout_char_startDate_text" disabled="disabled" class="form-control"/><span class="input-group-addon" id="crm_window_layout_char_startDate_but"><i class="glyphicon glyphicon-th"></i></span>
+						</div>
+			</div>
+		</div>
+		<div class="col-sm-5">
+			<div class="form-group" id="crm_window_layout_char">
+					<div class="input-group date"  id="crm_window_layout_char_endDate">
+						 <input type="text" value="结束日期" id="crm_window_layout_char_endDate_text" disabled="disabled" class="form-control"/><span class="input-group-addon" id="crm_window_layout_char_endDate_but"><i class="glyphicon glyphicon-th"></i></span>
+					</div>
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="input-group date">
+												<button class="btn btn-primary" onclick="crm_window_layout_char_data_query()">
+													<i class="fa fa-search"></i> 查询
+												</button>
+			</div>
+		</div>
+		</div>
+			<div class="col-sm-12">
+				<!-- bar chart -->
+
+				<div class="chart" id="container" style="height: 380px;"></div>
+			</div>
+		</div>
+		<!-- /.row - inside box -->
+	</div>
+	<div class="box-footer">
+		<div class="row">
+			<div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+				<button type="submit" onclick="crm_window_layout_char_type_set(1)" id="crm_window_layout_char_type_set_1" class="btn btn-danger">机会状态</button>
+				
+			</div>
+			<!-- ./col -->
+			<div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+				<button type="submit" onclick="crm_window_layout_char_type_set(2)" id="crm_window_layout_char_type_set_2" class="btn btn-primary">机会增量</button>
+			</div>
+			<div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+				<button type="submit" onclick="crm_window_layout_char_type_set(3)" id="crm_window_layout_char_type_set_3" class="btn btn-primary">创建排名</button>
+			</div>
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.box-footer -->
+</div>
+<!-- /.box -->

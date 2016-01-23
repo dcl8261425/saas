@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<div th:include="mainTemplate::guanjianzi" th:remove="tag"></div>   
+<title>青柠店铺社区化软件</title>
+<div th:include="mainTemplate::jscss" th:remove="tag"></div>
+<link href='http://www.youziku.com/webfont/CSS/01d21e95d4c1470f8bed5c88ddba6fff' rel='stylesheet' type='text/css'/>
+<script type="text/javascript" src="../../js/libs/pagejs/index.js" th:src="@{/js/libs/pagejs/index.js}"></script>
+<link rel="stylesheet" th:href="@{/css/animate.css}" />
+<script type="text/javascript" src="../../js/libs/pagejs/index.js" th:src="@{/js/libs/wow.min.js}"></script>
+
+</head>
+<body style="background-color: #f9f9f9;overflow:-Scroll;overflow-x:hidden">
+	<div id="header" th:include="mainTemplate::header" th:remove="tag"></div>
+		
+		<div class="row" style="min-height: 500px;background-color: rgb(242,111,33);">
+		<div class="col-md-3">
+			</div>
+			<div class="col-md-3">
+			<div class="row" style="margin-top: 30%">
+				<h3 class=" wow bounceInDown animated" style="visibility: visible; -webkit-animation-delay: 0.2s;color: white;"><strong>外勤系统</strong></h3>
+				<h3 class=" wow bounceInLeft animated" style="visibility: visible; -webkit-animation-delay: 0.4s;color: white;"><strong>帮助您管理员工</strong></h3>
+				<h3 class=" wow bounceInRight animated" style="visibility: visible; -webkit-animation-delay: 0.6s;color: white;"><strong>清楚的知道员工现在处于何处</strong></h3>
+				<h3 class=" wow bounceInUp animated" style="visibility: visible; -webkit-animation-delay: 0.8s;color: white;"><strong>打卡,报告工作，及时回馈。</strong></h3>
+			</div>
+			
+			</div>
+			<div class="col-md-6 wow bounceInRight animated" style="visibility: visible; -webkit-animation-delay: 0.5s;">
+				<img alt="" th:src="@{/img/indeximage/1.png}"/>
+			</div>
+
+ 
+		</div>
+		<div class="row" style="min-height: 500px;background-image: url('img/indeximage/feature-item.jpg');">
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-3">
+			<div class="row" style="margin-top: 30%">
+				<h3 class=" wow bounceInDown animated" style="visibility: visible; -webkit-animation-delay: 0.2s;color: RGB(1,198,176);"><strong>会员管理</strong></h3>
+				<h3 class=" wow bounceInLeft animated" style="visibility: visible; -webkit-animation-delay: 0.4s;color:RGB(1,198,176);"><strong>为您量身定做的vip客户端。</strong></h3>
+				<h3 class=" wow bounceInRight animated" style="visibility: visible; -webkit-animation-delay: 0.6s;color:RGB(1,198,176);"><strong>提升客户忠诚度</strong></h3>
+				<h3 class=" wow bounceInUp animated" style="visibility: visible; -webkit-animation-delay: 0.8s;color:RGB(1,198,176);"><strong>在线和客户沟通，查看用户对产品的反馈</strong></h3>
+			</div>
+			</div>
+			<div class="col-md-6 wow bounceInRight animated" style="visibility: visible; -webkit-animation-delay: 1s;">
+				<img alt="" th:src="@{/img/indeximage/2.png}"/>
+			</div>
+		</div>
+		
+		<div class="row" style="min-height: 500px;background-color: rgb(61,191,181);">
+		<div class="col-md-3">
+			</div>
+			<div class="col-md-3">
+			<div class="row" style="margin-top: 30%">
+								<h3 class=" wow bounceInDown animated" style="visibility: visible; -webkit-animation-delay: 0.2s;color: white;"><strong>进销存系统</strong></h3>
+				<h3 class=" wow bounceInLeft animated" style="visibility: visible; -webkit-animation-delay: 0.4s;color: white;"><strong>帮助您管理库存</strong></h3>
+				<h3 class=" wow bounceInRight animated" style="visibility: visible; -webkit-animation-delay: 0.6s;color:white;"><strong>订单，销量，</strong></h3>
+				<h3 class=" wow bounceInUp animated" style="visibility: visible; -webkit-animation-delay: 0.8s;color:white;"><strong>打卡,报告工作，及时回馈。</strong></h3>
+			</div>
+			</div>
+			
+			<div class="col-md-6 wow bounceInRight animated" style="visibility: visible; -webkit-animation-delay: 0.5s;">
+				<img alt="" th:src="@{/img/indeximage/3.png}"/>
+			</div>
+		</div>
+		<div class="row" style="min-height: 500px;background-image: url('img/indeximage/feature-item.jpg');">
+		<div class="col-md-3">
+			</div>
+			<div class="col-md-3">
+			<div class="row" style="margin-top: 30%">
+				<h3 class=" wow bounceInDown animated" style="visibility: visible; -webkit-animation-delay: 0.2s;color: RGB(1,198,176);"><strong>OA系统</strong></h3>
+				<h3 class=" wow bounceInLeft animated" style="visibility: visible; -webkit-animation-delay: 0.4s;color:  RGB(1,198,176);"><strong>请假，政务审批，公告通知</strong></h3>
+				<h3 class=" wow bounceInRight animated" style="visibility: visible; -webkit-animation-delay: 0.6s;color:  RGB(1,198,176);"><strong>使您的内政更加快速</strong></h3>
+				<h3 class=" wow bounceInUp animated" style="visibility: visible; -webkit-animation-delay: 0.8s;color:  RGB(1,198,176);"><strong>员工的工作效率必然的提高</strong></h3>
+			</div>
+			</div>
+			
+			<div class="col-md-6 wow bounceInRight animated" style="visibility: visible; -webkit-animation-delay: 1s;">
+				<img alt="" th:src="@{/img/indeximage/4.png}" />
+			</div>
+		</div>
+	<div id="footer" th:include="mainTemplate::footer" th:remove="tag"></div>
+</body>
+</html>

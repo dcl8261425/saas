@@ -1,0 +1,14 @@
+﻿
+/* 效果CSS开始 */
+.msKeimgBox { margin: 0px auto; width: 100%; overflow: hidden; position: relative; padding-top: 30px; height: 93px; }
+.msKeimgBox ul { width: 1000px; }
+.mskeLayBg { background: #000; width: 100%; position: absolute; left: 0px; top: 0px; z-index: 10; opacity: 0.7; filter: alpha(opacity=70); display: none; _display:none!important }
+.mskelayBox { height: auto; width: auto; margin-top: -251px; margin-left: -494px; position: fixed; left: 50%; top: 50%; border: 7px solid #FFF; z-index: 20; background: #FFF; display: none; _display:none!important }
+.mskeImgBg { height: 57px; width: 100%; position: absolute; left: 0px; bottom: 0px; }
+.mskeClaose { position: absolute; top: -17px; right: -17px; cursor: pointer; }
+.mske_downIco { position: absolute; left: 0px; top: 0px; }
+.mske_imgDown { background: url(../images/mke_imgMbg.png) repeat; height: 57px; width: 818px; position: absolute; right: 0px; bottom: 0px; font: 13px/57px "微软雅黑"; color: #FFF; }
+.mske_imgDown a { margin-left: 34px; }
+.msKeimgBox ul li { float: left;  margin: 0 10px 10px 0;  list-style-type:none; cursor: pointer; }
+.msKeimgBox2 { height: auto; }
+/* 效果CSS结束 */

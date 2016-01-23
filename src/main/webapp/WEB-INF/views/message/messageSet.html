@@ -1,0 +1,140 @@
+<link href="../../css/main.css" rel="stylesheet" th:href="@{/js/libs/switch/bootstrap-switch.min.css}" />
+<script src="" th:src="@{/js/libs/switch/bootstrap-switch.min.js}"></script>
+<script src="" th:src="@{/js/libs/pagejs/itemPage/message/phonemessage/messageSet.js}"></script>
+<section class="content-header">
+	<h1>
+		短信平台 <small id="bankuai_title">短信设置</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+		<li class="active" id="bankuai_title2">短信设置</li>
+	</ol>
+</section>
+
+<section class="content" id="content">
+	<!-- Main row -->
+	<div id="message_set_alert"></div>
+	<div class="row">
+		<!-- Left col -->
+		<section class="col-lg-12 connectedSortable" id="right_layout">
+			<div class="box box-primary" id="weixin_wifi_window">
+				<div class="box-header">
+					<div class="pull-right box-tools"></div>
+					<i class="fa fa-cloud"></i>
+					<h3 class="box-title">短信设置</h3>
+					<div class="pull-right box-tools"></div>
+				</div>
+				<div class="box-body no-padding">
+					<div class="col-sm-12">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="row">
+									<div class="col-sm-4">向会员发信息-添加积分时</div>
+									<div class="col-sm-4">
+										<div class="switch" data-on="warning" data-off="danger">
+											<input type="checkbox" id="message_addScore_open" />
+										</div>
+									</div>
+									<div class="col-sm-4" id="message_addScore_open_num">已发送 1 条</div>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="row">
+									<div class="col-sm-4">向会员发信息-添加储值时</div>
+									<div class="col-sm-4">
+										<div class="switch" data-on="warning" data-off="danger">
+											<input type="checkbox" id="message_addPrice_open" />
+										</div>
+									</div>
+									<div class="col-sm-4" id="message_addPrice_open_num">已发送 1 条</div>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="row">
+									<div class="col-sm-4">向会员发信息-减少积分时</div>
+									<div class="col-sm-4">
+										<div class="switch" data-on="warning" data-off="danger">
+											<input type="checkbox" id="message_reduceScore_open" />
+										</div>
+									</div>
+									<div class="col-sm-4" id="message_reduceScore_open_num">已发送 1 条</div>
+								</div>
+								
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="row">
+									<div class="col-sm-4">向会员发信息-减少储值时</div>
+									<div class="col-sm-4">
+										<div class="switch" data-on="warning" data-off="danger">
+											<input type="checkbox" id="message_reducePrice_open" />
+										</div>
+									</div>
+									<div class="col-sm-4" id="message_reducePrice_open_num">已发送 1 条</div>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="row"  style="display: none;">
+									<div class="col-sm-4">向商户发信息-公众账号接受消息时</div>
+									<div class="col-sm-4">
+										<div class="switch" data-on="warning" data-off="danger">
+											<input type="checkbox" id="message_weixininfo_open" />
+										</div>
+									</div>
+									<div class="col-sm-4" id="message_weixininfo_open_num">已发送 1 条</div>
+									
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="row">
+									<div class="col-sm-4">向商户发信息-用户下订单时</div>
+									<div class="col-sm-4">
+										<div class="switch" data-on="warning" data-off="danger">
+											<input type="checkbox" id="message_order_open" />
+										</div>
+									</div>
+									<div class="col-sm-4" id="message_order_open_num">已发送 1 条</div>
+										
+								</div>
+							</div>
+						</div>
+						<div class="row" style="display: none;">
+							<div class="col-sm-12">
+								<div class="row">
+									<div class="col-sm-4">向商户发信息-用户预订时</div>
+									<div class="col-sm-4">
+										<div class="switch" data-on="warning" data-off="danger">
+											<input type="checkbox" id="message_yuding_open" />
+										</div>
+									</div>
+									<div class="col-sm-4" id="message_yuding_open_num">已发送 1 条</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="box-footer">
+					
+					<div class="row">
+						<div class="col-sm-6" style="color: red;" id="message_num">当前剩余短信数量 100 条</div>
+						<div class="col-xs-6">
+						<div class="input-group">
+											<input type="text" name="table_search" id="message_qianming" class="form-control pull-right" placeholder="必须填写,2~-8个字不填写默认光云互连"/>
+											<div class="input-group-btn">
+												<button class="btn btn-primary" id="message_qianming_but">
+													短信签名
+												</button>
+											</div>
+							</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- right col -->
+
+	</div>
+	<!-- /.row (main row) -->
+</section>

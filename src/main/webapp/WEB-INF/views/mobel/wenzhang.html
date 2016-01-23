@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="${title}"></title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/css/zhenghe/model.css}" />
+<script type="text/javascript" src="../../js/libs/jquery-1.9.1.js" th:src="@{/js/libs/zhenghe/model.js}"></script>
+<script th:inline="javascript">
+	var ctx = /*[[${#httpServletRequest.contextPath}+'/']]*/'/';
+	function weixin_model_row_delete(id){
+		$("#row_"+id).remove();
+	}
+	var isVote=  /*[[${isVote}]]*/'/';
+	var Vote_vip=/*[[${Vote_vip}]]*/'/';
+	var Vote_duoxuan=/*[[${Vote_duoxuan}]]*/'/';
+	var Vote_startDate=/*[[${Vote_startDate}]]*/'/';
+	var Vote_endDate=/*[[${Vote_endDate}]]*/'/';
+	var islogin=/*[[${islogin}]]*/'/';
+	function onTouPiaoButton(ItemId,conpanyId){
+		if(!islogin){
+			if(Vote_vip){
+			$('#weixin_vip_rigister_alert').addClass('is-visible');
+			$("#weixin_vip_rigister_alert_enter").attr("onclick","onTouPiaoButton2("+ItemId+","+conpanyId+")");
+			return ;
+			}
+		}
+			var i=$.layer({
+			    type : 3
+			});
+		    $.ajax({
+				type : "POST",
+				url : ctx+"weixin/public/toupiao",
+				data:{
+					ItemId:ItemId,
+					conpanyId:conpanyId
+				},
+				success : function(msg) {
+					layer.close(i);
+					if(msg.success==null||msg.success==undefined||msg.success==true){
+						 location.reload() 
+					}else{
+						$("#weixin_alert_content").html(msg.info);
+						$('#weixin_alert').addClass('is-visible');
+					}
+				}
+		    })
+	}
+	function onTouPiaoButton2(ItemId,conpanyId){
+			var name=$("#vip_name").val();
+			var phone=$("#vip_phone").val();
+			var i=$.layer({
+			    type : 3
+			});
+		    $.ajax({
+				type : "POST",
+				url : ctx+"weixin/public/toupiao2",
+				data:{
+					ItemId:ItemId,
+					conpanyId:conpanyId,
+					name:name,
+					phone:phone
+				},
+				success : function(msg) {
+					layer.close(i);
+					if(msg.success==null||msg.success==undefined||msg.success==true){
+						window_close();
+						islogin=true;
+						 location.reload() 
+					}else{
+					
+						$("#weixin_alert_content").html(msg.info);
+						$('#weixin_alert').addClass('is-visible');
+					}
+				}
+		    })
+	}
+	function window_close(){
+		$('#weixin_vip_rigister_alert').removeClass('is-visible');
+	}
+	function weixin_alert_window_close(){
+		$('#weixin_alert').removeClass('is-visible');
+	}
+	</script>
+
+</head>
+<body class="skin-blue">
+
+	<div id="header" th:include="mobel/temp::header_admin" th:remove="tag"></div>
+	<div class="row" id="weixin_vip_num">
+		<div class="col-xs-12">
+			<div class="box box-primary">
+				<div class="box-header">
+					<div class="pull-right box-tools"></div>
+					<i class="ion ion-clipboard"></i>
+					<h3 class="box-title">发布</h3>
+				</div>
+				<div class="box-body" th:utext="${html}"></div>
+				
+			</div>
+			<br />
+		</div>
+				<div class="col-xs-12" th:if="${isVote==true}">
+			<div class="box box-primary">
+				<div class="box-header">
+					<div class="pull-right box-tools"></div>
+					<i class="ion ion-clipboard"></i>
+					<h3 class="box-title">投票</h3>
+				</div>
+				<div class="box-body" th:if="${isVote==true}">
+					<div class="row" th:each="dto:${Vote_item}">
+						<div class="col-xs-3" th:text="${dto.name}">
+							
+						</div>
+						<div class="col-xs-6">
+							<div class="progress">
+							  <div class="progress-bar" role="progressbar" th:text="${dto.num}" th:style="'width:'+${dto.baifenbi}+'%'">
+							  
+							  </div>
+							</div>
+						</div>
+						<div class="col-xs-3">
+							<button class="btn btn-danger btn-sm pull-right" th:onclick="'onTouPiaoButton('+${dto.id}+','+${dto.ConpanyId}+')'">
+													投票 <i class="fa fa-plus-square"></i>
+												</button>
+						</div>
+					</div>
+					
+					
+					
+				</div>
+			</div>
+			<br />
+		</div>
+	</div>
+	<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default" id="">
+		<ul class="am-navbar-nav am-cf am-avg-sm-4">
+			<li><a th:href='${"tel:"+conpany.softAdminPhone}'> <span class="am-icon-phone"></span> <span
+					class="am-navbar-label">呼叫</span>
+			</a></li>
+
+
+
+		</ul>
+	</div>
+	<footer data-am-widget="footer" class="am-footer am-footer-default" data-am-footer="{  }">
+		<div class="am-footer-switch">
+			<span class="am-footer-ysp" data-rel="mobile" data-am-modal="{target: '#am-switch-mode'}">品利</span> <span
+				class="am-footer-divider">|</span> <a id="godesktop" data-rel="desktop" class="am-footer-desktop" href="#">资产</a>
+		</div>
+		<div class="am-footer-miscs ">
+			<p>
+				由 <a href="" title="" target="_blank">杭州</a>品利资产
+			</p>
+			<p>CopyRight©2015 AllMobilize Inc.</p>
+			<p>冀ICP备14001602号-2</p>
+		</div>
+	</footer>
+	<div id="am-footer-modal" class="am-modal am-modal-no-btn am-switch-mode-m am-switch-mode-m-default">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd am-modal-footer-hd">
+				<a href="javascript:void(0)" data-dismiss="modal" class="am-close am-close-spin">&times;</a>
+			</div>
+			<div class="am-modal-bd">
+				您正在浏览的是 <span class="am-switch-mode-owner">云适配</span> <span class="am-switch-mode-slogan">为您当前手机订制的移动网站。</span>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+ <div id="weixin_vip_rigister_alert"  class="cd-popup" role="alert" th:if="${Vote_vip==true}">
+        <div class="cd-popup-container">
+            <p id="good_alert_body">
+            	本投票只允许会员投票请注册
+            	<input type="text" id="vip_name" class="form-control"  placeholder="姓名"/>
+            	<br/>
+            	<input type="text" id="vip_phone" class="form-control"  placeholder="电话"/>
+            </p>
+            <ul class="cd-buttons">
+                <li><a id="weixin_vip_rigister_alert_enter">确定</a></li>
+                <li><a  href="javascript:window_close()" >取消</a></li>
+            </ul>
+            <a href="#0" class="cd-popup-close img-replace" onclick="window_close()">Close</a>
+        </div>
+        <!-- cd-popup-container -->
+    </div>
+    <div id="weixin_alert"  class="cd-popup" role="alert" th:if="${Vote_vip==true}">
+        <div class="cd-popup-container">
+            <p  id="weixin_alert_content">
+            	
+            </p>
+            <ul class="cd-buttons">
+                <li><a id="alert" href="javascript:weixin_alert_window_close()">确定</a></li>
+                <li><a  href="javascript:weixin_alert_window_close()" >取消</a></li>
+            </ul>
+            <a href="#0" class="cd-popup-close img-replace" onclick="weixin_alert_window_close()">Close</a>
+        </div>
+        <!-- cd-popup-container -->
+    </div>

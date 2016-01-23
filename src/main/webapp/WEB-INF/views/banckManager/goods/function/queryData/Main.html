@@ -1,0 +1,98 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/goods/function/queryData/main.js}"></script>
+<div class="modal fade" id="good_queryData_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">查询库存</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div id="good_queryData_AlertDiv"></div>
+							<div class="box box-primary" id="good_queryData_Body">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<input type="text" name="table_search" id="good_queryData_window_query_spell"
+												class="form-control pull-right" style="width: 150px;" placeholder="查询货物名首拼音" />
+											<input type="text" name="table_search" id="good_queryData_window_query_Name"
+												class="form-control pull-right" style="width: 150px;" placeholder="查询货物名" />
+											<div class="input-group-btn">
+												<button class="btn btn-default" onclick="good_queryData_box_serch()">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 800px;min-height: 300px;">
+									<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">名称</th>
+												<th style="text-align: center;">数量</th>
+												<th style="text-align: center;">售价</th>
+												<th style="text-align: center;">型号</th>
+												<th style="text-align: center;">单位</th>
+												<th style="text-align: center;">积分</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="good_queryData_window_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="good_queryData_window_tbody_page">
+
+									</ul>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="good_queryData_window_add_window_div"></div>
+<script type="text/x-jsrender" id="good_queryData_window_tbody_tr">
+<!--
+	<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>goodsName}}</td>
+								<td width="20%" align="center">{{>goodsNum}}</td>
+								<td width="10%" align="center">{{>price}}</td>
+								<td width="10%" align="center">{{>goodsModel}}</td>
+								<td width="10%" align="center">{{>goodsType}}</td>
+								<td width="10%" align="center">{{>score}}</td>
+								<td width="30%" align="center">
+										无
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="good_queryData_window_tbody_tr_select">
+<!--
+	<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>goodsName}}</td>
+								<td width="10%" align="center">{{>goodsNum}}</td>
+								<td width="10%" align="center">{{>price}}</td>
+								<td width="20%" align="center">{{>goodsModel}}</td>
+								<td width="10%" align="center">{{>goodsType}}</td>
+								<td width="10%" align="center">{{>score}}</td>
+								<td width="10%" align="center">
+										<button type="button" onclick="good_queryData_window_select({{>id}})" class="btn btn-danger btn-sm">选中</button>
+								</td>
+							</tr>
+-->
+</script>

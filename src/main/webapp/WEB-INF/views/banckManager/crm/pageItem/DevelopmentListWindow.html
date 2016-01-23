@@ -1,0 +1,181 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/crm/pageItem/DevelopmentListWindow.js}"></script>
+<div class="box box-primary" id="crm_window_layout_toDevelopent_window">
+	<div class="box-header">
+		<div class="pull-right box-tools">
+			<button onclick="window_layout_close(this,'crm/window/DevelopmentListWindow')"
+				class="btn btn-danger btn-sm refresh-btn" data-toggle="tooltip" title="Reload">
+				<i class="fa fa-times"></i>
+			</button>
+		</div>
+		<!-- /. tools -->
+		<i class="ion ion-clipboard"></i>
+		<h3 class="box-title">开发计划列表</h3>
+	</div>
+	<!-- /.box-header -->
+	<div class="box-body">
+		<div id="crm_window_layout_toDevelopent_window_alert_div"></div>
+		<ul class="todo-list" id="crm_window_layout_toDevelopent_window_content">
+			
+		</ul>
+	</div>
+	<!-- /.box-body -->
+
+</div>
+<!-- /.box -->
+<script type="text/x-jsrender" id="crm_window_layout_toDevelopent_window_line">
+<!--
+			<li>
+				<a href="javascript:crm_window_layout_toDevelopent_log_show({{>id}})"><span
+				class="text">{{>customerName}}</span> <small class="label label-danger"><i
+					class="fa fa-clock-o"></i> {{JavaSTojsDate:createDate}}</small>
+				</a>
+				<div class="tools">
+					<i class="fa fa-edit" onclick="crm_window_layout_toDevelopent_log({{>id}})"></i>
+				</div>
+			</li>
+-->
+</script>
+<script type="text/x-jsrender" id="crm_window_layout_toDevelopent_window_tr">
+<!--
+<li>
+
+                                            <input type="checkbox" value="" name=""/>                                            
+
+                                            <span class="text">{{>notesTitle}}</span>
+
+                                            <small class="label label-danger"><i class="fa fa-clock-o"></i> {{JavaSTojsDate:notesDate}}</small>
+											<small class="label label-danger"><i class="fa fa-user"></i> {{>notesUserName}}</small>
+                                            <div class="tools">
+ 												<i class="fa fa-eye" onclick="look_Notes_Info_marks('mark_div_{{>id}}')" title="查看详情"></i>
+                                            </div>
+											
+											<div style="display: none" id="mark_div_{{>id}}"><hr/>{{:notesMark}}<br/></div>
+                                        </li>
+										
+-->
+</script>
+
+<script type="text/x-jsrender" id="crm_window_layout_toDevelopent_window_look">
+<!--
+<div class="modal fade" id="chanceOpenInfo_window_look_info_window_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">查看记录</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+ <div class="box box-primary" >
+                                <div class="box-header">
+                                 <div class="pull-right box-tools">
+                                      
+                                    </div>
+                                    <i class="ion ion-clipboard"></i>
+                                </div>
+                                <div class="box-body">
+                                    <ul class="todo-list" id="chanceOpenInfo_window_look_tbody">
+
+                                    </ul>
+                                </div>
+
+                                <div class="box-footer clearfix no-border" >
+                                   <ul class="pagination pagination-sm no-margin pull-right" id="chanceOpenInfo_window_look_tbody_page">
+
+									</ul>
+                                </div>
+                            </div>
+			</div>
+		</div>
+	</div>
+</div>
+-->
+</script>
+<script type="text/x-jsrender" id="crm_window_layout_toDevelopent_window_add">
+<!--
+<div class="modal fade" id="chanceOpenInfo_window_add_info_window_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加记录</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div id="chanceOpenInfo_Add_AlertDiv"></div>
+							<div class="box box-primary" id="lookGroupUser_body">
+								<div class="box-header">
+									<h3 class="box-title">填写资料框</h3>
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" id="chanceOpenInfo_window_enter_add_but"
+													onclick="chanceOpenInfo_add_enter()">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="chanceOpenInfo_window_input_CustomerName">
+												<input type="text" class="form-control" id="chanceOpenInfo_window_Title" placeholder="请输入标题" />
+											</div>
+										</div>
+
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group has-warning"><label class="control-label" for="inputWarning"><i class="fa fa-warning"></i>鼠标在按钮停顿2秒后显示按钮功效</label>
+                                           </div>
+											<button class="btn btn-sm btn-default" id="createChance_NotesUserId_id_but" onclick="Edit_add_linkman('chanceOpenInfo_window_Marks')">
+															<i class="fa fa-users" title="添加联系人"></i> 
+											</button> 
+											<button class="btn btn-sm btn-default" id="createChance_NotesUserId_id_but" onclick="Edit_add_custemor('chanceOpenInfo_window_Marks')">
+															<i class="fa fa-user" title="添加员工"></i> 
+											</button>
+											<button class="btn btn-sm btn-default" id="createChance_NotesUserId_id_but" onclick="Edit_add_Note('chanceOpenInfo_window_Marks')">
+															<i class="fa fa-file" title="添加开发信息"></i> 
+											</button> 
+											<button class="btn btn-sm btn-default" id="createChance_NotesUserId_id_but" onclick="Edit_add_GoodSource('chanceOpenInfo_window_Marks')">
+															<i class="fa fa-cogs" title="添加进货商"></i> 
+											</button> 
+											<button class="btn btn-sm btn-default" id="createChance_NotesUserId_id_but" onclick="Edit_add_StoreHouse('chanceOpenInfo_window_Marks')">
+															<i class="fa fa-home" title="添加仓库"></i> 
+											</button> 
+											<button class="btn btn-sm btn-default" id="createChance_NotesUserId_id_but" onclick="Edit_add_Good('chanceOpenInfo_window_Marks')">
+															<i class="fa fa-home" title="添加商品"></i> 
+											</button> 
+										</div>
+									</div>
+<br/>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="chanceOpenInfo_window_input_linkManMark">
+												<textarea rows="5" cols="80" placeholder="信息" id="chanceOpenInfo_window_Marks" class="form-control"></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+-->
+</script>
+<div id="crm_window_layout_toDevelopent_window_div"></div>

@@ -1,0 +1,123 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/crm/function/chanceOpenMarks/main.js}"></script>
+<div class="modal fade" id="chanceOpenMarks_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">开发建议管理</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div id="chanceOpenMarks_AlertDiv"></div>
+							<div class="box box-primary" id="chanceOpenMarks_Window_Body">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<input type="text" name="table_search" id="chanceOpenMarks_window_query_Name"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="建议名" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="chanceOpenMarks_query_function_window()">
+													<i class="fa fa-search"></i>
+												</button>
+												<button class="btn btn-danger btn-sm" id="" onclick="chanceOpenMarks_window_add_window()">
+													创建新建议 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 800px;min-height: 300px;">
+									<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">名字</th>
+												<th style="text-align: center;">创建者</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="chanceOpenMarks_window_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="chanceOpenMarks_window_tbody_page">
+
+									</ul>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="chanceOpenMarks_window_add_window_div"></div>
+<script type="text/x-jsrender" id="chanceOpenMarks_window_tbody_tr">
+<!--
+	<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="30%" align="center">{{>name}}</td>
+								<td width="30%" align="center">{{>createUserName}}</td>
+								<td width="30%" align="center">
+										<button type="button" onclick="chanceOpenMarks_look({{>id}})" class="btn btn-danger btn-sm">查看</button>
+										<button type="button" onclick="chanceOpenMarks_delete({{>id}})" class="btn btn-danger btn-sm">删除</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="chanceOpenMarks_window_add_window">
+<!--
+<div class="modal fade" id="chanceOpenMarks_window_add_but" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 100%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<button class="btn btn-danger btn-sm" id="chanceOpenMarks_submit" style="float: right;">
+					确定提交 <i class="fa fa-plus-square"></i>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">创建建议</h4>
+			</div>
+			<div class="modal-body" id="chanceOpenMarks_window_add_but_body">
+				<div id="chanceOpenMarks_window_add_window_alert"></div>
+				<div id="chanceOpenMarks_window_add_window_Demo"></div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+-->
+</script>
+<script type="text/x-jsrender" id="chanceOpenMarks_window_look_window">
+<!--
+<div class="modal fade" id="chanceOpenMarks_window_look_but" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 100%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<button class="btn btn-danger btn-sm" id="chanceOpenMarks_look" style="float: right;">
+					确定 <i class="fa fa-plus-square"></i>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">查看建议</h4>
+			</div>
+			<div class="modal-body" id="chanceOpenMarks_window_add_but_body">
+				<div id="chanceOpenMarks_window_add_window_alert"></div>
+				<div id="chanceOpenMarks_window_add_window_Demo"></div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+-->
+</script>

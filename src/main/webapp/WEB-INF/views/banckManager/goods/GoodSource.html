@@ -1,0 +1,293 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/goods/GoodSource.js}"></script>
+<section class="content-header">
+	<h1>
+		库存管理 <small id="bankuai_title">供货商管理</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+		<li class="active" id="bankuai_title2">供货商管理</li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content" id="content">
+	<div id="GoodSource_box_alertDiv"></div>
+	<div class="row">
+		<div class="col-xs-12">
+										<div class="box box-primary" id="GoodSource_box">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<input type="text" name="table_search" id="GoodSource_box_name"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="名称" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="GoodSource_box_serch()">
+													<i class="fa fa-search"></i>
+												</button>
+												<button class="btn btn-danger btn-sm" id="" onclick="GoodSource_box_show_addWindow()">
+													创建新供货商 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 800px;min-height: 300px;">
+									<table id="example1" class="table table-bordered table-hover input-sm">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">名称</th>
+												<th style="text-align: center;">地址</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="GoodSource_box_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="GoodSource_box_tbody_page">
+
+									</ul>
+								</div>
+							</div>
+		</div>
+	</div>
+	<div id="window"></div>
+<div id="window2"></div>
+</section>
+<!-- /.content -->
+<script type="text/x-jsrender" id="GoodSource_box_tbody_tr">
+<!--
+							<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>name}}</td>
+								<td width="20%" align="center">{{>address}}</td>
+								<td width="30%" align="center">
+										<button type="button" onclick="GoodSource_box_addlinkman({{>id}})" class="btn btn-danger btn-sm">查看联系人</button>
+										<button type="button" onclick="GoodSource_box_update({{>id}})" class="btn btn-danger btn-sm">修改</button>
+										<button type="button" onclick="GoodSource_box_delete({{>id}})" class="btn btn-danger btn-sm">删除</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="GoodSource_box_add_window_temp">
+<!--
+<div class="modal fade" id="GoodSource_box_add_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加供货商</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div id="GoodSource_box_add_window_temp_AlertDiv"></div>
+							<div class="box box-primary" id="lookGroupUser_body">
+								<div class="box-header">
+									<h3 class="box-title">填写资料框</h3>
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" id="GoodSource_box_add_window_enter_add_but"
+													onclick="GoodSource_box_add_window_enter_add()">
+													确认<i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="GoodSource_box_add_window_input_goodsSoucename">
+												<input type="text" class="form-control" id="GoodSource_box_add_window_goodsSoucename" placeholder="供货商名称" />
+											</div>
+										</div>
+
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="GoodSource_box_add_window_input_address">
+												<input type="text" class="form-control" id="GoodSource_box_add_window_address" placeholder="供货商地址"></input>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+-->
+</script>
+<script type="text/x-jsrender" id="GoodSource_box_linkman_window_temp">
+<!--
+<div class="modal fade" id="GoodSource_box_linkman_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">供应商联系人</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div id="GoodSource_box_linkman_window_temp_AlertDiv"></div>
+							<div class="box box-primary" id="GoodSource_box_linkman_window_box">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<input type="text" name="table_search" id="GoodSource_box_linkman_window_name"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="联系人名" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="GoodSource_box_linkman_window_serch()">
+													<i class="fa fa-search"></i>
+												</button>
+												<button class="btn btn-danger btn-sm" id="" onclick="GoodSource_box_linkman_window_show_addWindow()">
+													创建新供货商联系人 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 800px;min-height: 300px;">
+									<table id="example1" class="table table-bordered table-hover input-sm">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">名称</th>
+												<th style="text-align: center;">电话</th>
+												<th style="text-align: center;">生日</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="GoodSource_box_linkman_window_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="GoodSource_box_linkman_window_tbody_page">
+
+									</ul>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+-->
+</script>
+<script type="text/x-jsrender" id="GoodSource_box_linkman_window_tbody_tr">
+<!--
+							<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>name}}</td>
+								<td width="20%" align="center">{{>phone}}</td>
+								<td width="20%" align="center">{{JavaSTojsDate:linkManBirthday}}</td>
+								<td width="30%" align="center">
+										<button type="button" onclick="GoodSource_box_linkman_update({{>id}})" class="btn btn-danger btn-sm">修改</button>
+										<button type="button" onclick="GoodSource_box_linkman_delete({{>id}})" class="btn btn-danger btn-sm">删除</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="GoodSource_box_linkman_add_window">
+<!--
+<div class="modal fade" id="GoodSource_box_linkman_add_but_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">联系人</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div id="GoodSource_box_linkman_AlertDiv"></div>
+							<div class="box box-primary" id="GoodSource_box_linkman_add_body">
+								<div class="box-header">
+									<h3 class="box-title">填写资料框</h3>
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" id="GoodSource_box_linkman_add_but"
+													onclick="GoodSource_box_linkman_add_function_window_enter_add()">
+													确认 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="GoodSource_box_linkman_input_CustomerName">
+												<input type="text" class="form-control" id="GoodSource_box_linkman_linkname" placeholder="请输入联系人名称" />
+											</div>
+										</div>
+
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="GoodSource_box_linkman_input_linkManPhone">
+												<input type="text" class="form-control" id="GoodSource_box_linkman_phone" placeholder="联系人电话"></input>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+
+										<div class="col-xs-4">
+											<div class="form-group" id="GoodSource_box_linkman_input_linkManBirthday">
+													<div class="input-group date"  id="GoodSource_box_linkman_linkManBirthday">
+													  <input type="text" value="联系人生日" id="GoodSource_box_linkman_linkManBirthday_text" disabled="disabled" class="form-control"/><span class="input-group-addon" id="AddLinkMan_window_linkManBirthday_text_button"><i class="glyphicon glyphicon-th"></i></span>
+													</div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+-->
+</script>

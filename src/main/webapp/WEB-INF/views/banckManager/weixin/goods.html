@@ -1,0 +1,422 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/weixin/goods.js}"></script>
+<section class="content-header">
+	<h1>
+		微信管理 <small id="bankuai_title">微信商品管理</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+		<li class="active" id="bankuai_title2">微信商品管理</li>
+	</ol>
+</section>
+
+<section class="content" id="content">
+	<!-- Main row -->
+	<div class="row">
+		<div id="weixin_goods_alert"></div>
+		<div class="col-lg-6" onclick="weixin_goods_yishangjia()">
+			<!-- small box -->
+			<div class="small-box bg-aqua">
+				<div class="inner">
+					<h3>1</h3>
+					<p>已上架的商品</p>
+				</div>
+				<div class="icon">
+					<i class="ion ion-ios7-infinite"></i>
+				</div>
+				<a href="#" class="small-box-footer"> 点击开启 <i class="fa fa-arrow-circle-right"></i>
+				</a>
+			</div>
+		</div>
+		<!-- ./col -->
+		<div class="col-lg-6" onclick="weixin_goods_weishangjia()">
+			<!-- small box -->
+			<div class="small-box bg-red">
+				<div class="inner">
+					<h3>2</h3>
+					<p>未上架的商品</p>
+				</div>
+				<div class="icon">
+					<i class="ion-ios7-infinite"></i>
+				</div>
+				<a href="#" class="small-box-footer"> 点击开启 <i class="fa fa-arrow-circle-right"></i>
+				</a>
+			</div>
+		</div>
+		<!-- ./col -->
+	</div>
+	<!-- /.row -->
+	<div class="row">
+		<!-- Left col -->
+		<section class="col-lg-12 connectedSortable" id="right_layout"></section>
+		<!-- right col -->
+	</div>
+	<!-- /.row (main row) -->
+</section>
+<!-- /.content -->
+<script type="text/x-jsrender" id="weixin_good_yishangjia">
+<!--
+<div class="box box-primary" >
+	<div class="box-header">
+
+		<i class="fa fa-cloud"></i>
+		<h3 class="box-title">已上架</h3>
+		<div class="box-tools">
+											<div class="input-group">
+											<input type="text" name="table_search" id="weixin_goods_queryName" class="form-control input-sm pull-right" style="width: 150px;" placeholder="商品名">
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="weixin_goods_query_data(true)">
+													<i class="fa fa-search"></i>
+												</button>
+												<button class="btn btn-danger btn-sm" id="" onclick="weixin_goods_add()">
+													创建新商品 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+	</div>
+	<div class="box-body no-padding">
+		<div class="row">
+			<div class="col-sm-12" style="text-align: center;">
+				<div class="col-sm-12" style="text-align: center;">
+<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">名字</th>
+												<th style="text-align: center;">售价</th>
+												<th style="text-align: center;">进价</th>
+												<th style="text-align: center;">积分</th>
+												<th style="text-align: center;">型号</th>
+												<th style="text-align: center;">类别</th>
+												<th style="text-align: center;">管理</th>
+											</tr>
+										</thead>
+										<tbody id="weixin_tbody">
+											
+										</tbody>
+									</table>
+			</div>
+		</div>
+	</div>
+	<div class="box-footer clearfix">
+					<ul class="pagination pagination-sm no-margin pull-right" id="weixin_goods_tbody_page"></ul>
+	</div>
+</div>
+<br/>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_good_weishangjia">
+<!--
+<div class="box box-primary" >
+	<div class="box-header">
+
+		<i class="fa fa-cloud"></i>
+		<h3 class="box-title">未上架</h3>
+		<div class="box-tools">
+														<div class="input-group">
+											<input type="text" name="table_search" id="weixin_goods_queryName" class="form-control input-sm pull-right" style="width: 150px;" placeholder="商品名">
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="weixin_goods_query_data(false)">
+													<i class="fa fa-search"></i>
+												</button>
+												<button class="btn btn-danger btn-sm" id="" onclick="weixin_goods_add()">
+													创建新商品 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+		</div>
+	</div>
+	<div class="box-body no-padding">
+		<div class="row">
+			<div class="col-sm-12" style="text-align: center;">
+				<div class="col-sm-12" style="text-align: center;">
+<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">名字</th>
+												<th style="text-align: center;">售价</th>
+												<th style="text-align: center;">进价</th>
+												<th style="text-align: center;">积分</th>
+												<th style="text-align: center;">型号</th>
+												<th style="text-align: center;">类别</th>
+												<th style="text-align: center;">管理</th>
+
+											</tr>
+										</thead>
+										<tbody id="weixin_tbody">
+											
+										</tbody>
+									</table>
+			</div>
+		</div>
+	</div>
+<div class="box-footer clearfix">
+					<ul class="pagination pagination-sm no-margin pull-right" id="weixin_goods_tbody_page"></ul>
+	</div>
+</div>
+<br/>
+-->
+</script>
+<script type="text/x-jsrender" id="good_yishangjia_queryData_window_tbody_tr">
+<!--
+	<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>goodsName}}</td>
+								<td width="20%" align="center">{{>price}}</td>
+								<td width="10%" align="center">{{>inPrice}}</td>
+								<td width="10%" align="center">{{>score}}</td>
+								<td width="10%" align="center">{{>goodsModel}}</td>
+								<td width="10%" align="center">{{>goodsType}}</td>
+								<td width="30%" align="center">
+										<div class="btn-group">
+										
+										<button type="button" onclick="weixin_goods_down({{>id}})" class="btn btn-danger btn-sm">下架</button>
+										
+									</div>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="good_weishangjia_queryData_window_tbody_tr">
+<!--
+	<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>goodsName}}</td>
+								<td width="10%" align="center">{{>price}}</td>
+								<td width="10%" align="center">{{>inPrice}}</td>
+								<td width="10%" align="center">{{>score}}</td>
+								<td width="10%" align="center">{{>goodsModel}}</td>
+								<td width="10%" align="center">{{>goodsType}}</td>
+								<td width="20%" align="center">
+										<div class="btn-group">
+					
+										<button type="button" onclick="weixin_goods_up({{>id}})" class="btn btn-danger btn-sm">上架</button>
+										<button type="button" onclick="weixin_goods_delete({{>id}})" class="btn btn-danger btn-sm">删除</button>
+										</div>
+								</td>
+							</tr>
+-->
+</script>
+<div class="modal fade" id="weixin_goods_add" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加商品</h4>
+			</div>
+			<div class="modal-body">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div id="queryDate_update_price_window_AlertDiv"></div>
+							<div class="box box-primary">
+								<div class="box-header">
+									<h3 class="box-title">添加商品表单</h3>
+									<div class="box-tools">
+										<div class="input-group">
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" id="weixin_goods_add_enter">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="col-xs-4">
+												<div class="form-group" id="weixin_goods_add_input_goodname">
+													<input type="text" class="form-control input-sm" id="weixin_goods_add_goodname" placeholder="货物名"></input>
+												</div>
+											</div>
+											<div class="col-xs-4">
+												<div class="form-group" id="weixin_goods_add_input_goodsType">
+													<input type="text" class="form-control input-sm" id="weixin_goods_add_goodsType" placeholder="单位"></input>
+												</div>
+											</div>
+											<div class="col-xs-4">
+												<div class="form-group" id="weixin_goods_add_input_goodsModel">
+													<input type="text" class="form-control input-sm" id="weixin_goods_add_goodsModel" placeholder="型号"></input>
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="col-xs-4">
+												<div class="form-group" id="weixin_goods_add_input_price">
+													<input type="text" class="form-control input-sm" id="weixin_goods_add_price" placeholder="售价"></input>
+												</div>
+											</div>
+											<div class="col-xs-4">
+												<div class="form-group" id="weixin_goods_add_input_inPrice">
+													<input type="text" class="form-control input-sm" id="weixin_goods_add_inPrice" placeholder="进价"></input>
+												</div>
+											</div>
+											<div class="col-xs-4">
+												<div class="form-group" id="weixin_goods_add_input_score">
+													<input type="text" class="form-control input-sm" id="weixin_goods_add_score" placeholder="积分"></input>
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="col-xs-6">
+												<div class="form-group" id="weixin_goods_add_input_spell">
+													<input type="text" class="form-control input-sm" disabled="disabled" id="weixin_goods_add_spell"
+														placeholder="拼音首写"></input>
+												</div>
+											</div>
+											<div class="col-xs-6">
+												<div class="input-group" id="weixin_goods_add_input_goodsSelectType">
+													<input type="text" name="table_search" id="weixin_goods_add_goodsSelectType"
+														class="form-control input-sm pull-right" placeholder="商品类别,选项里没有则直接输入文字" />
+													<div class="input-group-btn">
+														<button class="btn btn-sm btn-default" onclick="queryWeixinGoodsType()">
+															<i class="fa fa-search"></i>
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="col-xs-6">
+												<div class="input-group" id="weixin_goods_add_input_image1">
+													<input type="text" name="table_search" id="weixin_goods_add_image1"
+														class="form-control input-sm pull-right" placeholder="主图片地址" />
+													<div class="input-group-btn">
+														<button class="btn btn-sm btn-default" onclick="onImageManagerUpload('weixin_goods_add_image1')">
+															<i class="fa fa-search"></i>
+														</button>
+													</div>
+												</div>
+
+											</div>
+											<div class="col-xs-6">
+
+												<div class="input-group" id="weixin_goods_add_input_image2">
+													<input type="text" name="table_search" id="weixin_goods_add_image2"
+														class="form-control input-sm pull-right" placeholder="附图片1地址" />
+													<div class="input-group-btn">
+														<button class="btn btn-sm btn-default" onclick="onImageManagerUpload('weixin_goods_add_image2')">
+															<i class="fa fa-search"></i>
+														</button>
+													</div>
+												</div>
+
+											</div>
+
+										</div>
+
+									</div>
+
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="col-xs-6">
+
+												<div class="input-group" id="weixin_goods_add_input_image3">
+													<input type="text" name="table_search" id="weixin_goods_add_image3"
+														class="form-control input-sm pull-right" placeholder="附图片2地址" />
+													<div class="input-group-btn">
+														<button class="btn btn-sm btn-default" onclick="onImageManagerUpload('weixin_goods_add_image3')">
+															<i class="fa fa-search"></i>
+														</button>
+													</div>
+												</div>
+											</div>
+											<div class="col-xs-6">
+
+												<div class="input-group" id="weixin_goods_add_input_image4">
+													<input type="text" name="table_search" id="weixin_goods_add_image4"
+														class="form-control input-sm pull-right" placeholder="附图片3地址" />
+													<div class="input-group-btn">
+														<button class="btn btn-sm btn-default" onclick="onImageManagerUpload('weixin_goods_add_image4')">
+															<i class="fa fa-search"></i>
+														</button>
+													</div>
+												</div>
+
+											</div>
+
+										</div>
+
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="col-xs-12">
+												<div class="form-group" id="weixin_goods_add_input_marks">
+													<textarea rows="5" style="width: 100%; height: 400px;" id="weixin_goods_add_marks"
+														class="form-control input-sm" placeholder="说明"></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="weixin_goods_select_type" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加商品</h4>
+			</div>
+			<div class="modal-body">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div id="queryDate_update_price_window_AlertDiv"></div>
+							<div class="box box-primary">
+								<div class="box-header">
+									<h3 class="box-title">选择商品类别</h3>
+									
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="row">
+										<div class="col-xs-12">
+											<section class="content invoice" id="weixin_goods_seletType_list">
+												
+												
+											</section>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="weixin_goods_selectType_Item">
+<!--
+	<button class="btn bg-purple btn-flat margin btn-sm" onclick="selectType('{{>id}}','{{>typeName}}')">{{>typeName}}</button>
+-->
+</script>

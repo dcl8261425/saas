@@ -1,0 +1,46 @@
+<script type="text/javascript" src="../../js/libs/layer.js" th:src="@{/js/libs/jsrender.min.js}"></script>
+<script type="text/javascript" src="../../js/libs/jquery-1.9.1.js" th:src="@{/js/libs/pagejs/itemPage/weixin/jifenduihuan/jifenduihuan.js}"></script>
+<div class="row" id="jifenduihuan_body">
+
+</div>
+<br/>
+
+<script type="text/x-jsrender" id="jifenduihuan_tr">
+<!--
+	<div class="col-lg-6" >
+			<div class="thumbnail">
+          <img data-src="holder.js/100%x200" alt="100%x200" src="{{>image}}" data-holder-rendered="true" style="height: 250px; width: 100%; display: block;"/>
+          <div class="caption">
+            <h3><span class="label label-primary">{{>name}}</span></h3>
+            <div class="row">
+            <div class="col-xs-6" ><p><span class="label label-success">所需积分：{{>score}}</span></p></div> <div class="col-xs-6" ><span class="label label-success">数量：{{>num}}</span> </div>
+            </div>
+            <div class="row">
+            	 <div class="col-xs-12" >
+            	 	{{>content}}
+            	 </div>
+            </div>
+            <p><button class="btn btn-primary" style="width: 100%;" onclick="weixin_jifenduihuan_duihuan_window_open({{>id}})">
+													<i class="fa fa-hand-o-left"></i> 兑换
+				</button></p>
+          </div>
+        </div>
+	</div>
+-->
+</script>
+    <div class="cd-popup" role="alert">
+        <div class="cd-popup-container">
+            <p id="jifenduihuan_duihuan_alert_body"></p>
+            <ul class="cd-buttons">
+                <li><a id="weixin_jifenduihuan_duihuan_window_enter" href="">确定</a></li>
+                <li><a  href="javascript:weixin_jifenduihuan_duihuan_window_close()" >取消</a></li>
+            </ul>
+            <a href="#0" class="cd-popup-close img-replace" onclick="weixin_jifenduihuan_duihuan_window_close()">Close</a>
+        </div>
+        <!-- cd-popup-container -->
+    </div>
+<script type="text/x-jsrender" id="jifenduihuan_duihuan_num_tr">
+<!--
+	<input type="text" class="form-control input-sm" id="jifenduihuan_duihuan_num" placeholder="兑换数量"/>
+-->
+</script>

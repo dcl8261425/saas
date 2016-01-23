@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta id="viewport" name="viewport" content="width=540,user-scalable=no,target-densitydpi=high-dpi">
+		
+		<script data-main="js/main" src="require.js"></script>
+		<script  src="/js/libs/jquery-1.9.1.min.js"></script>
+		<title>一个都不能死</title>
+		<style type="text/css">
+			body{
+		        margin:0px;
+		        padding:0px;
+		        overflow: hidden;
+		    }
+		</style>
+		<script language="javascript">
+		var mebtnopenurl = 'http://mp.weixin.qq.com/s?__biz=MjM5ODMzMjk5Nw==&mid=200442232&idx=1&sn=bb981cf0ec10bc9bf28f24179744f511&from=singlemessage&isappinstalled=0#rd';
+		
+		
+		
+		function dp_submitScore(m,t){
+			$.ajax({
+				type : "POST",
+				url :"/VipAppController/submitgamepaiming",
+				data:{
+						score:t
+					},
+				success : function(msg) {
+					if(msg.success==null||msg.success==undefined||msg.success==true){
+
+						
+					}else{
+					
+					}
+				}
+		    })
+		}
+		
+		function dp_share(t){
+			
+		}
+
+		function dp_share2(t){
+			
+		}
+		function dp_Ranking(){
+			window.location=mebtnopenurl;
+		}
+
+		function showAd(){
+		}
+		function hideAd(){
+		}
+	
+		</script>
+
+	<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main" src="main.js"></script></head>
+	<body>
+		<div style="text-align:center;">
+			<canvas id="linkScreen" width="1366" height="621" style="width: 1366px; height: 621px;">
+				很遗憾，您的浏览器不支持HTML5，请使用支持HTML5的浏览器。
+			</canvas>
+		</div>
+		<div id="share" style="display:none">
+		<img id="logo" width="100%" src="460.jpg" style="position:absolute;top:0;left:0;">
+		<img width="100%" src="http://game2.id87.com/bunengsi/2000.png" style="position:absolute;top:0;left:0;display:" onClick="document.getElementById(&#39;share&#39;).style.display=&#39;none&#39;;">
+		</div>
+</body></html>

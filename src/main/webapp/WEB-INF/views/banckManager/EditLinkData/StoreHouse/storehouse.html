@@ -1,0 +1,80 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/EditLinkDate/StoreHouse/main.js}"></script>
+<div class="modal fade" id="StoreHouse_box_EditLinkDat_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" >选取仓库</h4>
+			</div>
+			<div class="modal-body" >
+				<section class="content">
+					<div class="row">
+						<div id="StoreHouse_box_window_alert"></div>
+						<section class="col-lg-12 connectedSortable">
+						
+			<div class="box box-primary" id="StoreHouse_box_EditLinkDate">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<input type="text" name="table_search" id="StoreHouse_box_EditLinkDate_name"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="名称" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="StoreHouse_box_EditLinkDate_serch()">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 800px;min-height: 300px;">
+									<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">名称</th>
+												<th style="text-align: center;">地址</th>
+												<th style="text-align: center;">管理人</th>
+												<th style="text-align: center;">电话</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="StoreHouse_box_EditLinkDate_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="StoreHouse_box_EditLinkDate_tbody_page">
+
+									</ul>
+								</div>
+							</div>
+
+						</section>
+					</div>
+				</section>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="StoreHouse_box_EditLinkDate_tbody_tr">
+<!--
+							<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>name}}</td>
+								<td width="20%" align="center">{{>address}}</td>
+								<td width="20%" align="center">{{>managerUserName}}</td>
+								<td width="20%" align="center">{{>tal}}</td>
+								<td width="30%" align="center">
+										<button type="button" onclick="StoreHouse_box_EditLinkDate_select({{>id}},'{{>name}}')" class="btn btn-danger btn-sm">选择</button>
+								</td>
+							</tr>
+-->
+</script>

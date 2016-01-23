@@ -1,0 +1,66 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/weixin/imageModelManager.js}"></script>
+
+<section class="content-header">
+	<h1>
+		微信管理 <small id="bankuai_title">图片板块管理</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+		<li class="active" id="bankuai_title2">图片板块管理</li>
+	</ol>
+</section>
+
+ <section class="content" id="content">
+	<div class="row">
+		<div id="game_alert"></div>
+		<section class="col-lg-12 connectedSortable ui-sortable">
+			<div class="nav-tabs-custom">
+				<!-- Tabs within a box -->
+				<ul class="nav nav-tabs pull-right" style="cursor: move;">
+					<li class="active"><a href="#revenue-chart" data-toggle="tab">未审批</a></li>
+					<li class="pull-left header" ><i class="fa fa-inbox"></i> 审批图片</li>
+				</ul>
+				<div class="tab-content no-padding">
+					<!-- Morris chart - Sales -->
+					<div class="chart tab-pane active" id="revenue-chart" style="position: relative; min-height: 600px">
+						<div class="row" id="conpany_image">
+							
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</section>
+	</div>
+</section><!-- /.content -->
+<script type="text/x-jsrender" id="image_item_model">
+<!--
+					<div class="col-md-4" >
+						<div class="nav-tabs-custom">
+							<ul class="nav nav-tabs pull-right">
+
+								<li class="pull-left header"><i class="fa fa-th"></i> {{>title}}</li>
+							</ul>
+							<div class="tab-content">
+								
+								<img src="{{>imageLink}}" width="100%" height="300px;"/>
+<div class="callout callout-info" style="margin-top: 20px;font-size:5px;">
+{{>message}}
+</div>
+								
+								<div class="box-footer clearfix" style="width: 100%">
+									<div class="btn-group" style="width: 100%">
+										<button type="button" onclick="image_model_pass({{>id}})" style="width: 50%" class="btn btn-info btn-flat">
+											通过
+										</button>
+										<button type="button" onclick="image_model_nopass({{>id}})" style="width: 50%" class="btn btn-info btn-flat">
+											不通过
+										</button>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+-->
+</script>

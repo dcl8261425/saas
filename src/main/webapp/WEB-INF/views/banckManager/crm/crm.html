@@ -1,0 +1,67 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/crm/main.js}"></script>
+<section class="content-header">
+	<h1>
+		客户管理 <small id="bankuai_title">客户机会概览</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+		<li class="active" id="bankuai_title2">客户机会概览</li>
+	</ol>
+</section>
+
+ <section class="content" id="content">
+ 
+   <div class="row">
+                        <div class="col-lg-6" onclick="createChance()">
+                            <!-- small box -->
+                            <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <h3>
+                                       1
+                                    </h3>
+                                    <p>
+                                     	 创建新的机会
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-person-add"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                   点击开启 <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div><!-- ./col -->
+                        <div class="col-lg-6" onclick="window_list_show('crm/window/list')">
+                            <!-- small box -->
+                            <div class="small-box bg-red">
+                                <div class="inner">
+                                    <h3>
+                                       	2
+                                    </h3>
+                                    <p>
+                                        	概览小窗口添加
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion-icecream"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                   点击开启 <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div><!-- ./col -->
+                    </div><!-- /.row -->
+                    <!-- Main row -->
+                    <div class="row">
+                        <!-- Left col -->
+                        <section class="col-lg-6 connectedSortable" id="right_layout"> 
+ 
+                            
+                        </section><!-- right col -->
+                         <section class="col-lg-6 connectedSortable" id="left_layout"> 
+                              
+                 
+
+                        </section><!-- right col -->
+                    </div><!-- /.row (main row) -->
+    </section><!-- /.content -->

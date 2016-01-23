@@ -1,0 +1,188 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/EditLinkDate/chanceOpenInfo/main.js}"></script>
+<div class="modal fade" id="Edit_chanceOpenInfo_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">开发记录管理</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+						<div id="Edit_chanceOpenInfo_AlertDiv"></div>
+						<section class="col-lg-6 connectedSortable">
+							
+							
+							<div class="box box-primary" id="Edit_chanceOpenInfo_Window_Body_main">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<input type="text" name="table_search" id="Edit_chanceOpenInfo_window_query_Name_main"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="客户名称" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="Edit_chanceOpenInfo_query_function_window_main()">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 400px;">
+									<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">客户名称</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="Edit_chanceOpenInfo_window_tbody_main">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="Edit_chanceOpenInfo_window_tbody_page_main">
+
+									</ul>
+								</div>
+							</div>
+						</section>
+						<section class="col-lg-6 connectedSortable">
+							
+							
+							<div class="box box-primary" id="Edit_chanceOpenInfo_Window_Body">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<input type="text" name="table_search" id="Edit_chanceOpenInfo_window_query_Name"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="记录人名" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="Edit_chanceOpenInfo_query_function_window()">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 800px;">
+									<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">记录人</th>
+												<th style="text-align: center;">开始日期</th>
+												<th style="text-align: center;">结束日期</th>
+												<th style="text-align: center;">最新日期</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="Edit_chanceOpenInfo_window_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="Edit_chanceOpenInfo_window_tbody_page">
+
+									</ul>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="Edit_chanceOpenInfo_window_add_window_div"></div>
+<script type="text/x-jsrender" id="Edit_chanceOpenInfo_window_tbody_tr">
+<!--
+	<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="10%" align="center">{{>notesUserName}}</td>
+								<td width="15%" align="center">{{JavaSTojsDate:startDate}}</td>
+								<td width="15%" align="center">{{JavaSTojsDate:endDate}}</td>
+								<td width="15%" align="center">{{JavaSTojsDate:updateDate}}</td>
+								<td width="30%" align="center">
+										<button type="button" onclick="Edit_chanceOpenInfo_look_show({{>id}})" class="btn btn-danger btn-sm">查看历史记录</button>
+										<button type="button" onclick="Edit_chanceOpenInfo_select({{>id}},'{{>notesUserName+'的开发记录'}}')" class="btn btn-danger btn-sm">选中</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="Edit_chanceOpenInfo_window_tbody_tr_main">
+<!--
+							<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="60%" align="center">{{>customerName}}</td>
+								<td width="30%" align="center">
+										<button type="button" onclick="Edit_chanceOpenInfo_look_show_main({{>id}})" class="btn btn-danger btn-sm">查看记录</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="Edit_chanceOpenInfo_window_look_info_window_tr">
+<!--
+<li>
+
+                                            <input type="checkbox" value="" name=""/>                                            
+
+                                            <span class="text">{{>notesTitle}}</span>
+
+                                            <small class="label label-danger"><i class="fa fa-clock-o"></i> {{JavaSTojsDate:notesDate}}</small>
+											<small class="label label-danger"><i class="fa fa-user"></i> {{>notesUserName}}</small>
+                                            <div class="tools">
+ 												<i class="fa fa-eye" onclick="look_Notes_Info_marks('mark_div_{{>id}}')" title="查看详情"></i>
+												<i class="fa fa-check-circle-o" onclick="Edit_chanceOpenInfo_Item_select({{>id}},'{{>notesTitle}}')" title="选中"></i>
+                                            </div>
+											
+											<div style="display: none" id="mark_div_{{>id}}"><hr/>{{>notesMark}}<br/></div>
+                                        </li>
+										
+-->
+</script>
+
+<script type="text/x-jsrender" id="Edit_chanceOpenInfo_window_look_info_window">
+<!--
+<div class="modal fade" id="Edit_chanceOpenInfo_window_look_info_window_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">查看记录</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+ <div class="box box-primary" >
+                                <div class="box-header">
+                                 <div class="pull-right box-tools">
+                                      
+                                    </div>
+                                    <i class="ion ion-clipboard"></i>
+                                </div>
+                                <div class="box-body">
+                                    <ul class="todo-list" id="Edit_chanceOpenInfo_window_look_tbody">
+
+                                    </ul>
+                                </div>
+
+                                <div class="box-footer clearfix no-border" >
+                                   <ul class="pagination pagination-sm no-margin pull-right" id="Edit_chanceOpenInfo_window_look_tbody_page">
+
+									</ul>
+                                </div>
+                            </div>
+			</div>
+		</div>
+	</div>
+</div>
+-->
+</script>

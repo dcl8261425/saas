@@ -1,0 +1,128 @@
+<link href="../../css/main.css" rel="stylesheet" th:href="@{/js/libs/switch/bootstrap-switch.min.css}" />
+<script src="" th:src="@{/js/libs/switch/bootstrap-switch.min.js}"></script>
+<script src="" th:src="@{/js/libs/pagejs/itemPage/message/phonemessage/vipMessage.js}"></script>
+<section class="content-header">
+	<h1>
+		短信平台 <small id="bankuai_title">会员发信</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+		<li class="active" id="bankuai_title2">会员发信</li>
+	</ol>
+</section>
+
+<section class="content" id="content">
+	<!-- Main row -->
+	<div id="message_set_alert"></div>
+	<div class="row">
+		<!-- Left col -->
+		<section class="col-lg-12 connectedSortable" id="right_layout">
+			<div class="box box-primary" id="weixin_wifi_window">
+				<div class="box-header">
+					<div class="pull-right box-tools"></div>
+					<i class="fa fa-cloud"></i>
+					<h3 class="box-title">会员发信</h3>
+					<div class="pull-right box-tools">
+
+					</div>
+				</div>
+				<div class="box-body no-padding">
+				<div  class="col-sm-12">
+					<div class="row">
+										<div class="btn-group" style="width: 100%;">
+									<button type="button" class="btn btn-info dropdown-toggle" id="weixin_model_selet_model_button"
+										style="width: 100%;" data-toggle="dropdown" aria-expanded="true">选择群发模块</button>
+									<ul class="dropdown-menu" role="menu">
+										<li onclick="vipMessage_sendNum()"><a>发送兑换券</a></li>
+										<li onclick="vipMessage_sendMessages()"><a href="#">发送普通短信</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="row">
+						<div class="col-sm-12" id="phone_message_content">
+						</div>
+					</div>
+						</div>
+				</div>
+				<div class="box-footer">
+					<div class="row">
+					<div  class="col-sm-12">
+					</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- right col -->
+
+	</div>
+	<!-- /.row (main row) -->
+</section>
+<script type="text/x-jsrender" id="vipMessage_sendNum_temp">
+<!--
+<br/>
+<div id="message_set_alert">
+<div class="alert alert-warning alert-dismissable no-print">
+<i class="fa fa-check"></i>
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+模板说明 <b>：</b>
+直接把兑换券储存至会员的账户，<我的兑换券> 通过积分兑换进行确认序列号，最多300字，60字一条短信。请预先在会员管理模块-》会员积分兑换页面进行奖品添加<br/>
+注意：在发送时不减少兑换物的数量，<br/>
+群发信息 最长30分钟内到达，运营商接口有延迟，<br/>
+如果发送条数填写的数字超过当前会员数，则想当前所有会员发送。
+</div></div>
+<br/>
+<div style="width:100%;text-align: center;">
+<select class="form-control input-sm" id="phonemessageTemp_addScore_input_value_select" style="width:100%">
+
+</select>
+<br/>
+<div class="form-group" >
+<input id="phonemessageTemp_addScore_input_num" placeholder="发送数量" value="" class="form-control input-sm " ></input><br/><br/>
+</div>
+<div class="form-group" id="input_phonemessageTemp_addScore_input_value">
+<textarea rows="10" cols="60" id="phonemessageTemp_addScore_input_value" style="width:80%"></textarea><br/><br/>
+</div>
+<button class="btn btn-danger btn-sm" onclick="vipMessage_sendNum_enter()">
+													确认 <i class="fa fa-plus-square"></i>
+												</button>
+</div>
+
+-->
+
+</script>
+<script type="text/x-jsrender" id="vipMessage_sendMessages_temp">
+<!--
+<br/>
+<div id="message_set_alert">
+<div class="alert alert-warning alert-dismissable no-print">
+<i class="fa fa-check"></i>
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+模板说明 <b>：</b>
+普通群发信息发送,最多300字，60字一条短信，如果发送条数填写的数字超过当前会员数，则想当前所有会员发送。<br/>
+群发信息 最长30分钟内到达，运营商接口有延迟，<br/>
+</div></div>
+<br/>
+<div style="width:100%;text-align: center;">
+<div class="form-group" >
+<input id="phonemessageTemp_addScore_input_num" placeholder="发送数量" value="" class="form-control input-sm " ></input><br/><br/>
+</div>
+<div class="form-group" id="input_phonemessageTemp_addScore_input_value">
+<textarea rows="10" cols="60" id="phonemessageTemp_addScore_input_value" style="width:80%"></textarea><br/><br/>
+</div>
+<button class="btn btn-danger btn-sm" onclick="vipMessage_sendMessages_enter()">
+													确认 <i class="fa fa-plus-square"></i>
+												</button>
+</div>
+
+-->
+
+</script>
+<script type="text/x-jsrender" id="vipMessage_sendMessages_temp_option">
+<!--
+{{if #index==0}}
+<option selected='selected' value='{{>id}}'>{{>name}}</option>
+{{else}}
+<option value='{{>id}}'>{{>name}}</option>
+{{/if}}
+-->
+</script>

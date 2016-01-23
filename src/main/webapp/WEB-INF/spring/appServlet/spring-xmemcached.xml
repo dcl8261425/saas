@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:bean="http://www.springframework.org/schema/beans" 
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/task 
+		http://www.springframework.org/schema/task/spring-task-3.2.xsd
+		    http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/cache 
+		http://www.springframework.org/schema/cache/spring-cache.xsd"
+		>
+			
+	<bean:import
+		resource="lib/simple-spring-memcached-3.1.0.jar*/simplesm-context.xml" />
+	<aop:aspectj-autoproxy />
+	<cache:annotation-driven cache-manager="cacheManager"/> 
+	<context:component-scan
+		base-package="com.google.code.ssm,com.dcl.blog.dao.impl,com.dcl.blog.model" />
+	<beans:bean name="cacheManager"
+		class="com.google.code.ssm.spring.SSMCacheManager">
+		<beans:property name="caches">
+			<beans:set>
+				<beans:bean class="com.google.code.ssm.spring.SSMCache">
+					<beans:constructor-arg name="cache" index="0"
+						ref="defaultCache" />
+					<!-- 5 minutes -->
+					<beans:constructor-arg name="expiration"
+						index="1" value="600000" />
+					<!-- @CacheEvict(..., "allEntries" = true) doesn't work -->
+					<beans:constructor-arg name="allowClear"
+						index="2" value="false" />
+				</beans:bean>
+			</beans:set>
+		</beans:property>
+
+	</beans:bean>
+	<beans:bean name="defaultCache" class="com.google.code.ssm.CacheFactory">
+		<beans:property name="cacheName" value="defaultCache" />
+		<beans:property name="cacheClientFactory">
+			<beans:bean name="cacheClientFactory"
+				class="com.google.code.ssm.providers.xmemcached.MemcacheClientFactoryImpl" />
+		</beans:property>
+		<beans:property name="addressProvider">
+			<beans:bean class="com.google.code.ssm.config.DefaultAddressProvider">
+				<beans:property name="address" value="127.0.0.1:11211" />
+			</beans:bean>
+		</beans:property>
+		<beans:property name="configuration">
+			<beans:bean class="com.google.code.ssm.providers.CacheConfiguration">
+				<beans:property name="consistentHashing" value="true" />
+			</beans:bean>
+		</beans:property>
+
+	</beans:bean>
+
+	<beans:bean class="com.google.code.ssm.Settings">  
+       <beans:property name="order" value="500" />  
+   </beans:bean>  
+
+</beans:beans>

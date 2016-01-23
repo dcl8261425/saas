@@ -1,0 +1,155 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/EditLinkDate/GoodSource/main.js}"></script>
+<div class="modal fade" id="GoodSource_box_EditLinkDate_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" >查询厂家</h4>
+			</div>
+			<div class="modal-body" >
+				<section class="content">
+					<div class="row">
+						<div id="Edit_GoodSource_box_EditLinkDate_window_alert"></div>
+						<section class="col-lg-12 connectedSortable">
+						
+												<div class="box box-primary" id="GoodSource_box_EditLinkDate">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<input type="text" name="table_search" id="GoodSource_box_EditLinkDate_name"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="名称" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="GoodSource_box_EditLinkDate_serch()">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 800px;min-height: 300px;">
+									<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">名称</th>
+												<th style="text-align: center;">地址</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="GoodSource_box_EditLinkDate_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="GoodSource_box_EditLinkDate_tbody_page">
+
+									</ul>
+								</div>
+							</div>
+
+						</section>
+					</div>
+				</section>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="GoodSource_box_EditLinkDate_window_window"></div>
+<script type="text/x-jsrender" id="GoodSource_box_EditLinkDate_tbody_tr">
+<!--
+							<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>name}}</td>
+								<td width="20%" align="center">{{>address}}</td>
+								<td width="30%" align="center">
+										<button type="button" onclick="GoodSource_box_EditLinkDate_addlinkman({{>id}})" class="btn btn-danger btn-sm">查看联系人</button>
+										<button type="button" onclick="GoodSource_box_EditLinkDate_select({{>id}},'{{>name}}')" class="btn btn-danger btn-sm">选中</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="GoodSource_box_EditLinkDate_linkman_window_temp">
+<!--
+<div class="modal fade" id="GoodSource_box_EditLinkDate_linkman_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">供应商联系人</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div id="GoodSource_box_EditLinkDate_linkman_window_temp_AlertDiv"></div>
+							<div class="box box-primary" id="GoodSource_box_EditLinkDate_linkman_window_box">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<input type="text" name="table_search" id="GoodSource_box_EditLinkDate_linkman_window_name"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="联系人名" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="GoodSource_box_EditLinkDate_linkman_window_serch()">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 800px;min-height: 300px;">
+									<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">名称</th>
+												<th style="text-align: center;">电话</th>
+												<th style="text-align: center;">生日</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="GoodSource_box_EditLinkDate_linkman_window_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="GoodSource_box_EditLinkDate_linkman_window_tbody_page">
+
+									</ul>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+-->
+</script>
+<script type="text/x-jsrender" id="GoodSource_box_EditLinkDate_linkman_window_tbody_tr">
+<!--
+							<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>name}}</td>
+								<td width="20%" align="center">{{>phone}}</td>
+								<td width="20%" align="center">{{JavaSTojsDate:linkManBirthday}}</td>
+								<td width="30%" align="center">
+										<button type="button" onclick="GoodSource_box_EditLinkDate_linkman_select({{>id}},'{{>name}}')" class="btn btn-danger btn-sm">选中</button>
+								</td>
+							</tr>
+-->
+</script>

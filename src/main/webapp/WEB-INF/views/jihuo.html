@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<div th:include="mainTemplate::guanjianzi" th:remove="tag"></div>
+<title>青柠店铺社区化软件</title>
+<div th:include="mainTemplate::jscss" th:remove="tag"></div>
+<script type="text/javascript" src="../../js/libs/pagejs/jihuo.js" th:src="@{/js/libs/pagejs/jihuo.js}"></script>
+</head>
+<body>
+	<div id="header" th:include="mainTemplate::header"></div>
+	<div class="container" style="min-height: 680px;">
+		<div style="height: 30px;"></div>
+		<div class="row">
+  			<div class="col-lg-6" style="text-align: center;">
+  				 	<div class="alert alert-block" style="text-align: center;">
+						此账号将是您软件的最高管理员，拥有一切权限<br />
+					 	可以在内部在创建您的员工账号，前五个账号永久免费<br />
+					        欢迎您使用本公司提供的软件服务<br/>
+					     填写时注意事项：<br/>
+					     账户前缀就是您要注册的管理员名称，账号生成成功后<br/>您的账户全名则为：前缀+"@"+您的公司编号+".com"
+					</div>
+  			</div>
+  			<div class="col-lg-6">
+  				     <div class="form-signin" style="text-align: center;min-width: 480px;" id="loginWindow">
+					<h2 class="form-signin-heading">添加管理员账号</h2>
+					<input type="text" class="form-control input-sm" id="admin" placeholder="账号前缀" /> 
+					<input type="password" class="form-control input-sm" id="password" placeholder="密码" /> 
+					<input type="password" class="form-control input-sm" id="repassword" placeholder="重新输入密码" /> 
+					<button class="btn btn-large btn-primary" id="rigister">添加</button>
+				</div>
+  			</div>
+		</div>
+	</div>
+	<div id="footer" th:include="mainTemplate::footer" th:remove="tag"></div>
+	<script type="text/x-jsrender" id="rigister_success">
+<!--
+	管理员账号已经生成完毕<br/>
+	账号是：{{>username}}<br/>
+	您也可以去您的邮箱查看
+-->
+</script>
+</body>
+</html>
+

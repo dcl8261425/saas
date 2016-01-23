@@ -1,0 +1,19 @@
+<div id="header_admin" th:fragment="header_admin">
+	<header class="header">
+		<input style="display: none;" id="conpanyId" th:value="${conpany.id}"/>
+		<a th:href='@{${"/weixin/public/main?conpanyId="+conpany.id}}' class="logo" th:text="${conpany.conpanyName}"> </a>
+		<nav class="navbar navbar-static-top" role="navigation">
+			<a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button"> <span class="sr-only">展开/关闭侧菜单</span>
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+			</a>
+			<div class="navbar-right">
+					<ul class="nav navbar-nav">
+						<li class="dropdown notifications-menu"><a href="javascript:weixin_model_buycar_but()" class="dropdown-toggle"> <i
+								class="fa fa-truck"></i> 
+						</a>
+						</li>
+					</ul>
+			</div>
+		</nav>
+	</header>
+</div>

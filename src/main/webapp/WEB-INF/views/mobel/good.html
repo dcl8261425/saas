@@ -1,0 +1,86 @@
+<script type="text/javascript" src="../../js/libs/layer.js" th:src="@{/js/libs/jsrender.min.js}"></script>
+<script type="text/javascript" src="../../js/libs/jquery-1.9.1.js" th:src="@{/js/libs/pagejs/itemPage/weixin/goods/goods.js}"></script>
+<div id="good_body_item_content">
+	
+</div>
+<div class="row" id="good_body">
+
+</div>
+<br/>
+<div class="row" id="good_body_page">
+	<div class="col-xs-6" >
+		<button class="btn btn-primary" style="width: 100%;" onclick="good_page_up()">
+													 上一页
+				</button>
+	</div>
+	<div class="col-xs-6" >
+		<button class="btn btn-primary" style="width: 100%;" onclick="good_page_next()">
+												 下一页
+				</button>
+	</div>
+</div>
+<script type="text/x-jsrender" id="good_tr">
+<!--
+	<div class="col-lg-6" >
+			<div class="thumbnail">
+          <img data-src="holder.js/100%x200" alt="100%x200" src="{{>image1}}" data-holder-rendered="true" style="height: 250px; width: 100%; display: block;"/>
+          <div class="caption">
+            <h3><span class="label label-primary">{{>goodsName}}</span></h3>
+            <div class="row">
+            <div class="col-xs-6" ><p><span class="label label-success">价格：{{>price}}</span></p></div> <div class="col-xs-6" ><span class="label label-success">获取积分：{{>score}}</span> </div>
+            </div>
+            <div class="row">
+            <div class="col-xs-6" ><p><span class="label label-success">单位：{{>goodsType}}</span></p></div> <div class="col-xs-6" ><span class="label label-success">型号：{{>goodsModel}}</span> </div>
+            </div>
+            <div class="row">
+            	 <div class="col-xs-12" >
+            	 	点击查看详情
+            	 </div>
+            </div>
+            <p></p>
+ 		<div class="row">
+            <div class="col-xs-6" ><button onclick="showItem('{{>conpanyId}}','{{>id}}')" class="btn btn-primary" style="width: 100%;">
+													<i class="fa fa-hand-o-left"></i> 查看详情
+			</button></div>
+			<div class="col-xs-6" ><button class="btn btn-primary" style="width: 100%;" onclick="weixin_good_window_open({{>id}})">
+													<i class="fa fa-hand-o-left"></i> 加入购物车
+				</button></div>
+            </div>
+          </div>
+        </div>
+	</div>
+-->
+</script>
+    <div id="addcar" class="cd-popup" role="alert">
+        <div class="cd-popup-container">
+            <p id="good_duihuan_alert_body">确定加入购物车？</p>
+            <ul class="cd-buttons">
+                <li><a id="weixin_good_window_enter" href="javascript:addCar()">确定</a></li>
+                <li><a  href="javascript:weixin_good_window_close()" >取消</a></li>
+            </ul>
+            <a href="#0" class="cd-popup-close img-replace" onclick="weixin_good_window_close()">Close</a>
+        </div>
+        <!-- cd-popup-container -->
+    </div>
+       <div id="alert"  class="cd-popup" role="alert">
+        <div class="cd-popup-container">
+            <p id="good_alert_body"></p>
+            <ul class="cd-buttons">
+                <li><a href="javascript:weixin_model_buycar_but()">去购物车结算</a></li>
+                <li><a  href="javascript:weixin_alert_close()" >再转转</a></li>
+            </ul>
+            <a href="#0" class="cd-popup-close img-replace" onclick="weixin_good_window_close()">Close</a>
+        </div>
+        <!-- cd-popup-container -->
+    </div>
+      <div id="alert_error"  class="cd-popup" role="alert">
+        <div class="cd-popup-container">
+            <p id="good_alert_error_body"></p>
+            <ul class="cd-buttons">
+                <li><a href="javascript:weixin_model_vip_but()">去加入会员</a></li>
+                <li><a  href="javascript:weixin_alert_error_close()" >再转转</a></li>
+            </ul>
+            <a href="#0" class="cd-popup-close img-replace" onclick="weixin_alert_error_close()">Close</a>
+        </div>
+        <!-- cd-popup-container -->
+    </div>

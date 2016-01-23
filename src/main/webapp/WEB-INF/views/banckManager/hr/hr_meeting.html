@@ -1,0 +1,205 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/hr/meeting.js}"></script>
+<section class="content-header">
+	<h1>
+		员工管理 <small id="bankuai_title">签到管理</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+		<li class="active" id="bankuai_title2">员工管理</li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content" id="content">
+	<div class="row">
+
+		<div class="col-lg-12 col-xs-12" onclick="hr_meeting_manage_set('crm/window/list')">
+			<!-- small box -->
+			<div class="small-box bg-red">
+				<div class="inner">
+					<h3>1</h3>
+					<p>签到设置</p>
+				</div>
+				<div class="icon">
+					<i class="ion-icecream"></i>
+				</div>
+				<a href="#" class="small-box-footer"> 点击开启 <i class="fa fa-arrow-circle-right"></i>
+				</a>
+			</div>
+		</div>
+		<!-- ./col -->
+	</div>
+	<!-- /.row -->
+	<div id="alertDiv"></div>
+	<div class="row">
+		<div class="col-xs-5">
+			<div class="input-group date" id="hr_meeting_date">
+				<input type="text" value="开始日期" id="hr_meeting_date_text" disabled="disabled" class="form-control" /><span
+					class="input-group-addon" id="crm_window_layout_char_startDate_but"><i class="glyphicon glyphicon-th"></i></span>
+			</div>
+		</div>
+
+		<div class="col-xs-7">
+			<div class="input-group-btn">
+				<button class="btn btn-default" onclick="hr_meeting_query_but()">
+					<i class="fa fa-search"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+	<br />
+	<div class="row">
+		<table class="table input-sm" id="hr_meeting_body">
+		</table>
+	</div>
+</section>
+<!-- /.content -->
+<script type="text/x-jsrender" id="hr_meeting_tr">
+<!--
+	{{if #index%10==0}}
+			<tr>
+	{{/if}}
+				<td>
+					<table class="table table-bordered table-hover input-sm">
+						<tr>
+							<td align="center">{{>conpanyUsertrueName}}</td>
+						</tr>
+						<tr>
+							<td align="center">{{JavaSTojsDateTime:startDate}}</td>
+						</tr>
+						<tr>
+							<td align="center">{{JavaSTojsDateTime:endDate}}</td>
+						</tr>
+						<tr>
+<td align="center">
+<div class="row">
+<div class="col-xs-9" id="hr_meeting_stute_{{>id}}">
+							{{if stute==0}}
+								未签到
+							{{else stute==1}}
+								迟到
+							{{else stute==2}}
+								早退
+							{{else stute==3}}
+								迟到和早退
+							{{else stute==4}}
+							        外出
+							{{else stute==5}}
+								正常签到
+							{{/if}}
+</div>
+<div class="col-xs-3">
+<i class="fa fa-edit" id="hr_queryCustemmer_window_trueName_tag" style="cursor: pointer;" onclick="hr_meeting_chanage('stute','hr_meeting_stute_{{>id}}',{{>id}})"></i>
+</div>
+</td>
+
+						</tr>
+						<tr>
+							<td align="center">
+							<div class="row">
+								<div class="col-xs-9" id="hr_meeting_marks_{{>id}}">
+									{{>stuteMarks}}
+								</div>
+								<div class="col-xs-3">
+									<i class="fa fa-edit" id="hr_queryCustemmer_window_trueName_tag" style="cursor: pointer;" onclick="hr_meeting_chanage('marks','hr_meeting_marks_{{>id}}',{{>id}})"></i>
+								</div>
+							</div>
+
+							</td>
+						</tr>
+					</table>				
+				</td>
+	{{if (#index+1)%10==0}}
+			</tr>
+	{{/if}}	
+-->
+</script>
+<div class="modal fade" id="hr_meeting_set_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">查询员工</h4>
+			</div>
+			<div class="modal-body">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-12 connectedSortable">
+							<div id="hr_meeting_set_AlertDiv"></div>
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<div class="input-group-btn">
+												<button class="btn btn-default pull-right" onclick="hr_meeting_set_enter()">确定保存</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body" style="max-height: 800px; min-height: 300px;">
+									<div class="row">
+										<div class="col-xs-3" style="text-align: center;">上班时间:</div>
+										<div class="col-xs-9">
+											<div class="input-group clockpicker" id="hr_meeting_set_up_but" data-autoclose="true">
+												<input type="text" class="form-control" id="hr_heeting_set_up" value="00:00" disabled="disabled" /> <span
+													class="input-group-addon"> <span class="glyphicon glyphicon-time"></span>
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-3" style="text-align: center;">下班时间:</div>
+										<div class="col-xs-9">
+											<div class="input-group clockpicker" id="hr_meeting_set_down_but" data-autoclose="true">
+												<input type="text" class="form-control" id="hr_heeting_set_down" value="00:00" disabled="disabled" /> <span
+													class="input-group-addon"> <span class="glyphicon glyphicon-time"></span>
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12" style="text-align: center;">
+											<select id="hr_meeting_is_ip" class="form-control">
+												<option value="true" id="hr_meeting_is_ip_true">只允许本机局域网的计算机，手机进行签到</option>
+												<option value="false" id="hr_meeting_is_ip_false">允许任何计算机，手机进行签到</option>
+											</select>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12" style="text-align: center;">
+											<table id="example1" class="table table-bordered table-hover input-sm">
+												<thead>
+													<tr>
+														<th style="text-align: center;">修改人</th>
+														<th style="text-align: center;">修改日期</th>
+														<th style="text-align: center;">修改内容</th>
+													</tr>
+												</thead>
+												<tbody id="hr_meeting_set_table_body">
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="hr_meeting_set_table_body_tr">
+<!--
+							<tr>
+								<td width="10%" align="center">{{>managerUserTrueName}}</td>
+								<td width="20%" align="center">{{JavaSTojsDate:managerDate}}</td>
+								<td width="20%" align="center">上班:{{>startDate}},下班:{{>endDate}},是否指定网络:{{>iptest?"指定":"未指定"}}</td>
+								
+							</tr>
+-->
+</script>

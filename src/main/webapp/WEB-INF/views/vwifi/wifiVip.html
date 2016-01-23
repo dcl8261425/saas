@@ -1,0 +1,1946 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/css/zhenghe/model.css}" />
+<link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/js/libs/video/video-js.css}" />
+<link href="http://h5server.ejamad.com/h5/css/append.css" th:if="${isguanggao==true}" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../js/libs/jquery-1.9.1.js" th:src="@{/js/libs/zhenghe/model.js}"></script>
+<script type="text/javascript" th:src="${guanggao}" th:if="${isguanggao==true}"></script>
+<script th:inline="javascript">
+window.$=jQuery;
+var ej=jQuery;
+</script>
+<script src="" th:src="@{/js/libs/ajaxfileupload.js}"></script>
+<script src="" th:src="@{/js/libs/video/video.js}"></script>
+<script src="" th:src="@{/js/libs/jsrender.min.js}"></script>
+<script src="" th:src="@{/js/libs/pagejs/itemPage/weixin/wifi/VipWifi.js}"></script>
+<script src="" th:src="@{/js/libs/gifffer.js}"></script>
+
+<script th:inline="javascript">
+	var ctx = /*[[${#httpServletRequest.contextPath}+'/']]*/'/';
+	var guanggao = /*[[${isguanggao}]]*/'/';
+	$.views.converters("JavaSTojsDateTime", function(val) {
+		 var date=new Date(val);
+		 var y=date.getFullYear();
+		 var m=date.getMonth();
+		 var d=date.getDate();
+		 var h=date.getHours();
+		 var m2=date.getMinutes();
+		 var s=date.getSeconds();
+		 
+		 var s=y+"年"+(m+1)+"月"+d+"日"+h+"时"+m2+"分"+s+"秒";
+		 if(s=='1970年1月1日8时0分0秒'){
+			return '未签写';
+		}else{
+			 return s;
+		}
+	});
+	$.views.converters("JavaSTojsDate", function(val) {
+		 var date=new Date(val);
+		 var y=date.getFullYear();
+		 var m=date.getMonth();
+		 var d=date.getDate();
+		
+		 
+		 var s=y+"年"+(m+1)+"月"+d+"日";
+		 if(s=='1970年1月1日'){
+			return '未签写';
+		}else{
+			 return s;
+		}
+	});
+</script>
+</head>
+<body class="skin-blue" style="background-color: rgb(249, 249, 249);">
+	<div id="content" th:if="${login==true}">
+		<section class="content invoice">
+			<form th:action="@{/wifidogController/portal}">
+
+				<input type="hidden" id="conpanyId1" name="conpanyId" th:value="${conpanyId}" /> <input name="phone" id="phone1"
+					placeholder="请输入加入会员时手机号。" class="form-control" /> <input name="password" id="password1"
+					placeholder="请输入密码，默认0000或00000。" class="form-control" /> <input class="btn btn-primary" id="start"
+					style="width: 100%;" type="submit" value="登录" />
+			</form>
+		</section>
+		
+	</div>
+	<div id="content" th:if="${rigister==true}">
+	<section class="content invoice">
+			   <form th:action="@{/wifidogController/rigisterWifiVip}">
+					<input type="hidden" id="gw_address" name="gw_address" th:value="${gw_address}" /> <input type="hidden"
+						id="gw_port" name="gw_port" th:value="${gw_port}" /> <input type="hidden" id="gw_id" name="gw_id"
+						th:value="${gw_id}" /> <input type="hidden" id="mac" name="mac" th:value="${mac}" /> <input type="hidden"
+						id="url" name="url" th:value="${url}" /> <input type="hidden" id="dev_id" name="dev_id" th:value="${dev_id}" />
+					<input type="hidden" id="conpanyId" name="conpanyId" th:value="${conpanyId}" /> <input type="hidden" id="tokens"
+						name="tokens" th:value="${tokens}" /> <input name="name" id="name" placeholder="请输姓名。" class="form-control" /> <input
+						name="phone" id="phone" placeholder="请输入手机号。" class="form-control" /> <input id="getCode" class="btn btn-primary"
+						style="width: 100%;" type="button"  onclick="rigister()" value="获取验证码,之后可以注册" /> <input id="inputTestCode" name="testCode"
+						style="display: none;" placeholder="请输入发送到手机的验证码。" class="form-control" /> <input id="startRigister"
+						class="btn btn-primary" style="width: 100%; display: none;" type="button" onclick="rigister_start()" value="成为会员并上网" />
+				</form>
+		</section>
+		</div>
+	<div id="content" th:if="${success==false}">
+		<section class="content invoice">
+
+			您的登录已经超时<br />请您想本店店主索要会员vip手机应用<br />或者关注本店微信.
+		</section>
+	</div>
+	<div id="content" th:if="${success==true}">
+
+		<ul id="myTab" class="nav nav-tabs" role="tablist" style="text-align: center;">
+
+			<li role="presentation" class="active" onclick="loadImage()"><a href="#image" role="tab" id="profile-tab"
+				data-toggle="tab" aria-controls="profile" aria-expanded="true">图片</a></li>
+			<li role="presentation" class="" onclick="loadVideo()"><a href="#video" role="tab" id="profile-tab"
+				data-toggle="tab" aria-controls="profile" aria-expanded="true">视频</a></li>
+			<li role="presentation" class="" onclick="loadText()"><a href="#text" role="tab" id="profile-tab"
+				data-toggle="tab" aria-controls="profile" aria-expanded="true">文字</a></li>
+			<li role="presentation" onclick="game()"><a href="#game" id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
+				aria-expanded="false">游戏</a></li>
+			<li role="presentation" class="" onclick="loadErShouType()"><a href="#ershou" role="tab" id="profile-tab"
+				data-toggle="tab" aria-controls="profile" aria-expanded="true">格铺</a></li>
+		</ul>
+		<div id="myTabContent" class="tab-content">
+			<div role="tabpanel" class="tab-pane fade active in" id="image" aria-labelledby="home-tab">
+				<div class="row">
+					<div class="col-md-12"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<button class="btn btn-danger btn-flat" style="width: 100%" onclick="showAddImage()">
+							<i class="fa fa-plus-square"></i> 分享有意思的图片
+						</button>
+					</div>
+				</div>
+				<div class="row" id="imageMessageContent"></div>
+			</div>
+
+			<div role="tabpanel" class="tab-pane fade " id="video" aria-labelledby="home-tab">
+				<div class="row"></div>
+				<div class="row">
+					<div class="col-md-12">
+						<button class="btn btn-danger btn-flat" style="width: 100%" onclick="showAddVideo()">
+							<i class="fa fa-plus-square"></i> 分享有意思的视频
+						</button>
+					</div>
+				</div>
+				<div class="row" id="videpMessageContent"></div>
+			</div>
+			<div role="tabpanel" class="tab-pane fade " id="text" aria-labelledby="home-tab">
+				<div class="row"></div>
+				<div class="row">
+					<div class="col-md-12">
+						<button class="btn btn-danger btn-flat" style="width: 100%" onclick="showAddText()">
+							<i class="fa fa-plus-square"></i> 分享有意思的文字
+						</button>
+					</div>
+				</div>
+				<div class="row" id="textMessageContent"></div>
+			</div>
+			<div role="tabpanel" class="tab-pane fade " id="game" aria-labelledby="home-tab">
+				<div class="row"></div>
+				<div class="row" id="gameContent"></div>
+			</div>
+			<div role="tabpanel" class="tab-pane fade " id="ershou" aria-labelledby="home-tab">
+				<div class="row"></div>
+				<div class="row">
+					<div class="col-md-12">
+						<button class="btn btn-danger btn-flat" style="width: 100%" onclick="showAddErshou()">
+							<i class="fa fa-plus-square"></i> 我要挂点东西卖
+						</button>
+					</div>
+				</div>
+				<section class="content invoice" id="gezi_type_menu_content"></section>
+				<div class="row" id="gezi_content"></div>
+				<div class="row" id="geziMessageContent"></div>
+			</div>
+			<div role="tabpanel" class="tab-pane fade " id="vip" aria-labelledby="home-tab">
+				<div class="row"></div>
+				<section class="content invoice">
+					<div class="small-box bg-aqua">
+						<div class="inner">
+							<h3>会员制度</h3>
+							<p>以下是本店会员积分的制度，方便大家查看。</p>
+						</div>
+						<div class="icon">
+							<i class="ion ion-bag"></i>
+						</div>
+						<a href="#" class="small-box-footer"> 店铺允许的话,积分可兑换商品哦 <i class="fa fa-arrow-circle-right"></i>
+						</a>
+					</div>
+				</section>
+				<section class="content invoice">
+							<div class="small-box bg-blue" onclick="score_to_goods_list(1)">
+								<div class="inner">
+									<h3>积分兑换</h3>
+									<p>积分兑换奖品哦！~速度来啦。</p>
+								</div>
+								<div class="icon">
+									<i class="ion ion-bag"></i>
+								</div>
+								<a href="#" class="small-box-footer"> 点我现在就兑 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</section>
+				<div class="row">
+					<div class="col-md-12" id="shopvipLevenContent"></div>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane fade " id="vipJiaolIu" aria-labelledby="home-tab">
+				<div class="row"></div>
+				<div class="row" id="vipJiaolIuContent">
+					
+				</div>
+				<div class="row">
+					<button class="btn btn-danger btn-flat" id="vipJiaolIu_next" onclick="" style="width: 100%">下一个</button>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane fade " id="shopinfo" aria-labelledby="home-tab">
+				<div class="row"></div>
+				<div class="row" id="shopinfoContent"></div>
+			</div>
+			<div role="tabpanel" class="tab-pane fade " id="myInfo" aria-labelledby="home-tab">
+				<div class="row"></div>
+				<section class="content invoice">
+					<div class="small-box bg-red">
+						<div class="inner">
+							<h3>会员中心</h3>
+							<p>加入会员，享受积分，折扣</p>
+							<p id="weixin_vip_level" th:text='${"vip等级:"+linkman.vipLevel}'></p>
+							<p id="weixin_vip_marks" th:text='${"待遇:"+linkman.vipMarks}'></p>
+							<p id="weixin_vip_price" th:text='${"余额:"+linkman.money}'></p>
+						</div>
+						<div class="icon">
+							<i id="weixin_model_tem_layout_ion" class="ion ion-android-contact"></i>
+						</div>
+						<a href="#" class="small-box-footer"> <label>您的当前积分：<label id="weixin_vip_score"
+								th:text="${linkman.linkManScore}"></label>
+								<button class="btn btn-sm btn-default" onclick="weixin_vip_reflash()">
+									<i class="fa fa-refresh"></i>
+								</button>
+						</label>
+						</a>
+					</div>
+				</section>
+				<div class="row">
+					<div class="col-md-12">
+						<section class="content invoice">
+							<div class="small-box bg-blue" onclick="touxiang_name()">
+								<div class="inner">
+									<h3>修改头像昵称</h3>
+									<p>修改账户信息</p>
+								</div>
+								<div class="icon">
+									<i class="ion ion-bag"></i>
+								</div>
+								<a href="#" class="small-box-footer"> 换头像换昵称 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</section>
+						<section class="content invoice">
+							<div class="small-box bg-blue"  onclick="show_update_password()">
+								<div class="inner">
+									<h3>修改密码</h3>
+									<p>修改密码，哇咔咔，这样别人不能盗用积分储值了</p>
+								</div>
+								<div class="icon">
+									<i class="ion ion-bag"></i>
+								</div>
+								<a href="#" class="small-box-footer"> 可以看看都发送过什么 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</section>
+						<section class="content invoice">
+							<div class="small-box bg-purple" onclick="show_duihuanjifen()">
+								<div class="inner">
+									<h3>序列号兑换积分</h3>
+									<p>打印小条上的序列号可以兑换积分哦!~</p>
+								</div>
+								<div class="icon">
+									<i class="ion ion-bag"></i>
+								</div>
+								<a href="#" class="small-box-footer"> 来兑换吧 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</section>
+						<section class="content invoice">
+							<div class="small-box bg-green" onclick="JiFenDuiHuanNumList_show(1)">
+								<div class="inner">
+									<h3>积分兑换号仓库</h3>
+									<p>积分兑换序列号的仓库。</p>
+								</div>
+								<div class="icon">
+									<i class="ion ion-bag"></i>
+								</div>
+								<a href="#" class="small-box-footer"> 在这里查看以前兑换的序列号哦 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</section>
+						<section class="content invoice">
+							<div class="small-box bg-aqua" onclick="getZhongJiangNumList_show(1)">
+								<div class="inner">
+									<h3>活动兑换号仓库</h3>
+									<p>活动兑换序列号的仓库。</p>
+								</div>
+								<div class="icon">
+									<i class="ion ion-bag"></i>
+								</div>
+								<a href="#" class="small-box-footer"> 在这里查看以前活动的序列号哦 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</section>
+						<section class="content invoice">
+							<div class="small-box bg-blue" onclick="orderShow(1)">
+								<div class="inner">
+									<h3>订单历史</h3>
+									<p>我以前都买过什么？</p>
+								</div>
+								<div class="icon">
+									<i class="ion ion-bag"></i>
+								</div>
+								<a href="#" class="small-box-footer"> 回忆一下 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane fade " id="shopMenu" aria-labelledby="home-tab">
+				<div class="row"></div>
+				 <section class="content invoice" >
+				<button class="btn btn-danger btn-flat" onclick="gouwuchewindow()" 
+					style="width: 100%">查看购物车</button>
+				</section>
+				<section class="content invoice" id="shopMenuTypeContent"></section>
+				<div class="row" id="shopMenuContent"></div>
+				 <section class="content invoice" >
+				<button class="btn btn-danger btn-flat" id="shopMenuContent_mover" 
+					style="width: 100%">继续查看</button>
+				</section>
+			</div>
+		</div>
+
+		<br /> <br />
+	</div>
+
+	<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default" th:if="${success==true}" id="">
+		<ul class="am-navbar-nav am-cf am-avg-sm-4">
+			<li role="presentation" onclick="vip()"><a href="#vip" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile"
+				aria-expanded="true"> <span class="fa fa-users am-icon-sm"></span> <span class="am-navbar-label">会员</span>
+			</a></li>
+			<li role="presentation" onclick="jiaoliu(1)"><a href="#vipJiaolIu" role="tab" id="profile-tab" data-toggle="tab"
+				aria-controls="profile" aria-expanded="true"> <span class="fa fa-comments-o am-icon-sm"></span> <span
+					class="am-navbar-label">交流</span>
+			</a></li>
+			<li role="presentation" onclick="gonggao(1)"><a href="#shopinfo" role="tab" id="profile-tab" data-toggle="tab"
+				aria-controls="profile" aria-expanded="true"> <span class="fa fa-bell-o am-icon-sm"></span> <span
+					class="am-navbar-label">公告</span>
+			</a></li>
+			<li role="presentation"><a href="#myInfo" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile"
+				aria-expanded="true"> <span class="fa  fa-user am-icon-sm"></span> <span class="am-navbar-label">我的</span>
+			</a></li>
+			<li role="presentation" onclick="loadGoodsType()"><a href="#shopMenu" role="tab" id="profile-tab" data-toggle="tab"
+				aria-controls="profile" aria-expanded="true"> <span class="fa fa-file-text am-icon-sm"></span> <span
+					class="am-navbar-label">菜单</span>
+			</a></li>
+
+
+		</ul>
+	</div>
+
+</body>
+</html>
+<script type="text/x-jsrender" id="image_item">
+<!--
+					<div class="col-md-12">
+						<div class="nav-tabs-custom">
+							<ul class="nav nav-tabs pull-right">
+
+								<li class="pull-left header"><i class="fa fa-th"></i> {{>title}}</li>
+							</ul>
+							<div class="tab-content">
+								
+								<img data-gifffer="{{>imageLink}}" width="100%" />
+<div class="callout callout-info" style="margin-top: 20px;font-size:5px;">
+{{>message}}
+</div>
+								{{for oneMsg}}
+								<div class="callout callout-info" style="margin-top: 20px;">
+<table width="100%">
+									<tr>
+										<td rowspan="3" width="20%" style="text-align: center;"><img class="media-object" data-src="holder.js/64x64" alt="64x64"
+											{{if touXiangImage==""||touXiangImage==null}} src="/img/touxiang.jpg" {{else}} src="{{>touXiangImage}}"{{/if}}
+											data-holder-rendered="true" style="width: 42px; height: 42px;" /></td>
+										<td style="font-size: 5px;"  width="50%">{{>createVipName}}</td>
+										
+									</tr>
+									<tr>
+
+										<td rowspan="2" width="50%" style="font-size: 8px;">{{>message}}</td>
+
+									</tr>
+									<tr>
+
+
+
+									</tr>
+									<tr>
+										
+
+									</tr>
+								</table>
+									
+								</div>
+								{{/for}}
+								<div class="box-footer clearfix" style="width: 100%">
+									<div class="btn-group" style="width: 100%">
+										<button type="button" onclick="imageZan({{>id}},'imagezan')" style="width: 50%" class="btn btn-info btn-flat">
+											 {{if zanUser}}<font color="red" id="imagezan{{>id}}"><i class="fa  fa-thumbs-up"></i> {{>zan}}</font>{{else}}<font color="" id="imagezan{{>id}}"><i class="fa  fa-thumbs-up"></i> {{>zan}}</font>{{/if}}
+										</button>
+										<button type="button" style="width: 50%" onclick="imageLook({{>id}})" class="btn btn-info btn-flat">
+											<i class="fa fa-comments-o"></i> {{>returnNum}}
+										</button>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+-->
+</script>
+<script type="text/x-jsrender" id="video_item">
+<!--
+<div class="col-md-12">
+						<div class="nav-tabs-custom">
+							<ul class="nav nav-tabs pull-right">
+
+								<li class="pull-left header"><i class="fa fa-th"></i> {{>title}}</li>
+							</ul>
+							<div class="tab-content">
+								
+								<video class="video-js vjs-default-skin" controls="" preload="none" width="100%" height="264" data-setup="{}">
+									<source src="{{>videoLink}}" type="video/mp4" />
+								</video>
+<div class="callout callout-info" style="margin-top: 20px;font-size:5px;">
+{{>message}}
+</div>
+								{{for oneMsg}}
+								<div class="callout callout-info" style="margin-top: 20px;">
+<table width="100%">
+									<tr>
+										<td rowspan="3" width="20%" style="text-align: center;"><img class="media-object" data-src="holder.js/64x64" alt="64x64"
+											{{if touXiangImage==""||touXiangImage==null}} src="/img/touxiang.jpg" {{else}} src="{{>touXiangImage}}"{{/if}}	
+											data-holder-rendered="true" style="width: 42px; height: 42px;" /></td>
+										<td style="font-size: 5px;"  width="50%">{{>createVipName}}</td>
+										
+									</tr>
+									<tr>
+
+										<td rowspan="2" width="50%" style="font-size: 8px;">{{>message}}</td>
+
+									</tr>
+									<tr>
+
+
+
+									</tr>
+									<tr>
+										
+
+									</tr>
+								</table>
+									
+								</div>
+								{{/for}}
+								<div class="box-footer clearfix" style="width: 100%">
+									<div class="btn-group" style="width: 100%">
+										<button type="button" onclick="videoZan({{>id}},'videozan')" style="width: 50%" class="btn btn-info btn-flat">
+											 {{if zanUser}}<font color="red" id="videozan{{>id}}"><i class="fa  fa-thumbs-up"></i> {{>zan}}</font>{{else}}<font color="" id="videozan{{>id}}"><i class="fa  fa-thumbs-up"></i> {{>zan}}</font>{{/if}}
+										</button>
+										<button type="button" onclick="videoLook({{>id}})" style="width: 50%" class="btn btn-info btn-flat">
+											<i class="fa fa-comments-o"></i> {{>returnNum}}
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+-->
+</script>
+<script type="text/x-jsrender" id="text_item">
+<!--
+									<div class="col-md-12">
+						<div class="nav-tabs-custom">
+							<ul class="nav nav-tabs pull-right">
+
+								<li class="pull-left header"><i class="fa fa-th"></i> {{>title}}</li>
+							</ul>
+							<div class="tab-content">
+								{{>message}}
+								{{for oneMsg}}
+								<div class="callout callout-info" style="margin-top: 20px;">
+<table width="100%">
+									<tr>
+										<td rowspan="3" width="20%" style="text-align: center;"><img class="media-object" data-src="holder.js/64x64" alt="64x64"
+											{{if touXiangImage==""||touXiangImage==null}} src="/img/touxiang.jpg" {{else}} src="{{>touXiangImage}}"{{/if}}
+											data-holder-rendered="true" style="width: 42px; height: 42px;" /></td>
+										<td style="font-size: 5px;"  width="50%">{{>createVipName}}</td>
+										
+									</tr>
+									<tr>
+
+										<td rowspan="2" width="50%" style="font-size: 8px;">{{>message}}</td>
+
+									</tr>
+									<tr>
+
+
+
+									</tr>
+									<tr>
+										
+
+									</tr>
+								</table>
+									
+								</div>
+								{{/for}}
+								<div class="box-footer clearfix" style="width: 100%">
+									<div class="btn-group" style="width: 100%">
+										<button type="button" onclick="textZan({{>id}},'textzan')" style="width: 50%" class="btn btn-info btn-flat">
+											 {{if zanUser}}<font color="red" id="textzan{{>id}}"><i class="fa  fa-thumbs-up"></i> {{>zan}}</font>{{else}}<font color="" id="textzan{{>id}}"><i class="fa  fa-thumbs-up"></i> {{>zan}}</font>{{/if}}
+										</button>
+										<button type="button" onclick="textLook({{>id}})" style="width: 50%" class="btn btn-info btn-flat">
+											<i class="fa fa-comments-o"></i> {{>returnNum}}
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					-->
+</script>
+<script type="text/x-jsrender" id="game_item">
+<!--
+					<div class="col-md-12">
+						<div class="nav-tabs-custom">
+							<ul class="nav nav-tabs pull-right">
+
+								<li class="pull-left header"><i class="fa fa-th"></i> {{>name}}</li>
+							</ul>
+							<div class="tab-content">
+								<div id="carousel-example-generic_game{{>id}}" class="carousel slide" data-ride="carousel">
+									<div class="carousel-inner" role="listbox">
+										<div class="item active">
+											<img src="{{>gameImage1}}" style="width: 100%; height: 200px;" />
+										</div>
+										<div class="item">
+											<img src="{{>gameImage2}}" style="width: 100%; height: 200px;" />
+										</div>
+										<div class="item">
+											<img src="{{>gameImage3}}" style="width: 100%; height: 200px;" />
+										</div>
+									</div>
+									<a class="left carousel-control" href="#carousel-example-generic_game{{>id}}" role="button" data-slide="prev"> <span
+										class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+									</a> <a class="right carousel-control" href="#carousel-example-generic_game{{>id}}" role="button" data-slide="next"> <span
+										class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span>
+									</a>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<span class="label label-danger">玩过次数</span><span class="label label-primary">{{>vipRunNum}}</span>
+									</div>
+									<div class="col-md-12">
+										<font color="red">游戏说明:</font><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{>gameInfo}}
+									</div>
+									<div class="col-md-12">
+										<font color="red">游戏规则:</font><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{>gameMarks}}
+									</div>
+								</div>
+								<div class="row">
+								<div class="box-footer clearfix" style="width: 100%">
+									<div class="btn-group" style="width: 100%">
+										{{if paming}}
+										<a href="{{>gameServiceAddress}}?gameId={{>id}}" target="_Blank" style="width: 50%" class="btn btn-info btn-flat">
+												 <i class="fa fa-arrow-circle-o-right"></i> 开始
+										</a>
+										<a  href="javascript:gamePaihang({{>id}})"  style="width: 50%" class="btn btn-info btn-flat">
+										 <i class="fa fa-arrow-circle-o-right"></i> 排名
+										</a>
+										{{else}}
+										<a href="{{>gameServiceAddress}}?gameId={{>id}}" target="_Blank" style="width: 100%" class="btn btn-info btn-flat">
+												 <i class="fa fa-arrow-circle-o-right"></i> 开始
+										</a>
+										{{/if}}
+									</div>
+								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+-->
+</script>
+<script type="text/x-jsrender" id="gezi_type_menu">
+<!--
+<button class="btn bg-purple btn-flat margin btn-sm" onclick="loadErShou({{>id}},1)">{{>vipErShouTypeName}}</button>
+-->
+</script>
+<script type="text/x-jsrender" id="gezi_type_menu_add">
+<!--
+<button class="btn bg-purple btn-flat margin btn-sm" onclick="gezi_type_menu_add_select({{>id}},this)">{{>vipErShouTypeName}}</button>
+-->
+</script>
+<script type="text/x-jsrender" id="gezi_item">
+<!--
+					<div class="col-md-12">
+					<section class="content invoice" >
+								
+								
+								<div id="carousel-example-generic{{>id}}" class="carousel slide" data-ride="carousel">
+									<div class="carousel-inner" role="listbox">
+										<div class="item active">
+											<img src="/img/ershoupaly.jpg" style="width: 100%; height: 200px;" />
+										</div>
+										{{if image1!=null&&image1!=""}}
+										<div class="item">
+											<img src="{{>image1}}" style="width: 100%; height: 200px;" />
+										</div>
+										{{/if}}
+										{{if image2!=null&&image2!=""}}
+										<div class="item">
+											<img src="{{>image2}}" style="width: 100%; height: 200px;" />
+										</div>
+										{{/if}}
+										{{if image3!=null&&image3!=""}}
+										<div class="item">
+											<img src="{{>image3}}" style="width: 100%; height: 200px;" />
+										</div>
+										{{/if}}
+										{{if image4!=null&&image4!=""}}
+										<div class="item">
+											<img src="{{>image4}}" style="width: 100%; height: 200px;" />
+										</div>
+										{{/if}}
+									</div>
+									<a class="left carousel-control" href="#carousel-example-generic{{>id}}" role="button" data-slide="prev"> <span
+										class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+									</a> <a class="right carousel-control" href="#carousel-example-generic{{>id}}" role="button" data-slide="next"> <span
+										class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span>
+									</a>
+								</div>
+								<div>
+								<span class="label label-danger">名称</span><span class="label label-primary">{{>title}}</span><br />
+									<span class="label label-danger">价格</span><span class="label label-primary">{{>price}}</span><br /> <span
+										class="label label-danger">联系电话:</span><span class="label label-primary">{{>phone}}</span><br /> <span
+										class="label label-danger">会员名:</span><span class="label label-primary">{{>createVipName}}</span><br />
+								</div>
+								<div class="callout callout-info" style="margin-top: 20px;font-size:5px;">
+									{{>message}}
+								</div>
+								{{for oneMsg}}
+								<div class="callout callout-info" style="margin-top: 20px;">
+								<table width="100%">
+									<tr>
+										<td rowspan="3" width="20%" style="text-align: center;"><img class="media-object" data-src="holder.js/64x64" alt="64x64"
+											{{if touXiangImage==""||touXiangImage==null}} src="/img/touxiang.jpg" {{else}} src="{{>touXiangImage}}"{{/if}}
+											data-holder-rendered="true" style="width: 42px; height: 42px;" /></td>
+										<td style="font-size: 5px;"  width="50%">{{>createVipName}}</td>
+										
+									</tr>
+									<tr>
+
+										<td rowspan="2" width="50%" style="font-size: 8px;">{{>message}}</td>
+
+									</tr>
+									<tr>
+
+
+
+									</tr>
+									<tr>
+										
+
+									</tr>
+								</table>
+									
+								</div>
+								{{/for}}
+							<div class="box-footer clearfix" style="width: 100%">
+									<div class="btn-group" style="width: 100%">
+										<button type="button" onclick="ershouLook({{>id}})" style="width: 100%" class="btn btn-info btn-flat">
+											查看
+										</button>
+										
+									</div>
+								</div>
+						</section>
+					</div>
+-->
+</script>
+<script type="text/x-jsrender" id="shopvipLevenContent_item">
+<!--
+<section class="content invoice">
+							{{>score}}<br /> {{>marks}}<br /> <span
+								class="label label-danger">需要积分</span><span class="label label-primary">{{>score}}</span><br />
+						</section>
+-->
+</script>
+<script type="text/x-jsrender" id="shopJiaoLiu_item">
+<!--
+					<div class="col-md-12">
+						<div class="box box-success">
+							<div class="box-header" style="cursor: move;">
+								<h3 class="box-title">
+									<i class="fa fa-comments-o"></i> {{>obj.vipMessageTitle}}
+								</h3>
+
+							</div>
+							<div class="slimScrollDiv" style="position: relative; overflow: auto; width: auto; height: 80%;">
+								<div class="box-body chat" id="ret_toVip_jiaoliu_toVip_item_content{{>obj.messageOneId}}" style="overflow: auto; width: auto; height:280px;" >
+									{{for list}}
+									<div class="item">
+										<img {{if touXiangImage==""||touXiangImage==null}} src="/img/touxiang.jpg" {{else}} src="{{>touXiangImage}}"{{/if}} alt="user image" class="online" />
+										<p class="message">
+											<a href="javascript:toVipJiaoLiu({{>fromVipId}},{{>messageOneId}},{{>type}},'{{>fromVipName}}',{{>vipMessageId}})" class="name"> <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{JavaSTojsDateTime:sendDate}}</small>
+												{{>fromVipName}}
+											</a> {{>message}}
+										</p>
+
+									</div>
+									{{/for}}
+
+								</div>
+								<div class="slimScrollBar"
+									style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 0px; z-index: 99; right: 1px; height: 184.91124260355px; background: rgb(0, 0, 0);"></div>
+								<div class="slimScrollRail"
+									style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div>
+							</div>
+							<div class="box-footer">
+	<div class="col-md-12">
+		<div >
+			向<small class="text-muted" id="ret_toVip_jiaoliu_name{{>obj.messageOneId}}_mesId_{{>obj.vipMessageId}}">请选择对话人</small>留言<small class="text-muted pull-right">点击想要回复的人可修改</small>
+		</div>
+		<input class="form-control"  placeholder="请输入回复"  style="display: none" id="ret_toVip_jiaoliu_id{{>obj.messageOneId}}_mesId_{{>obj.vipMessageId}}"/>
+		<input class="form-control"  placeholder="请输入回复"  style="display: none" id="ret_toVip_jiaoliu_toVip_id{{>obj.messageOneId}}_mesId_{{>obj.vipMessageId}}"/>
+	</div>
+								<div class="input-group">
+									<input class="form-control" id="ret_toVip_jiaoliu_toVip_content{{>obj.messageOneId}}_mesId_{{>obj.vipMessageId}}"" placeholder="请输入回复" />
+									<div class="input-group-btn">
+										<button class="btn btn-success" id="ret_toVip_jiaoliu_toVip_button{{>obj.messageOneId}}_mesId_{{>obj.vipMessageId}}">
+											<i class="fa fa-plus"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+-->
+</script>
+<script type="text/x-jsrender" id="shopinfo_item">
+<!--
+<div class="col-md-12">
+						<section class="content invoice">
+							<div class="row">
+								<div class="col-md-12" style="text-align: center;">
+									{{>gonggaoContent}}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12" style="text-align: center;">
+								
+									<small class="text-muted"><i class="fa fa-clock-o"></i>发布于 {{JavaSTojsDateTime:sendDate}}</small>
+								</div>
+							</div>
+						</section>
+					</div>
+					-->
+</script>
+
+<script type="text/x-jsrender" id="shopMenuType_item">
+<!--
+<button class="btn bg-purple btn-flat margin btn-sm" onclick="loadGoods({{>id}},1)">{{>typeName}}</button>
+-->
+</script>
+<script type="text/x-jsrender" id="shopMenu_item">
+<!--
+<div class="col-md-12">
+
+						<section class="content invoice" >
+						
+								<div id="carousel-example-generic_goods{{>id}}" class="carousel slide" data-ride="carousel">
+									<div class="carousel-inner" role="listbox">
+										
+										{{if image1!=null&&image1!=""}}
+										<div class="item active">
+											<img src="{{>image1}}" style="width: 100%; height: 200px;" />
+										</div>
+										{{/if}}
+										{{if image2!=null&&image2!=""}}
+										<div class="item">
+											<img src="{{>image2}}" style="width: 100%; height: 200px;" />
+										</div>
+										{{/if}}
+										{{if image3!=null&&image3!=""}}
+										<div class="item">
+											<img src="{{>image3}}" style="width: 100%; height: 200px;" />
+										</div>
+										{{/if}}
+										{{if image4!=null&&image4!=""}}
+										<div class="item">
+											<img src="{{>image4}}" style="width: 100%; height: 200px;" />
+										</div>
+										{{/if}}
+									</div>
+									<a class="left carousel-control" href="#carousel-example-generic_goods{{>id}}" role="button" data-slide="prev"> <span
+										class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+									</a> <a class="right carousel-control" href="#carousel-example-generic_goods{{>id}}" role="button" data-slide="next"> <span
+										class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span>
+									</a>
+								</div>
+
+								<div>
+								<span class="label label-danger">名称:</span><span class="label label-primary">{{>goodsName}}</span><br />
+									<span class="label label-danger">价格:</span><span class="label label-primary">{{>price}}</span><br /> <span
+										class="label label-danger">型号:</span><span class="label label-primary">{{>goodsModel}}</span><br /> <span
+										class="label label-danger">单位:</span><span class="label label-primary">{{>goodsType}}</span><br />
+								</div>
+								<br/>
+								<div class="box-footer clearfix" style="width: 100%">
+									<div class="btn-group" style="width: 100%">
+										
+										<a href="javascript:addGouWuChe_open({{>id}})" target="_Blank" style="width: 100%" class="btn btn-info btn-flat">
+												 <i class="fa fa-arrow-circle-o-right"></i> 加入购物车
+										</a>
+										
+									</div>
+								</div>
+							
+						</section>
+						
+					</div>
+-->
+</script>
+<script type="text/x-jsrender" id="image_xiangqing_main">
+<!--
+
+								<img src="{{>imageLink}}" width="100%" />
+<div class="callout callout-info" style="margin-top: 20px;font-size:5px;">
+									{{>message}}
+								</div>
+
+								<div class="box-footer clearfix" style="width: 100%">
+									<div class="btn-group" style="width: 100%">
+										<button type="button" onclick="imageZan({{>id}},'imagezan_main')" style="width: 50%" class="btn btn-info btn-flat">
+											 {{if zanUser}}<font color="red" id="imagezan_main{{>id}}"><i class="fa  fa-thumbs-up"></i> {{>zan}}</font>{{else}}<font color="" id="imagezan_main{{>id}}"><i class="fa  fa-thumbs-up"></i> {{>zan}}</font>{{/if}}
+										</button>
+										<button type="button" style="width: 50%"  class="btn btn-info btn-flat">
+											<i class="fa fa-comments-o"></i> {{>returnNum}}
+										</button>
+									</div>
+								</div>
+							<div class="box-footer">
+								<div class="input-group">
+									<input class="form-control" placeholder="请输入回复" id="return_image_text"/>
+									<div class="input-group-btn">
+										<button class="btn btn-success" onclick="return_image_function({{>id}})">
+											<i class="fa fa-plus"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+-->
+</script>
+<script type="text/x-jsrender" id="video_xiangqing_main">
+<!--
+
+								<video class="video-js vjs-default-skin" controls="" preload="none" width="100%" height="264" data-setup="{}">
+									<source src="{{>videoLink}}" type="video/mp4" />
+								</video>
+<div class="callout callout-info" style="margin-top: 20px;font-size:5px;">
+									{{>message}}
+								</div>
+								<div class="box-footer clearfix" style="width: 100%">
+									<div class="btn-group" style="width: 100%">
+										<button type="button" onclick="videoZan({{>id}},'videozan_main')" style="width: 50%" class="btn btn-info btn-flat">
+											 {{if zanUser}}<font color="red" id="videozan_main{{>id}}"><i class="fa  fa-thumbs-up"></i> {{>zan}}</font>{{else}}<font color="" id="videozan_main{{>id}}"><i class="fa  fa-thumbs-up"></i> {{>zan}}</font>{{/if}}
+										</button>
+										<button type="button"  style="width: 50%" class="btn btn-info btn-flat">
+											<i class="fa fa-comments-o"></i> {{>returnNum}}
+										</button>
+									</div>
+								</div>
+<div class="box-footer">
+								<div class="input-group">
+									<input class="form-control" placeholder="请输入回复" id="return_video_text"/>
+									<div class="input-group-btn">
+										<button class="btn btn-success" onclick="return_video_function({{>id}})">
+											<i class="fa fa-plus"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+-->
+</script>
+<script type="text/x-jsrender" id="ershou_xiangqing_main">
+<!--
+					
+								
+								
+								<div id="carousel-example-generic_xiangqing{{>id}}" class="carousel slide" data-ride="carousel" style="width:100%">
+									<div class="carousel-inner" role="listbox">
+										<div class="item active">
+											<img src="/img/ershoupaly.jpg" style="width: 100%; height: 200px;" />
+										</div>
+										{{if image1!=null&&image1!=""}}
+										<div class="item">
+											<img src="{{>image1}}" style="width: 100%; height: 200px;" />
+										</div>
+										{{/if}}
+										{{if image2!=null&&image2!=""}}
+										<div class="item">
+											<img src="{{>image2}}" style="width: 100%; height: 200px;" />
+										</div>
+										{{/if}}
+										{{if image3!=null&&image3!=""}}
+										<div class="item">
+											<img src="{{>image3}}" style="width: 100%; height: 200px;" />
+										</div>
+										{{/if}}
+										{{if image4!=null&&image4!=""}}
+										<div class="item">
+											<img src="{{>image4}}" style="width: 100%; height: 200px;" />
+										</div>
+										{{/if}}
+									</div>
+									<a class="left carousel-control" href="#carousel-example-generic_xiangqing{{>id}}" role="button" data-slide="prev"> <span
+										class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+									</a> <a class="right carousel-control" href="#carousel-example-generic_xiangqing{{>id}}" role="button" data-slide="next"> <span
+										class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span>
+									</a>
+								</div>
+								<div style="width:100%">
+								<span class="label label-danger">名称</span><span class="label label-primary">{{>title}}</span><br />
+									<span class="label label-danger">价格</span><span class="label label-primary">{{>price}}</span><br /> <span
+										class="label label-danger">联系电话:</span><span class="label label-primary">{{>phone}}</span><br /> <span
+										class="label label-danger">会员名:</span><span class="label label-primary">{{>createVipName}}</span><br />
+								</div>
+								<div class="callout callout-info" style="margin-top: 20px;font-size:5px;">
+									{{>message}}
+								</div>
+								
+							<div class="box-footer">
+								<div class="input-group">
+									<input class="form-control" placeholder="请输入回复" id="return_ershou_text"/>
+									<div class="input-group-btn">
+										<button class="btn btn-success" onclick="return_ershou_function({{>id}})">
+											<i class="fa fa-plus"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+
+-->
+</script>
+<script type="text/x-jsrender" id="text_xiangqing_main">
+<!--
+{{>message}}
+
+								<div class="box-footer clearfix" style="width: 100%">
+									<div class="btn-group" style="width: 100%">
+										<button type="button" onclick="textZan({{>id}},'textzan_main')" style="width: 50%" class="btn btn-info btn-flat">
+											 {{if zanUser}}<font color="red" id="textzan_main{{>id}}"><i class="fa  fa-thumbs-up"></i> {{>zan}}</font>{{else}}<font color="" id="textzan_main{{>id}}"><i class="fa  fa-thumbs-up"></i> {{>zan}}</font>{{/if}}
+										</button>
+										<button type="button"  style="width: 50%" class="btn btn-info btn-flat">
+											<i class="fa fa-comments-o"></i> {{>returnNum}}
+										</button>
+									</div>
+								</div>
+<div class="box-footer">
+								<div class="input-group">
+									<input class="form-control" placeholder="请输入回复" id="return_text_text"/>
+									<div class="input-group-btn">
+										<button class="btn btn-success" onclick="return_text_function({{>id}})">
+											<i class="fa fa-plus"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+-->
+</script>
+<script type="text/x-jsrender" id="ershou_xiangqing_liuyan">
+<!--
+						<div class="row">
+					<div class="col-md-12">
+						<table width="100%">
+							<tr>
+								<td rowspan="3" width="20%" style="text-align: center;">
+									<img class="media-object" data-src="holder.js/64x64" alt="64x64" 
+{{if touXiangImage==""||touXiangImage==null}} src="/img/touxiang.jpg" {{else}} src="{{>touXiangImage}}"{{/if}}
+									 data-holder-rendered="true" style="width: 42px; height: 42px;" />
+								</td>
+								<td style="font-size: 5px;" width="50%">{{>createVipName}}</td>
+
+							</tr>
+							<tr>
+								<td rowspan="2" width="50%" style="font-size: 8px;">{{>message}}</td>
+							</tr>
+							<tr id="ershou_xiangqing_liuyan_ret_{{>id}}">
+							</tr>
+							{{for vipImageMessageRetTwoList}}
+							<tr>
+								<td></td>
+								<td>
+									<hr/>
+									<table width="100%">
+										<tr>
+											<td rowspan="3" width="20%" style="text-align: center;"><img class="media-object"
+												data-src="holder.js/64x64" alt="64x64"
+													{{if touXiangImage==""||touXiangImage==null}} src="/img/touxiang.jpg" {{else}} src="{{>touXiangImage}}"{{/if}}
+												data-holder-rendered="true" style="width: 42px; height: 42px;" /></td>
+											<td style="font-size: 5px;" width="50%">
+											
+											<a href="javascript:toVipid({{>createVipId}},{{>mainId}},4,'{{>createVipName}}')" class="name"> {{>createVipName}}</a>
+											
+											  对 <a href="javascript:toVipid({{>toCreateVipId}},{{>mainId}},4,'{{>toCreateVipName}}')" class="name"> 
+												{{>toCreateVipName}}
+											</a> 说:</td>
+
+										</tr>
+										<tr>
+
+											<td rowspan="2" width="50%" style="font-size: 5px;">{{>message}}</td>
+										</tr>
+										<tr>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							{{/for}}
+						</table>
+					</div>
+					<br/>
+	<div class="col-md-12">
+		<div >
+			向<small class="text-muted" id="ret_toVip_ershou_name{{>id}}">主留言</small>留言<small class="text-muted pull-right">点击想要回复的人可修改</small>
+		</div>
+		<input class="form-control"  placeholder="请输入回复"  style="display: none" id="ret_toVip_ershou_id{{>id}}"/>
+		<input class="form-control"  placeholder="请输入回复"  style="display: none" id="ret_toVip_ershou_toVip_id{{>id}}"/>
+	</div>
+								<div class="col-md-12">
+								
+								<div class="input-group" style="width:100%;">
+									
+									<input class="form-control" placeholder="请输入回复" id="return_ershou_text_two{{>id}}"/>
+									<div class="input-group-btn">
+										<button class="btn btn-success" onclick="return_ershou_function_two({{>id}})">
+											<i class="fa fa-plus"></i>
+										</button>
+									</div>
+								</div>
+					</div>
+				</div>
+				<hr />
+-->
+</script>
+<script type="text/x-jsrender" id="text_xiangqing_liuyan">
+<!--
+						<div class="row">
+					<div class="col-md-12">
+						<table width="100%">
+							<tr>
+								<td rowspan="3" width="20%" style="text-align: center;">
+									<img class="media-object" data-src="holder.js/64x64" alt="64x64" 
+{{if touXiangImage==""||touXiangImage==null}} src="/img/touxiang.jpg" {{else}} src="{{>touXiangImage}}"{{/if}}
+									 data-holder-rendered="true" style="width: 42px; height: 42px;" />
+								</td>
+								<td style="font-size: 5px;" width="50%"> {{>createVipName}}</td>
+								<td rowspan="3" width="20%" style="text-align: center;">
+									{{if zanUser}}
+													<font color="red" id="textMessageRetzan{{>id}}" style="cursor: pointer;" onclick="liuyan_text_zan({{>id}})">
+														<i class="fa  fa-thumbs-up"></i> {{>zan}}
+													</font>
+									{{else}}
+													<font color="" id="textMessageRetzan{{>id}}" style="cursor: pointer;" onclick="liuyan_text_zan({{>id}})">
+														<i class="fa  fa-thumbs-up"></i> {{>zan}}
+													</font>
+									{{/if}}
+							</td>
+							</tr>
+							<tr>
+								<td rowspan="2" width="50%" style="font-size: 8px;">{{>message}}</td>
+							</tr>
+							<tr id="text_xiangqing_liuyan_ret_{{>id}}">
+							</tr>
+							{{for vipImageMessageRetTwoList}}
+							<tr>
+								<td></td>
+								<td>
+									<hr/>
+									<table width="100%">
+										<tr>
+											<td rowspan="3" width="20%" style="text-align: center;"><img class="media-object"
+												data-src="holder.js/64x64" alt="64x64"
+	{{if touXiangImage==""||touXiangImage==null}} src="/img/touxiang.jpg" {{else}} src="{{>touXiangImage}}"{{/if}}
+												data-holder-rendered="true" style="width: 42px; height: 42px;" /></td>
+											<td style="font-size: 5px;" width="50%">
+											<a href="javascript:toVipid({{>createVipId}},{{>mainId}},3,'{{>createVipName}}')" class="name"> {{>createVipName}}</a>
+											
+											  对 <a href="javascript:toVipid({{>toCreateVipId}},{{>mainId}},3,'{{>toCreateVipName}}')" class="name"> 
+												{{>toCreateVipName}}
+											</a> 说:</td>
+
+										</tr>
+										<tr>
+
+											<td rowspan="2" width="50%" style="font-size: 5px;">{{>message}}</td>
+										</tr>
+										<tr>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							{{/for}}
+						</table>
+					</div>
+
+								<br/>
+	<div class="col-md-12">
+		<div >
+			向<small class="text-muted" id="ret_toVip_text_name{{>id}}">主留言</small>留言<small class="text-muted pull-right">点击想要回复的人可修改</small>
+		</div>
+		<input class="form-control"  placeholder="请输入回复"  style="display: none" id="ret_toVip_text_id{{>id}}"/>
+		<input class="form-control"  placeholder="请输入回复"  style="display: none" id="ret_toVip_text_toVip_id{{>id}}"/>
+	</div>
+								<div class="col-md-12">
+								<div class="input-group" style="width:100%;">
+									<input class="form-control" placeholder="请输入回复" id="return_text_text_two{{>id}}"/>
+									<div class="input-group-btn">
+										<button class="btn btn-success" onclick="return_text_function_two({{>id}})">
+											<i class="fa fa-plus"></i>
+										</button>
+									</div>
+								</div>
+					</div>
+
+				</div>
+				<hr />
+-->
+</script>
+<script type="text/x-jsrender" id="video_xiangqing_liuyan">
+<!--
+							<div class="row">
+					<div class="col-md-12">
+						<table width="100%">
+							<tr>
+								<td rowspan="3" width="20%" style="text-align: center;">
+									<img class="media-object" data-src="holder.js/64x64" alt="64x64" 
+{{if touXiangImage==""||touXiangImage==null}} src="/img/touxiang.jpg" {{else}} src="{{>touXiangImage}}"{{/if}}
+									 data-holder-rendered="true" style="width: 42px; height: 42px;" />
+								</td>
+								<td style="font-size: 5px;" width="50%">{{>createVipName}}</td>
+								<td rowspan="3" width="20%" style="text-align: center;">
+									{{if zanUser}}
+													<font color="red" id="videoMessageRetzan{{>id}}" style="cursor: pointer;" onclick="liuyan_video_zan({{>id}})">
+														<i class="fa  fa-thumbs-up"></i> {{>zan}}
+													</font>
+									{{else}}
+													<font color="" id="videoMessageRetzan{{>id}}" style="cursor: pointer;" onclick="liuyan_video_zan({{>id}})">
+														<i class="fa  fa-thumbs-up"></i> {{>zan}}
+													</font>
+									{{/if}}
+							</td>
+							</tr>
+							<tr>
+								<td rowspan="2" width="50%" style="font-size: 8px;">{{>message}}</td>
+							</tr>
+							<tr id="video_xiangqing_liuyan_ret_{{>id}}">
+							</tr>
+							{{for vipImageMessageRetTwoList}}
+							<tr>
+								<td></td>
+								<td>
+									<hr/>
+									<table width="100%">
+										<tr>
+											<td rowspan="3" width="20%" style="text-align: center;"><img class="media-object"
+												data-src="holder.js/64x64" alt="64x64"
+											{{if touXiangImage==""||touXiangImage==null}} src="/img/touxiang.jpg" {{else}} src="{{>touXiangImage}}"{{/if}}
+												data-holder-rendered="true" style="width: 42px; height: 42px;" /></td>
+											<td style="font-size: 5px;" width="50%"><a href="javascript:toVipid({{>createVipId}},{{>mainId}},2,'{{>createVipName}}')" class="name"> {{>createVipName}}</a>
+												  对 <a href="javascript:toVipid({{>toCreateVipId}},{{>mainId}},2,'{{>toCreateVipName}}')" class="name"> 
+												{{>toCreateVipName}}
+											</a> 说:</td>
+										</tr>
+										<tr>
+											<td rowspan="2" width="50%" style="font-size: 5px;">{{>message}}</td>
+										</tr>
+										<tr>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							{{/for}}
+						</table>
+					</div>
+
+							<br/>
+	<div class="col-md-12">
+		<div >
+			向<small class="text-muted" id="ret_toVip_video_name{{>id}}">主留言</small>留言<small class="text-muted pull-right">点击想要回复的人可修改</small>
+		</div>
+		<input class="form-control"  placeholder="请输入回复"  style="display: none" id="ret_toVip_video_id{{>id}}"/>
+		<input class="form-control"  placeholder="请输入回复"  style="display: none" id="ret_toVip_video_toVip_id{{>id}}"/>
+	</div>
+								<div class="col-md-12">
+								<div class="input-group" style="width:100%;">
+									<input class="form-control" placeholder="请输入回复" id="return_video_text_two{{>id}}"/>
+									<div class="input-group-btn">
+										<button class="btn btn-success" onclick="return_video_function_two({{>id}})">
+											<i class="fa fa-plus"></i>
+										</button>
+									</div>
+								</div>
+					</div>
+
+				</div>
+				<hr />
+-->
+</script>
+<script type="text/x-jsrender" id="image_xiangqing_liuyan">
+<!--
+				<div class="row">
+					<div class="col-md-12">
+						<table width="100%">
+							<tr>
+								<td rowspan="3" width="20%" style="text-align: center;">
+									<img class="media-object" data-src="holder.js/64x64" alt="64x64" 
+{{if touXiangImage==""||touXiangImage==null}} src="/img/touxiang.jpg" {{else}} src="{{>touXiangImage}}"{{/if}}
+									 data-holder-rendered="true" style="width: 42px; height: 42px;" />
+								</td>
+								<td style="font-size: 5px;" width="50%">{{>createVipName}}</td>
+								<td rowspan="3" width="20%" style="text-align: center;">
+									{{if zanUser}}
+													<font color="red" id="imageMessageRetzan{{>id}}" style="cursor: pointer;" onclick="liuyan_image_zan({{>id}})">
+														<i class="fa  fa-thumbs-up"></i> {{>zan}}
+													</font>
+									{{else}}
+													<font color="" id="imageMessageRetzan{{>id}}" style="cursor: pointer;" onclick="liuyan_image_zan({{>id}})">
+														<i class="fa  fa-thumbs-up"></i> {{>zan}}
+													</font>
+									{{/if}}
+							</td>
+							</tr>
+							<tr>
+								<td rowspan="2" width="50%" style="font-size: 8px;">{{>message}}</td>
+							</tr>
+							<tr id="image_xiangqing_liuyan_ret_{{>id}}">
+							</tr>
+							{{for vipImageMessageRetTwoList}}
+							<tr>
+								<td></td>
+								<td>
+									<hr/>
+									<table width="100%">
+										<tr>
+											<td rowspan="3" width="20%" style="text-align: center;"><img class="media-object"
+												data-src="holder.js/64x64" alt="64x64"
+	{{if touXiangImage==""||touXiangImage==null}} src="/img/touxiang.jpg" {{else}} src="{{>touXiangImage}}"{{/if}}
+												data-holder-rendered="true" style="width: 42px; height: 42px;" /></td>
+											<td style="font-size: 5px;" width="50%"><a href="javascript:toVipid({{>createVipId}},{{>mainId}},1,'{{>createVipName}}')" class="name"> {{>createVipName}}</a>
+											
+											  对 <a href="javascript:toVipid({{>toCreateVipId}},{{>mainId}},1,'{{>toCreateVipName}}')" class="name"> 
+												{{>toCreateVipName}}
+											</a> 说:</td>
+
+										</tr>
+										<tr>
+
+											<td rowspan="2" width="50%" style="font-size: 5px;">{{>message}}</td>
+										</tr>
+										<tr>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							{{/for}}
+						</table>
+					</div>
+					<br/>
+	<div class="col-md-12">
+		<div >
+			向<small class="text-muted" id="ret_toVip_image_name{{>id}}">主留言</small>留言<small class="text-muted pull-right">点击想要回复的人可修改</small>
+		</div>
+		<input class="form-control"  placeholder="请输入回复"  style="display: none" id="ret_toVip_image_id{{>id}}"/>
+		<input class="form-control"  placeholder="请输入回复"  style="display: none" id="ret_toVip_image_toVip_id{{>id}}"/>
+	</div>
+								<div class="col-md-12">
+								<div class="input-group" style="width:100%;">
+									<input class="form-control" placeholder="请输入回复" id="return_image_text_two{{>id}}"/>
+									<div class="input-group-btn">
+										<button class="btn btn-success" onclick="return_image_function_two({{>id}})">
+											<i class="fa fa-plus"></i>
+										</button>
+									</div>
+								</div>
+					</div>
+
+				</div>
+				<hr />
+-->
+</script>
+<div class="modal fade" id="image_xiangqing" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">图片</h4>
+			</div>
+			<div class="modal-body" id="imageShow_main"></div>
+			<div class="box-footer clearfix" style="width: 100%" id="imageLiuYan_content"></div>
+			<div class="box-footer clearfix" style="width: 100%">
+				<button class="btn btn-danger btn-flat" id="imageLiuYan_content_jixu" onclick="loadImageLiuYan()"
+					style="width: 100%">继续查看</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="video_xiangqing" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">视频</h4>
+			</div>
+			<div class="modal-body" id="videoShow_main"></div>
+			<div class="box-footer clearfix" style="width: 100%" id="videoLiuYan_content"></div>
+			<div class="box-footer clearfix" style="width: 100%">
+				<button class="btn btn-danger btn-flat" id="videoLiuYan_content_jixu" onclick="loadVideoLiuYan()"
+					style="width: 100%">继续查看</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="text_xiangqing" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">文本</h4>
+			</div>
+			<div class="modal-body" id="textShow_main"></div>
+			<div class="box-footer clearfix" style="width: 100%" id="textLiuYan_content"></div>
+			<div class="box-footer clearfix" style="width: 100%">
+				<button class="btn btn-danger btn-flat" id="textLiuYan_content_jixu" onclick="loadTextLiuYan()" style="width: 100%">继续查看</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="ershou_xiangqing" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">格子铺</h4>
+			</div>
+			<div class="modal-body" id="ershouShow_main"></div>
+			<div class="box-footer clearfix" style="width: 100%" id="ershouLiuYan_content"></div>
+			<div class="box-footer clearfix" style="width: 100%">
+				<button class="btn btn-danger btn-flat" id="ershouLiuYan_content_jixu" onclick="loadErShouLiuYan()"
+					style="width: 100%">继续查看</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="image_add_text" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">添加有趣的图片</h4>
+			</div>
+			<div class="modal-body">
+				<div class="alert alert-warning alert-dismissable">
+                                        <i class="fa fa-warning"></i>
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <b>注意:</b> 请不要发表涉黄，涉枪，辱骂店家，等信息，小心查水表哦.๐·°(৹˃̵﹏˂̵৹)°·๐
+                                    </div>
+				<a href="javascript:showAddImage_upImage()" class="btn btn-danger btn-flat"><i class="fa fa-plus-square"></i> 图片拍摄上传</a>
+				<input type="file" name="table_search" id="showAddImage_upImage" onchange="showAddImage_upImage_ajax()" class="form-control input-sm" style="width: 250px;display: none;" placeholder="厂家"/>
+				<img src="" id="showAddImage_upImage_src" width="100%"/>
+				<br/>
+				<input class="form-control" style="width: 100%" id="image_add_title_input" placeholder="给图片起个洋气的名字" />
+				<br/>
+				<input class="form-control" style="width: 100%" id="image_add_text_input" placeholder="请 简单说下此刻的心情，是不是崩溃的。。" />
+			</div>
+			<div class="box-footer clearfix" style="width: 100%">
+			<button class="btn btn-danger btn-sm pull-right" id="weixin_vip_queryVIP_tr_addprice_enter" onclick="showAddImage_submit()">
+													恩，给我发布 <i class="fa fa-plus-square"></i>
+												</button>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="video_add_text" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">添加有趣的视频</h4>
+			</div>
+			<div class="modal-body">
+							<div class="alert alert-warning alert-dismissable">
+                                        <i class="fa fa-warning"></i>
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <b>注意:</b> 请不要发表涉黄，涉枪，辱骂店家，等信息，小心查水表哦.๐·°(৹˃̵﹏˂̵৹)°·๐
+                                    </div>
+				<a href="javascript:showAddVideo_upVideo()" class="btn btn-danger btn-flat"><i class="fa fa-plus-square"></i> 视频拍摄上传</a>
+				<input type="file" name="table_search" id="showAddVideo_upVideo" onchange="showAddVideo_upVideo_ajax()" class="form-control input-sm" style="width: 250px;display: none;" placeholder="厂家"/>
+							<div id="showAddVideo_upVideo_src"></div>
+			
+				<br/>
+				<input class="form-control" style="width: 100%" id="video_add_title_input" placeholder="给图片起个洋气的名字。。" />
+				<br/>
+				<input class="form-control" style="width: 100%" id="video_add_text_input" placeholder="请 简单说下此刻的心情，是不是崩溃的。。" />
+			</div>
+			<div class="box-footer clearfix" style="width: 100%">
+			<button class="btn btn-danger btn-sm pull-right" id="weixin_vip_queryVIP_tr_addprice_enter" onclick="showAddVideo_submit()">
+													恩，给我发布 <i class="fa fa-plus-square"></i>
+												</button>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="text_add_text" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">添加有趣的文字</h4>
+			</div>
+			<div class="modal-body">
+							<div class="alert alert-warning alert-dismissable">
+                                        <i class="fa fa-warning"></i>
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <b>注意:</b> 请不要发表涉黄，涉枪，辱骂店家，等信息，小心查水表哦.๐·°(৹˃̵﹏˂̵৹)°·๐
+                                    </div>
+			<input class="form-control" style="width: 100%" id="text_add_title_input" placeholder="给图片起个洋气的名字" />
+			<br/>
+				<input class="form-control" style="width: 100%" id="text_add_text_input" placeholder="请 简单说下此刻的心情，是不是崩溃的。。" />
+			</div>
+			<div class="box-footer clearfix" style="width: 100%">
+			<button class="btn btn-danger btn-sm pull-right" id="weixin_vip_queryVIP_tr_addprice_enter" onclick="showAddText_submit()">
+													恩，给我发布 <i class="fa fa-plus-square"></i>
+												</button>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="ershou_add_text" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">添加格子</h4>
+			</div>
+			<div class="modal-body">
+							<div class="alert alert-warning alert-dismissable">
+                                        <i class="fa fa-warning"></i>
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <b>注意:</b> 请不要发表涉黄，涉枪，辱骂店家，等信息，小心查水表哦.๐·°(৹˃̵﹏˂̵৹)°·๐
+                                    </div>
+				<a href="javascript:showAddErShou_upErShou()" class="btn btn-danger btn-flat"><i class="fa fa-plus-square"></i> 图片上传</a>
+				<input type="file" name="table_search" id="showAddErShou_upErShou" onchange="showAddErShou_upErShou_ajax()" class="form-control input-sm" style="width: 250px;display: none;" placeholder="厂家"/>
+							<div id="showAddErShou_upErShou_src"></div>
+			
+				<br/>
+				
+				<input class="form-control" style="width: 100%" id="ershou_add_name" placeholder="小宝贝的名字" />
+				<br/>
+				
+				<input class="form-control" style="width: 100%" id="ershou_add_phone" placeholder="您的联系手机。不写默认为本账号" />
+				<br/>
+				
+				<input class="form-control" style="width: 100%" id="ershou_add_price" placeholder="小宝贝的身价，要卖多少钱呢?填写数字哦。" />
+				<br/>
+				<section class="content invoice" id="ershou_add_type_show">
+					
+				</section>
+				<input class="form-control" style="width: 100%;display: none;" id="ershou_add_type_select" placeholder="简单描述一下小宝贝吧。" />
+				<br/>
+				<input class="form-control" style="width: 100%" id="ershou_add_text2" placeholder="简单描述一下小宝贝吧。" />
+			</div>
+			<div class="box-footer clearfix" style="width: 100%">
+			<button class="btn btn-danger btn-sm pull-right" onclick="showAddErShou_submit()">
+													恩，给我发布 <i class="fa fa-plus-square"></i>
+												</button>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="game_paming" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">游戏排名</h4>
+			</div>
+			<div class="modal-body" id="game_paming_content">
+			<table class="table table-striped">
+                                        <tbody id="paiming_window_list">
+                                       
+                                       
+                                       
+                                    </tbody></table>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="game_paihangbang_item">
+<!--
+ <tr>
+                                            <td>{{>#index+1}}</td>
+											<td>{{>touxiang}}</td>
+                                            <td>{{>createVipName}}</td>
+                                            <td>
+                                                {{>score}}
+                                            </td>
+                                            
+                                        </tr>
+-->
+</script>
+<div class="modal fade" id="score_to_goods_list" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">积分兑换</h4>
+			</div>
+			<div class="modal-body">
+                                   <div class="row" id="score_to_goods_list_content"> 
+                                   
+                                   </div>
+                                   <div class="box-footer clearfix" style="width: 100%">
+				<button class="btn btn-danger btn-flat" id="score_to_goods_list_loadMover" onclick="score_to_goods_list()"
+					style="width: 100%">继续查看</button>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="score_to_goods_list_item">
+<!--
+
+	<div class="col-md-12">
+					<section class="content invoice" >
+								
+								
+								<img src="{{>image}}" style="width: 100%; height: 200px;" />
+								<div>
+								<span class="label label-danger">名称</span><span class="label label-primary">{{>name}}</span><br />
+									<span class="label label-danger">所需积分</span><span class="label label-primary">{{>score}}</span><br /> <span
+										class="label label-danger">数量:</span><span class="label label-primary">{{>num}}</span><br /> 
+								</div>
+								<div class="callout callout-info" style="margin-top: 20px;font-size:5px;">
+									{{>content}}
+								</div>
+								
+							<div class="box-footer clearfix" style="width: 100%">
+									<div class="row">
+										<div class="col-xs-4">
+											<button class="btn   "  style="width: 100%" id="scoreadd{{>id}}" onclick="$('#scoreNum{{>id}}').val(parseInt($('#scoreNum{{>id}}').val())+1)" >+</button>
+										</div>
+										<div class="col-xs-4">
+											<input class="form-control " disabled="disabled" style="width: 100%" value="0" id="scoreNum{{>id}}"  />
+										</div>
+										<div class="col-xs-4">
+											<button class="btn   "  style="width: 100%" id="scorejian{{>id}}" onclick="$('#scoreNum{{>id}}').val(parseInt($('#scoreNum{{>id}}').val())-1)" >-</button>
+										</div>
+									</div>
+<br/>
+									<div class="btn-group" style="width: 100%">
+										<button type="button" onclick="DuiHuanJiangPin({{>id}})" style="width: 100%" class="btn btn-info btn-flat">
+											兑换
+										</button>
+										
+									</div>
+								</div>
+						</section>
+					</div>
+
+-->
+</script>
+<div class="modal fade" id="update_password" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">修改密码</h4>
+			</div>
+			<div class="modal-body">
+			<div class="row">
+            	<input type="text" id="oldpassword" class="form-control"  placeholder="旧密码:原始密码:0000或00000"/>
+            	<br/>
+            	<input type="text" id="newpassword" class="form-control"  placeholder="新密码"/>
+            	<br/>
+            	<input type="text" id="renewpassword" class="form-control"  placeholder="再次输入新密码"/>
+            </div>
+            <div class="box-footer clearfix" style="width: 100%">
+            	<div class="row">
+            		<div class="col-xs-6">
+						<button class="btn btn-danger btn-flat"  onclick="show_update_password_enter()"
+						style="width: 100%">确定</button>
+					</div>
+					<div class="col-xs-6">
+						<button class="btn btn-danger btn-flat"  onclick="show_update_password_cel()"
+						style="width: 100%">取消</button>
+					</div>
+				</div>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="duihuanjifen_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">兑换积分</h4>
+			</div>
+			<div class="modal-body">
+			<div class="row">
+            	<input type="text" id="jifenNum" class="form-control"  placeholder="请输入积分兑换号，在店家给予的小条或者纸条上"/>
+            	
+            </div>
+            <div class="box-footer clearfix" style="width: 100%">
+            	<div class="row">
+            		<div class="col-xs-6">
+						<button class="btn btn-danger btn-flat"  onclick="show_duihuanjifen_enter()"
+						style="width: 100%">确定</button>
+					</div>
+					<div class="col-xs-6">
+						<button class="btn btn-danger btn-flat"  onclick="show_duihuanjifen_cel()"
+						style="width: 100%">取消</button>
+					</div>
+				</div>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="getZhongJiangNumList_item">
+<!--
+ <div class="col-md-12">
+						<section class="content invoice">
+							<div class="row">
+								<div class="col-md-12" style="text-align: center;">
+									<span class="label label-danger">序列号:</span>
+									<span class="label label-primary">{{>xuliehao}}</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12" style="text-align: center;">
+									<span class="label label-danger">说明:</span>
+									<span class="label label-primary">{{>xuliehao}}</span>
+								</div>
+							</div>
+						<div class="row">
+								<div class="col-md-12" style="text-align: center;">
+									<span class="label label-danger">是否已用:</span>
+									<span class="label label-primary">{{if uses}}已用{{else}}未用{{/if}}</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12" style="text-align: center;">
+									<small class="text-muted"><i class="fa fa-clock-o"></i>使用时间 {{JavaSTojsDate:startDate}} 至 {{JavaSTojsDate:endDate}}</small>
+								</div>
+							</div>
+						</section>
+					</div>
+-->
+</script>
+<div class="modal fade" id="getZhongJiangNumList_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">中奖序列号列表</h4>
+			</div>
+			<div class="modal-body">
+                                   <div class="row" id="getZhongJiangNumList_window_content"> 
+                                   
+                                   </div>
+                                   <div class="box-footer clearfix" style="width: 100%">
+				<button class="btn btn-danger btn-flat" id="getZhongJiangNumList_window_content_mover"
+					style="width: 100%">继续查看</button>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="JiFenDuiHuanNumList_item">
+<!--
+ <div class="col-md-12">
+						<section class="content invoice">
+							<div class="row">
+								<div class="col-md-12" style="text-align: center;">
+									<span class="label label-danger">名称:</span>
+									<span class="label label-primary">{{>name}}</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12" style="text-align: center;">
+									<span class="label label-danger">序列号:</span>
+									<span class="label label-primary">{{>xuliehao}}</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12" style="text-align: center;">
+									<span class="label label-danger">数量:</span>
+									<span class="label label-primary">{{>num}}</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12" style="text-align: center;">
+									<span class="label label-danger">是否已用:</span>
+									<span class="label label-primary">{{if uses}}已用{{else}}未用{{/if}}</span>
+								</div>
+							</div>
+						</section>
+					</div>
+-->
+</script>
+<div class="modal fade" id="JiFenDuiHuanNumList_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">积分兑换序列号列表</h4>
+			</div>
+			<div class="modal-body">
+                                   <div class="row" id="JiFenDuiHuanNumList_window_content"> 
+                                   
+                                   </div>
+                                   <div class="box-footer clearfix" style="width: 100%">
+				<button class="btn btn-danger btn-flat" id="JiFenDuiHuanNumList_window_content_mover" 
+					style="width: 100%">继续查看</button>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="order_item">
+<!--			<tr>
+			<td  style="text-align: center;" colspan="3">编号:{{>orderNum}}</td>
+</tr>
+ 					<tr>
+			、
+			<td  style="text-align: center;">总价:{{>countPrice}}</td>
+			<td  style="text-align: center;">单名:{{>title}}</td>
+			<td  style="text-align: center;">
+				<button type="button" onclick="weixin_vip_order_look_info({{>id}})" class="btn btn-danger btn-sm">查看详情</button>
+			</td>
+		</tr>
+		<tr id="rowTable_{{>id}}"></tr>
+-->
+</script>
+<script type="text/x-jsrender" id="order_item_item">
+<!--
+<td colspan="4">
+				<table id="example1" class="table table-bordered table-hover btn-sm">
+					<thead>
+						<tr>
+							<th style="text-align: center;">品名</th>
+							<th style="text-align: center;">数量</th>
+							<th style="text-align: center;">单价</th>
+							<th style="text-align: center;">积分</th>
+						</tr>
+					</thead>
+					<tbody >
+{{for data}}
+							<tr>
+								<td width="40%" style="text-align: center;">{{>goodsName}}</td>
+								<td width="15%" style="text-align: center;">{{>goodsNum}}</td>
+								<td width="30%" style="text-align: center;">{{>price}}</td>
+								<td width="15%" style="text-align: center;">
+									{{>score}}
+								</td>
+							</tr>
+{{/for}}
+					</tbody>
+				</table>
+		</td>
+	
+-->
+</script>
+<div class="modal fade" id="orderWindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">订单</h4>
+			</div>
+			<div class="modal-body">
+                 <div class="row" > 
+                 <table id="example1" class="table table-bordered table-hover">
+					
+					<tbody id="orderWindow_content">
+						
+					</tbody>
+				</table>
+                                   </div>
+                                   <div class="box-footer clearfix" style="width: 100%">
+				<button class="btn btn-danger btn-flat" id="orderWindow_content_mover" 
+					style="width: 100%">继续查看</button>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="touxiangnicheng_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">修改头像昵称</h4>
+			</div>
+			<div class="modal-body">
+			<div class="row">
+				<a href="javascript:touxiang_upImage()" class="btn btn-danger btn-flat"><i class="fa fa-plus-square"></i> 图片拍摄上传</a>
+					<input type="file" name="table_search" id="touxiang_upImage" onchange="touxiang_upImage_ajax()" class="form-control input-sm" style="width: 250px;display: none;" placeholder="厂家"/>
+					<img src="" id="touxiang_upImage_src" width="100%"/>
+				<br/>
+            	<input type="text" id="nicheng" class="form-control"  placeholder="请输入昵称"/>
+            	
+            </div>
+            <div class="box-footer clearfix" style="width: 100%">
+            	<div class="row">
+            		<div class="col-xs-6">
+						<button class="btn btn-danger btn-flat"  onclick="touxiang_name_submit()"
+						style="width: 100%">确定</button>
+					</div>
+					<div class="col-xs-6">
+						<button class="btn btn-danger btn-flat"  onclick="touxiang_name_close()"
+						style="width: 100%">取消</button>
+					</div>
+				</div>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="addgouwuche" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">添加到购物车</h4>
+			</div>
+			<div class="modal-body">
+			<div class="row" style="text-align: center;">
+				
+            	您确定吧此商品加入购物车？
+            	
+            </div>
+            <div class="box-footer clearfix" style="width: 100%">
+            	<div class="row">
+            		<div class="col-xs-6">
+						<button class="btn btn-danger btn-flat" id="add_gouwuche_button" onclick=""
+						style="width: 100%">确定</button>
+					</div>
+					<div class="col-xs-6">
+						<button class="btn btn-danger btn-flat"  onclick="addGouWuChe_close()"
+						style="width: 100%">取消</button>
+					</div>
+				</div>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="gouwuche_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 95%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">购物车</h4>
+			</div>
+			<div class="modal-body">
+			<div class="row" id="buycar_list_Content" style="text-align: center;">
+				
+            	
+            	
+            </div>
+          
+			</div>
+			
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="buycar_list_item">
+<!--
+	{{for data}}
+		<div class="row buyar_row_{{>conpanyId}}" id="buyar_row_{{>inOrderId}}">
+			<div class="col-xs-12" style="text-align: center;"><span class="label label-danger">名称:</span><span class="label label-primary">{{>goodsName}}</span></div>
+		</div>			
+<div class="row buyar_row_{{>conpanyId}}" id="buyar_row_{{>inOrderId}}">
+			<div class="col-xs-4" style="text-align: center;"><span class="label label-danger">售价:</span><span class="label label-primary">{{>price}}</span></div>	
+			<div class="col-xs-4" style="text-align: center;"><span class="label label-danger">单位:</span><span class="label label-primary">{{>goodsType}}</span></div>
+			<div class="col-xs-4" style="text-align: center;"><button type="button" onclick="buycarjiannum({{>inOrderId}},{{>conpanyId}})" class="btn btn-danger btn-flat">-</button> <lable id="buycarNum_{{>inOrderId}}">{{>goodsNum}}</lable> <button type="button" onclick="buycaraddnum({{>inOrderId}},{{>conpanyId}})" class="btn btn-danger btn-flat">+</button></div>
+	</div>	
+<div class="row buyar_row_{{>conpanyId}}" id="buyar_row_{{>inOrderId}}">			
+<div class="col-xs-12" style="text-align: center;"><button type="button" onclick="buycardelete({{>inOrderId}},{{>conpanyId}})" class="btn bg-purple btn-flat margin btn-sm">删除</button></div>
+	</div>	
+	{{/for}}
+<br/>
+		<div class="row">
+					<div class="col-xs-12">
+            	<input type="text" id="buyCar_address" class="form-control"  placeholder="收货地址"/>
+            	<br/>
+            	<input type="text" id="buyCar_phone" class="form-control"  placeholder="联系电话"/>
+				<br/>
+				<input type="text" id="buyCar_mark" class="form-control"  placeholder="备注"/>
+				<br/>
+				<button class="btn btn-danger btn-flat" id="add_gouwuche_button" onclick="gouwucheSubmit()" style="width: 100%">提交订单</button>
+					</div>
+		</div>
+	</div>
+</div>
+<br/>
+-->
+</script>

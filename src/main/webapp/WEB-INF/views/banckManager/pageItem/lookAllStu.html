@@ -1,0 +1,161 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/lookAllStuMan.js}"></script>
+                <!-- Content Header (Page header) -->
+                <section class="content-header" >
+                    <h1>
+                       	企业管理
+                        <small id="bankuai_title">企业信息概览控制台</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+                        <li class="active" id="bankuai_title2">企业信息概览控制台</li>
+                    </ol>
+                </section>
+
+                <!-- Main content -->
+                <section class="content" id="content">
+                    <!-- Small boxes (Stat box) -->
+                    <div class="row">
+
+                        
+                                                <div class="col-lg-12 col-xs-12" onclick="lookAllStuMan_meeting()">
+                            <!-- small box -->
+                            <div class="small-box bg-green">
+                                <div class="inner">
+                                    <h3>
+                                       1
+                                    </h3>
+                                    <p>
+                                        	签到/上下班
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion-icecream"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                   点击开启 <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div><!-- ./col -->
+                    </div><!-- /.row -->
+
+                    <!-- top row -->
+                    <div class="row">
+                        <div class="col-xs-12 connectedSortable">
+                            
+                        </div><!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+                    <!-- Main row -->
+                    <div class="row">
+                        <!-- Left col -->
+                        <section class="col-lg-6 connectedSortable" id="right_layout"> 
+                      	
+                        </section><!-- right col -->
+                         <section class="col-lg-6 connectedSortable" id="left_layout"> 
+                              
+                 				
+                        </section><!-- right col -->
+                    </div><!-- /.row (main row) -->
+                                    </section><!-- /.content -->
+<div class="modal fade" id="lookAllStu_meeting_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">上班签到</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div id="lookAllStu_meeting_alert_div"></div>
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="row">
+										<div class="col-xs-6">
+											<button class="btn btn-danger" style="width: 100%;" onclick="lookAllStu_meeting_but()">
+													上班签到
+												</button>
+
+										</div>
+										<div class="col-xs-6">
+											<button class="btn btn-danger" style="width: 100%;" onclick="lookAllStu_meeting_out()">
+													外出
+												</button>
+
+										</div>
+										
+									</div>
+									<div class="row" id="lookAllStu_meeting_out_div" style="display: none;">
+										<br/>
+										<div class="col-xs-9">
+											<div class="form-group" id="hr_main_addcustemmer_phone_text">
+												<input type="text" class="form-control input-sm" id="lookAllStu_meeting_out_input" placeholder="外出备注"></input>
+											</div>
+
+										</div>
+										<div class="col-xs-3">
+												<button class="btn btn-danger" style="width: 100%;" onclick="lookAllStu_meeting_out_but()">
+													确定
+												</button>
+
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="lookAllStu_meeting_down_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">下班签到</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div id="lookAllStu_meeting_down_alert_div"></div>
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="row">
+										<div class="col-xs-6">
+											<button class="btn btn-danger" style="width: 100%;" onclick="lookAllStu_meeting_down_but()">
+													签到
+												</button>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>

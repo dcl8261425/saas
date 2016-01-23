@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+		">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
+	<context:component-scan base-package="com.dcl.blog.controller" />
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+	<task:annotation-driven />  
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/css/**" location="/css/" />
+	<resources mapping="/js/libs/**" location="/js/libs/" />
+	<resources mapping="/img/**" location="/img/" />
+	<resources mapping="/game/**" location="/game/" />
+
+	<!-- Internationalization support -->
+
+	<beans:bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<beans:property name="defaultLocale" value="zh_CH" />
+	</beans:bean>
+
+	<beans:bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<beans:property name="paramName" value="language" />
+	</beans:bean>
+	<beans:bean
+		class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
+		<beans:property name="interceptors">
+			<beans:list>
+				<beans:ref bean="localeChangeInterceptor" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<beans:property name="basename" value="locale/messages" />
+	</beans:bean>
+	<!-- **************************************************************** -->
+	<!-- THYMELEAF-SPECIFIC ARTIFACTS -->
+	<!-- TemplateResolver <- TemplateEngine <- ViewResolver -->
+	<!-- **************************************************************** -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<beans:property name="contentNegotiationManager" ref="cnManager" />
+
+		<beans:property name="viewResolvers">
+			<beans:list>
+
+				<beans:bean class="org.thymeleaf.spring3.view.ThymeleafViewResolver">
+					<beans:property name="templateEngine" ref="templateEngine" />
+					<beans:property name="order" value="1" />
+					<beans:property name="viewNames" value="*" />
+					<beans:property name="characterEncoding" value="utf-8"></beans:property>
+				</beans:bean>
+				<!-- Used here for 'xml' and 'atom' views -->
+				<beans:bean
+					class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	<beans:bean id="cnManager"
+		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<beans:property name="favorPathExtension" value="true" />
+		<beans:property name="ignoreAcceptHeader" value="true" />
+		<beans:property name="defaultContentType" value="text/html" />
+
+		<beans:property name="mediaTypes">
+			<beans:map>
+				<beans:entry key="html" value="text/html" />
+				<beans:entry key="xml" value="application/xml" />
+				<beans:entry key="atom" value="application/atom+xml" />
+			</beans:map>
+		</beans:property>
+	</beans:bean>
+	<beans:bean id="templateResolver"
+		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".html" />
+		<beans:property name="templateMode" value="HTML5" />
+		<beans:property name="cacheable" value="false" />
+		<beans:property name="characterEncoding" value="UTF-8" />
+	</beans:bean>
+
+	<beans:bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
+		<beans:property name="templateResolver" ref="templateResolver" />
+	</beans:bean>
+	<beans:bean class="org.thymeleaf.spring3.view.ThymeleafViewResolver">
+		<beans:property name="templateEngine" ref="templateEngine" />
+	</beans:bean>
+	<beans:bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<beans:property name="messageConverters">
+			<beans:list>
+				<beans:ref bean="mappingJacksonHttpMessageConverter" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	<beans:bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<beans:property name="supportedMediaTypes">
+			<beans:list>
+				<beans:value>application/json;charset=UTF-8</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+</beans:beans>

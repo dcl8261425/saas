@@ -1,0 +1,192 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/weixin/order.js}"></script>
+<section class="content-header">
+	<h1>
+		微信管理 <small id="bankuai_title">微信订单管理</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+		<li class="active" id="bankuai_title2">微信订单管理</li>
+	</ol>
+</section>
+
+ <section class="content" id="content">
+                    <!-- Main row -->
+                     <div class="row">
+                     <div id="weixin_convert_alert"></div>
+                        <div class="col-lg-6" onclick="weixin_order_weisong()">
+                            <!-- small box -->
+                            <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <h3>
+                                       1
+                                    </h3>
+                                    <p>
+                                     	查看未送货订单
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-ios7-infinite"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                   点击开启 <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div><!-- ./col -->
+                        <div class="col-lg-6" onclick="weixin_order_yisong()">
+                            <!-- small box -->
+                            <div class="small-box bg-red">
+                                <div class="inner">
+                                    <h3>
+                                       	2
+                                    </h3>
+                                    <p>
+                                        	查看已送货订单
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion-ios7-infinite"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                   点击开启 <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div><!-- ./col -->
+                    </div><!-- /.row -->
+                    <div class="row">
+                        <!-- Left col -->
+                        <section class="col-lg-12 connectedSortable" id="right_layout"> 
+ 
+                            
+                        </section><!-- right col -->
+                    </div><!-- /.row (main row) -->
+    </section><!-- /.content -->
+<script type="text/x-jsrender" id="weixin_order_weisong">
+<!--
+<div class="box box-primary" >
+	<div class="box-header">
+
+		<i class="fa fa-cloud"></i>
+		<h3 class="box-title">查看未送货订单</h3>
+				<div class="box-tools">
+											<div class="input-group">
+											<input type="text" name="table_search" id="weixin_order_num_input" class="form-control input-sm pull-right" style="width: 150px;" placeholder="订单编号">
+											<div class="input-group-btn">
+												<button class="btn btn-sm btn-default" onclick="weixin_order_query(false,1)">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+	</div>
+	<div class="box-body no-padding">
+		<div class="row">
+			<div class="col-sm-12" style="text-align: center;">
+				<div class="col-sm-12" style="text-align: center;">
+<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">订单号</th>
+												<th style="text-align: center;">电话</th>
+												<th style="text-align: center;">地址</th>
+												<th style="text-align: center;">客户名称</th>
+												<th style="text-align: center;">订单开始时间</th>
+												<th style="text-align: center;">管理</th>
+
+											</tr>
+										</thead>
+										<tbody id="weixin_tbody">
+											
+										</tbody>
+									</table>
+			</div>
+		</div>
+	</div>
+<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="weixin_tbody_page"></ul>
+								</div>
+</div>
+<br/>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_order_yisong">
+<!--
+<div class="box box-primary" >
+	<div class="box-header">
+
+		<i class="fa fa-cloud"></i>
+		<h3 class="box-title">查看已送货订单</h3>
+				<div class="box-tools">
+											<div class="input-group">
+											<input type="text" name="table_search" id="weixin_order_num_input" class="form-control input-sm pull-right" style="width: 150px;" placeholder="订单编号">
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="weixin_order_query(true,1)">
+													<i class="fa fa-search"></i>
+												</button>
+												
+											</div>
+
+										</div>
+									</div>
+	</div>
+	<div class="box-body no-padding">
+		<div class="row">
+			<div class="col-sm-12" style="text-align: center;">
+				<div class="col-sm-12" style="text-align: center;">
+<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">订单号</th>
+												<th style="text-align: center;">电话</th>
+												<th style="text-align: center;">地址</th>
+												<th style="text-align: center;">客户名称</th>
+												<th style="text-align: center;">订单开始时间</th>
+												<th style="text-align: center;">订单结束时间</th>
+											</tr>
+										</thead>
+										<tbody id="weixin_tbody">
+											
+										</tbody>
+									</table>
+			</div>
+		</div>
+	</div>
+<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="weixin_tbody_page"></ul>
+								</div>
+</div>
+<br/>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_yisong_window_tbody_tr">
+<!--
+	<tr>
+								<td width="5%" align="center">{{>#index+1}}</td>
+								<td width="10%" align="center">{{>num}}</td>
+								<td width="25%" align="center">{{>phone}}</td>
+								<td width="30%" align="center">{{>address}}</td>
+								<td width="10%" align="center">{{>username}}</td>
+								<td width="10%" align="center">{{JavaSTojsDate:startDate}}</td>
+								<td width="10%" align="center">{{JavaSTojsDate:endDate}}</td>
+							
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_weisong_window_tbody_tr">
+<!--
+	<tr>
+								<td width="5%" align="center">{{>#index+1}}</td>
+								<td width="10%" align="center">{{>num}}</td>
+								<td width="15%" align="center">{{>phone}}</td>
+								<td width="30%" align="center">{{>address}}</td>
+								<td width="10%" align="center">{{>username}}</td>
+								<td width="10%" align="center">{{JavaSTojsDate:startDate}}</td>
+								<td width="20%" align="center">
+									<button type="button" onclick="weixin_order_enter({{>id}},'{{>price}}')" class="btn btn-danger btn-sm">确定发货</button>
+								</td>
+								</td>
+							</tr>
+-->
+</script>

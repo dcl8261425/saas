@@ -1,0 +1,648 @@
+<link href="../../css/main.css" rel="stylesheet" th:href="@{/js/libs/switch/bootstrap-switch.min.css}" />
+<script src="" th:src="@{/js/libs/switch/bootstrap-switch.min.js}"></script>
+<script src="" th:src="@{/js/libs/pagejs/itemPage/weixin/weixin_game_set.js}"></script>
+
+<section class="content-header">
+	<h1>
+		微信管理 <small id="bankuai_title">活动与游戏管理</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+		<li class="active" id="bankuai_title2">活动与游戏管理</li>
+	</ol>
+</section>
+
+ <section class="content" id="content">
+ 
+   <div class="row">
+   	<div id="weixin_game_alert"></div>
+                        <div class="col-lg-4" onclick="weixin_game_dazhuanpan()">
+                            <!-- small box -->
+                            <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <h3>
+                                       1
+                                    </h3>
+                                    <p>
+                                     	大转盘
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-person-add"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                   点击开启 <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div><!-- ./col -->
+                        <div class="col-lg-4" onclick="weixin_game_guaguaka()">
+                            <!-- small box -->
+                            <div class="small-box bg-orange">
+                                <div class="inner">
+                                    <h3>
+                                       	2
+                                    </h3>
+                                    <p>
+                                        	刮刮卡
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion-icecream"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                   点击开启 <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div><!-- ./col -->
+                        <div class="col-lg-4" onclick="weixin_game_goods()">
+                            <!-- small box -->
+                            <div class="small-box bg-red">
+                                <div class="inner">
+                                    <h3>
+                                       	3
+                                    </h3>
+                                    <p>
+                                        	奖品库设置
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion-icecream"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                   点击开启 <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div><!-- ./col -->
+                    </div><!-- /.row -->
+                    <!-- Main row -->
+                    <div class="row">
+                        <!-- Left col -->
+                        <section class="col-lg-12 connectedSortable" id="weixin_game_set_content"> 
+ 
+                            
+                        </section><!-- right col -->
+                    </div><!-- /.row (main row) -->
+    </section><!-- /.content -->
+<script type="text/x-jsrender" id="weixin_game_goods">
+<!--
+<div class="box box-primary" >
+	<div class="box-header">
+		<div class="pull-right box-tools">
+		<button class="btn btn-danger btn-sm" onclick="weixin_game_addGoods()">
+				创建新奖品 <i class="fa fa-plus-square"></i>
+		</button>
+		</div>
+		<i class="fa fa-cloud"></i>
+		<h3 class="box-title">奖项设置</h3>
+	</div>
+	<div class="box-body">
+		<div class="row">
+	<div class="col-sm-12" style="text-align: center;">
+			<div class="col-sm-12" style="text-align: center;">
+				<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">奖品名</th>
+												<th style="text-align: center;">说明</th>
+												<th style="text-align: center;">操作</th>
+
+											</tr>
+										</thead>
+										<tbody id="weixin_tbody">
+											
+										</tbody>
+									</table>
+<br/>
+			</div>
+</div>
+		</div>
+	</div>
+</div>
+
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_game_dazhuanpan">
+<!--
+<div class="box box-primary" >
+	<div class="box-header">
+		<div class="pull-right box-tools">
+
+		</div>
+		<i class="fa fa-cloud"></i>
+		<h3 class="box-title">大转盘设置</h3>
+	</div>
+	<div class="box-body no-padding" id="weixin_dazhuanpan_content">
+		<div class="row" style="text-align: center;">
+<div class="col-sm-12" style="text-align: center;">
+		    <div class="col-sm-12" style="text-align: center;">
+				<div class="row">
+					<div class="col-xs-2">
+						<div class="input-group">
+											<input type="text" name="table_search"  id="weixin_dazhuanpan_jilv" class="form-control pull-right" placeholder="中奖概率，数字越高中奖几率越低">
+											<div class="input-group-btn">
+												<button class="btn btn-primary" onclick="weixin_game_dazhuanpan_gailv()">
+													设定概率
+												</button>
+											</div>
+							</div>
+					</div>
+					<div class="col-xs-3">
+						<div class="input-group" >
+											<input type="text" name="table_search"  id="weixin_dazhuanpan_cushu" class="form-control pull-right" placeholder="每位客户每天可以参加的次数">
+											<div class="input-group-btn">
+												<button class="btn btn-primary" onclick="weixin_game_dazhuanpan_num()">
+													设定次数
+												</button>
+											</div>
+							</div>
+					</div>
+					<div class="col-xs-2"><div class="row"><div class="col-xs-6">是否开启:</div>
+<div class="col-xs-6">
+						<div class="switch" data-on="warning" data-off="danger"  >
+    			<input type="checkbox"  id="open_closs_dazhuanpan"/>
+			</div>
+</div>
+</div>
+					</div>
+					<div class="col-xs-2">
+							<div class="row"><div class="col-xs-6">是否用积分:</div>
+<div class="col-xs-6">
+						<div class="switch" data-on="warning" data-off="danger"  >
+    			<input type="checkbox"  id="open_score_dazhuanpan"/>
+			</div>
+</div>
+</div>
+					</div>
+<div class="col-xs-3">
+						<div class="input-group" >
+											<input type="text" name="table_search" disabled="disabled" id="weixin_dazhuanpan_score" class="form-control pull-right" placeholder="没转一次所需积分">
+											<div class="input-group-btn">
+												<button class="btn btn-primary" onclick="weixin_game_dazhuanpan_score()">
+													设定积分
+												</button>
+											</div>
+							</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<br/>
+						<div id="d1_text_label">
+							<div class="input-group" id="d1_text">
+											<input type="text"  disabled="disabled" id="d1_text_text" class="form-control" placeholder="奖品1选择"/>
+											<input type="text" value="0" name="table_search" id="d1_id_text" style="display: none;" class="form-control" placeholder=""/>
+											<div class="input-group-btn">
+												<button class="btn btn-default" onclick="weixin_game_selectGoods('d1_id_text','d1_text_text')">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<br/>
+					<div class="col-xs-4">
+						<div id="d1_input_startDate1">
+
+													<div class="input-group date"  id="d1_startdate">
+													  <input type="text" value="奖品兑换时间-开始 " id="startDate1" disabled="disabled" class="form-control"/><span class="input-group-addon" ><i class="glyphicon glyphicon-th"></i></span>
+													</div>
+											</div>
+					</div>
+					<div class="col-xs-4">
+						<div  id="d1_input_endDate1">
+													<div class="input-group date"  id="d1_enddate">
+													  <input type="text" value="奖品兑换时间-结束 " id="endDate1" disabled="disabled" class="form-control"/><span class="input-group-addon" ><i class="glyphicon glyphicon-th"></i></span>
+													</div>
+											</div>
+					</div>
+					<div class="col-xs-4">
+							<div id="input_d1_num">
+							<input type="text" class="form-control" id="d1_num" placeholder="数量"></input>
+							</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<button class="btn btn-danger btn-sm" onclick="weixin_game_dahuznapan_set1()">
+													确认设置 <i class="fa fa-plus-square"></i>
+												</button>
+					</div>
+				</div>
+			</div>
+<div class="col-sm-12" style="text-align: center;">
+				<div class="row">
+					<div class="col-xs-12">
+						<br/>
+						<div id="d2_id_text">
+						<div id="d2_text_label">
+							<div class="input-group" id="d2_text">
+											<input type="text" name="table_search" disabled="disabled" id="d2_text_text" class="form-control pull-right" placeholder="奖品2选择">
+											<input type="text" value="0" name="table_search" id="d2_id_text" style="display: none;" class="form-control pull-right" placeholder="">
+											<div class="input-group-btn">
+												<button class="btn btn-default" onclick="weixin_game_selectGoods('d2_id_text','d2_text_text')">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<br/>
+					<div class="col-xs-4">
+						<div id="d2_input_startDate">
+													<div class="input-group date"  id="d2_startdate">
+													  <input type="text" value="奖品兑换时间-开始 " id="startDate2" disabled="disabled" class="form-control"/><span class="input-group-addon" ><i class="glyphicon glyphicon-th"></i></span>
+													</div>
+											</div>
+					</div>
+					<div class="col-xs-4">
+						<div  id="d2_input_endDate1">
+													<div class="input-group date"  id="d2_enddate">
+													  <input type="text" value="奖品兑换时间-结束 " id="endDate2" disabled="disabled" class="form-control"/><span class="input-group-addon" ><i class="glyphicon glyphicon-th"></i></span>
+													</div>
+											</div>
+					</div>
+					<div class="col-xs-4">
+							<div id="input_d2_num">
+							<input type="text" class="form-control" id="d2_num" placeholder="数量"></input>
+							</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<button class="btn btn-danger btn-sm" onclick="weixin_game_dahuznapan_set2()">
+													确认设置 <i class="fa fa-plus-square"></i>
+												</button>
+					</div>
+				</div>
+			</div>
+<div class="col-sm-12" style="text-align: center;">
+				<div class="row">
+					<div class="col-xs-12">
+						<br/>
+						<div id="d3_id_text">
+						<div id="d3_text_label">
+							<div class="input-group" id="d3_text">
+											<input type="text" name="table_search" disabled="disabled" id="d3_text_text" class="form-control pull-right" placeholder="奖品3选择">
+											<input type="text" value="0" name="table_search" id="d3_id_text" style="display: none;" class="form-control pull-right" placeholder="">
+											<div class="input-group-btn">
+												<button class="btn btn-default" onclick="weixin_game_selectGoods('d3_id_text','d3_text_text')">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<br/>
+					<div class="col-xs-4">
+						<div id="d3_input_startDate1">
+													<div class="input-group date"  id="d3_startdate">
+													  <input type="text" value="奖品兑换时间-开始 " id="startDate3" disabled="disabled" class="form-control"/><span class="input-group-addon" ><i class="glyphicon glyphicon-th"></i></span>
+													</div>
+											</div>
+					</div>
+					<div class="col-xs-4">
+						<div  id="d3_input_endDate1">
+													<div class="input-group date"  id="d3_enddate">
+													  <input type="text" value="奖品兑换时间-结束 " id="endDate3" disabled="disabled" class="form-control"/><span class="input-group-addon" ><i class="glyphicon glyphicon-th"></i></span>
+													</div>
+											</div>
+					</div>
+					<div class="col-xs-4">
+							<div id="input_d3_num">
+							<input type="text" class="form-control" id="d3_num" placeholder="数量"></input>
+							</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<button class="btn btn-danger btn-sm" onclick="weixin_game_dahuznapan_set3()">
+													确认设置 <i class="fa fa-plus-square"></i>
+												</button>
+					</div>
+				</div>
+			</div>
+</div>
+		</div>
+	</div>
+<br/>
+</div>
+
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_game_guaguaka">
+<!--
+<div class="box box-primary" >
+	<div class="box-header">
+
+		<i class="fa fa-cloud"></i>
+		<h3 class="box-title">刮刮卡设置</h3>
+		<div class="pull-right box-tools">
+			
+		</div>
+	</div>
+	<div class="box-body no-padding">
+		<div class="row">
+			<div class="col-sm-12" style="text-align: center;">
+						    <div class="col-sm-12" style="text-align: center;">
+				<div class="row">
+					<div class="col-xs-2" >
+						<div class="input-group" >
+											<input type="text" name="table_search"  id="weixin_guaguaka_jilv" class="form-control pull-right" placeholder="中奖概率，数字越高中奖几率越低">
+											<div class="input-group-btn">
+												<button class="btn btn-primary" onclick="weixin_game_guaguaka_gailv()">
+													设定概率
+												</button>
+											</div>
+							</div>
+					</div>
+					<div class="col-xs-2">
+						<div class="input-group" >
+											<input type="text" name="table_search"  id="weixin_guaguaka_cishu" class="form-control pull-right" placeholder="每位客户每天可以参加的次数">
+											<div class="input-group-btn">
+												<button class="btn btn-primary" onclick="weixin_game_guaguaka_num()">
+													设定次数
+												</button>
+											</div>
+							</div>
+					</div>
+					<div class="col-xs-2">
+<div class="row"><div class="col-xs-6">是否开启:</div>
+<div class="col-xs-6">
+						<div class="switch" data-on="warning" data-off="danger"  >
+    			<input type="checkbox"  id="open_closs_dazhuanpan"/>
+			</div>
+</div>
+</div>
+					</div>
+					<div class="col-xs-2">
+							<div class="row"><div class="col-xs-6">是否用积分:</div>
+<div class="col-xs-6">
+						<div class="switch" data-on="warning" data-off="danger"  >
+    			<input type="checkbox"  id="open_score_dazhuanpan"/>
+			</div>
+</div>
+</div>
+					</div>
+<div class="col-xs-2">
+						<div class="input-group" >
+											<input type="text" name="table_search" disabled="disabled" id="weixin_dazhuanpan_score" class="form-control pull-right" placeholder="没转一次所需积分">
+											<div class="input-group-btn">
+												<button class="btn btn-primary" onclick="weixin_game_guaguaka_score()">
+													设定积分
+												</button>
+											</div>
+							</div>
+					</div>
+<div class="col-xs-2">
+	<div class="input-group-btn">
+												<button class="btn btn-danger " onclick="weixin_game_guaguaka_addGoods()">
+													添加奖品项 <i class="fa fa-plus-square"></i>
+												</button>
+				</div>
+</div>
+				</div>
+<br/>
+<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">名字</th>
+												<th style="text-align: center;">数量</th>
+												<th style="text-align: center;">开始时间</th>
+												<th style="text-align: center;">结束时间</th>
+												<th style="text-align: center;">操作</th>
+
+											</tr>
+										</thead>
+										<tbody id="weixin_tbody">
+											
+										</tbody>
+									</table>
+			</div>
+		</div>
+	</div>
+</div>
+<br/>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_game_goods_tr">
+<!--
+<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="30%" align="center">{{>content}}</td>
+								<td width="40%" align="center">{{>marks}}</td>
+								<td width="20%" align="center">
+									<button type="button" onclick="weixin_game_goods_delete({{>id}})" class="btn btn-danger btn-sm">删除</button>
+								</td>
+							</tr>
+-->
+</script>
+<div class="modal fade" id="weixin_game_addGoods" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加奖品库</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+						<div id="weixin_game_addGoods_alert"></div>
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" id="weixin_vip_queryVIP_tr_addscore_enter" onclick="weixin_game_addGoods_enter()">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="alert alert-warning alert-dismissable no-print">
+										<i class="fa fa-check"></i>
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<b>提示：</b>添加中奖奖品库
+									</div>
+									<div class="form-group" id="input_score_name">
+										<input type="text" class="form-control input-sm " id="score_content" placeholder="名字"/><br/>
+									</div>
+									<div class="form-group" id="input_score_marks">
+										<input type="text" class="form-control input-sm " id="score_marks" placeholder="备注，说明"/><br/>
+									</div>
+
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="weixin_game_guaguaka_addGoods" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">选择奖品库</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+						<div id="weixin_game_selectGoods_alert"></div>
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" id="weixin_vip_queryVIP_tr_addscore_enter" onclick="weixin_game_guaguaka_addGoods_enter()">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;"  id="guaguaka_addgoods_content">
+												<div class="row">
+					<div class="col-xs-12">
+						<br/>
+						<div id="d3_id_text">
+						<div id="d3_text_label">
+							<div class="input-group" id="d3_text">
+											<input type="text" name="table_search" disabled="disabled" id="d3_text_text" class="form-control pull-right" placeholder="奖品3选择"/>
+											<input type="text" value="0" name="table_search" id="d3_id_text" style="display: none;" class="form-control pull-right" placeholder=""/>
+											<div class="input-group-btn">
+												<button class="btn btn-default" onclick="weixin_game_selectGoods('d3_id_text','d3_text_text')">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+									<div class="row">
+					<br/>
+					<div class="col-xs-4">
+						<div id="d3_input_startDate1">
+													<div class="input-group date"  id="d3_startdate">
+													  <input type="text" value="奖品兑换时间-开始 " id="startDate3" disabled="disabled" class="form-control"/><span class="input-group-addon" ><i class="glyphicon glyphicon-th"></i></span>
+													</div>
+											</div>
+					</div>
+					<div class="col-xs-4">
+						<div  id="d3_input_endDate1">
+													<div class="input-group date"  id="d3_enddate">
+													  <input type="text" value="奖品兑换时间-结束 " id="endDate3" disabled="disabled" class="form-control"/><span class="input-group-addon" ><i class="glyphicon glyphicon-th"></i></span>
+													</div>
+											</div>
+					</div>
+					<div class="col-xs-4">
+							<div id="input_d3_num">
+							<input type="text" class="form-control" id="d3_num" placeholder="数量"></input>
+							</div>
+					</div>
+				</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="weixin_game_selectGoods_tr">
+<!--
+<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="30%" align="center">{{>content}}</td>
+								<td width="40%" align="center">{{>marks}}</td>
+								<td width="20%" align="center">
+									<button type="button" onclick="weixin_game_selectGoods_select({{>id}},'{{>content}}')" class="btn btn-danger btn-sm">选中</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_game_guaguaka_tr">
+<!--
+<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>content}}</td>
+								<td width="10%" align="center">{{>num}}</td>
+								<td width="20%" align="center">{{JavaSTojsDate:startDate}}</td>
+								<td width="20%" align="center">{{JavaSTojsDate:endDate}}</td>
+								<td width="20%" align="center">
+									<button type="button" onclick="weixin_game_guaguaka_delete({{>id}})" class="btn btn-danger btn-sm">删除</button>
+								</td>
+							</tr>
+-->
+</script>
+<div class="modal fade" id="weixin_game_selectGoods" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">选择奖品库</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+						<div id="weixin_game_selectGoods_alert"></div>
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+				<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">奖品名</th>
+												<th style="text-align: center;">说明</th>
+												<th style="text-align: center;">操作</th>
+
+											</tr>
+										</thead>
+										<tbody id="weixin_selectGoods_tbody">
+											
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>

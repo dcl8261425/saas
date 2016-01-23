@@ -1,0 +1,36 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/filemanager/main.js}"></script>
+<div class="modal fade" id="fileManager_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 600px;">
+		<div class="modal-content" style="text-align: center;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">文件管理</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content" >
+			<div id="fileManager_alert"></div>
+				<section >
+					<div class="row" >
+<input type="file" name="table_search" id="fileManager_uploadFile" onchange="fileManager_uploadFile_change()" class="form-control input-sm" style="width: 250px;display: none;" placeholder="厂家"/>
+						<div class="nav-tabs-custom" >
+                                <ul class="nav nav-tabs">
+                                    <li id="fileManager_window_selectType_button_img"><a href="javascript:fileManager_window_selectType('img')" data-toggle="tab" >图片</a></li>
+                                    <li id="fileManager_window_selectType_button_file" ><a href="javascript:fileManager_window_selectType('file')" data-toggle="tab">文件</a></li>
+                                     <li id="fileManager_window_selectType_button_video" ><a href="javascript:fileManager_window_selectType('video')" data-toggle="tab">视频</a></li>
+                                    <li class="pull-right"><a href="javascript:fileManager_uploadFile_upload()" class="text-muted"><i class="fa fa-gear"></i> 上传</a></li>
+                                </ul>
+                                <div class="tab-content"  style="height: 500px;text-align: center;overflow: scroll;overflow-x:hidden;">
+                                   <div class="row" id="fileManager_showImage" style="height: 500px;text-align: center;">
+
+                                   
+                                   	
+                                   </div>
+                                </div><!-- /.tab-content -->
+                            </div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<div id="addDate_window"></div>
+</div>

@@ -1,0 +1,305 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/function/RolePermissionManager/main.js}"></script>
+<div class="modal fade" id="roleAndPermissionManager_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 90%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">角色及角色权限管理</h4>
+			</div>
+			<div class="modal-body" id="roleAndPermissionManager_role_content">
+				<section class="content">
+					<div class="row">
+
+						<section class="col-lg-6 connectedSortable">
+
+							<div class="box box-primary" id="roleAndPermissionManager_role_body">
+								<div class="box-header">
+									<h3 class="box-title">角色列表</h3>
+									<div class="box-tools">
+
+										<div class="input-group">
+
+											<input type="text" name="table_search" id="roleAndPermissionManager_role_search_but_input"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="通过角色名称查找" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" id="roleAndPermissionManager_role_search_but">
+													<i class="fa fa-search"></i>
+												</button>
+												<button class="btn btn-danger btn-sm" id="roleAndPermissionManager_role_add">
+													添加角色<i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 400px;">
+									<table id="example1" class="table table-bordered table-hover input-sm">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">角色名</th>
+												<th style="text-align: center;">简介</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="roleAndPermissionManager_role_table_content_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix"></div>
+
+							</div>
+
+						</section>
+						<section class="col-lg-6 connectedSortable">
+							<div class="box box-primary" id="roleAndPermissionManager_permission_content">
+								<div class="box-header">
+									<h3 class="box-title">权限列表</h3>
+									<div class="box-tools">
+
+										<div class="input-group">
+
+											<input type="text" name="table_search" id="roleAndPermissionManager_permission_search_but_input"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="通过功能名查找" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" id="roleAndPermissionManager_permission_search_but">
+													<i class="fa fa-search"></i>
+												</button>
+												<button class="btn btn-danger btn-sm" id="roleAndPermissionManager_permission_addPermission">
+													添加权限<i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 400px;">
+									<table id="example1" class="table table-bordered table-hover input-sm">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">权限名</th>
+												<th style="text-align: center;">备注</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="roleAndPermissionManager_permission_table_content_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="roleAndPermissionManager_permission_page">
+
+									</ul>
+								</div>
+							</div>
+						</section>
+
+					</div>
+				</section>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="roleAndPermissionManager_createRole_window" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">创建角色</h4>
+			</div>
+			<div class="modal-body" id="roleAndPermissionManager_createRole_window_body">
+				<div class="form-group" id="roleAndPermissionManager_createRole_window_input_roleName">
+					<input type="text" class="form-control" id="roleAndPermissionManager_createRole_window_roleName"
+						placeholder="请输入名称 ..." />
+				</div>
+				<div class="form-group" id="roleAndPermissionManager_createRole_window_input_roleMarks">
+					<textarea rows="5" class="form-control" cols="80" id="roleAndPermissionManager_createRole_window_roleMarks"
+						placeholder="请输入备注"></textarea>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+				<button type="button" id="roleAndPermissionManager_createRole_window_create" class="btn btn-primary btn-sm">创建</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="roleAndPermissionManager_addPermission_window" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog"  style="width: 90%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">创建角色</h4>
+			</div>
+			<div class="modal-body" id="roleAndPermissionManager_addPermission_window_body">
+				<section class="content">
+				<div class="row">
+										<section class="col-lg-6 connectedSortable">
+					<div class="box box-primary" id="roleAndPermissionManager_addPermission_window_body_content_main">
+						<div class="box-header">
+							<h3 class="box-title">权限列表</h3>
+							<div class="box-tools">
+
+								<div class="input-group">
+
+									<input type="text" name="table_search" id="roleAndPermissionManager_addPermission_search_but_input_main"
+										class="form-control input-sm pull-right" style="width: 150px;" placeholder="通过功能名查找" />
+									<div class="input-group-btn">
+
+										<button class="btn btn-sm btn-default" id="roleAndPermissionManager_addPermission_search_but_main">
+											<i class="fa fa-search"></i>
+										</button>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+						<div class="box-body table-responsive" style="overflow: auto; max-height: 400px;">
+							<table class="table table-bordered table-hover input-sm">
+								<thead>
+									<tr>
+										<th style="text-align: center;">序号</th>
+										<th style="text-align: center;">权限名</th>
+										<th style="text-align: center;">备注</th>
+										<th style="text-align: center;">操作</th>
+									</tr>
+								</thead>
+								<tbody id="roleAndPermissionManager_addPermission_table_content_tbody_main">
+
+								</tbody>
+							</table>
+						</div>
+
+						<div class="box-footer clearfix">
+							<ul class="pagination pagination-sm no-margin pull-right" id="roleAndPermissionManager_addPermission_page">
+
+							</ul>
+						</div>
+					</div>
+					</section>
+					<section class="col-lg-6 connectedSortable">
+					<div class="box box-primary" id="roleAndPermissionManager_addPermission_window_body_content">
+						<div class="box-header">
+							<h3 class="box-title">权限列表</h3>
+							<div class="box-tools">
+
+								<div class="input-group">
+
+									<input type="text" name="table_search" id="roleAndPermissionManager_addPermission_search_but_input"
+										class="form-control input-sm pull-right" style="width: 150px;" placeholder="通过功能名查找" />
+									<div class="input-group-btn">
+
+										<button class="btn btn-sm btn-default" id="roleAndPermissionManager_addPermission_search_but">
+											<i class="fa fa-search"></i>
+										</button>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+						<div class="box-body table-responsive" style="overflow: auto; max-height: 400px;">
+							<table class="table table-bordered table-hover input-sm">
+								<thead>
+									<tr>
+										<th style="text-align: center;">序号</th>
+										<th style="text-align: center;">权限名</th>
+										<th style="text-align: center;">备注</th>
+										<th style="text-align: center;">操作</th>
+									</tr>
+								</thead>
+								<tbody id="roleAndPermissionManager_addPermission_table_content_tbody">
+
+								</tbody>
+							</table>
+						</div>
+
+						<div class="box-footer clearfix">
+							<ul class="pagination pagination-sm no-margin pull-right" id="roleAndPermissionManager_addPermission_page">
+
+							</ul>
+						</div>
+					</div>
+					</section>
+
+
+					</div>
+				</section>
+				
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="roleAndPermissionManager_Role_content">
+<!--
+	<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="10%" align="center">{{>name}}</td>
+								<td width="20%" align="center">{{>marks}}</td>
+								<td width="10%" align="center">
+										<button type="button" onclick="roleAndPermissionManager_deleteRole_selected({{>id}})" class="btn btn-danger btn-sm">移除</button>
+										<button type="button" onclick="roleAndPermissionManager_lookRolePermission_selected({{>id}})" class="btn btn-danger btn-sm">查看权限</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="roleAndPermissionManager_permission_content_tr">
+<!--
+	<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="10%" align="center">{{>functionName}}</td>
+								<td width="20%" align="center">{{>marks}}</td>
+								<td width="10%" align="center">
+										<button type="button" onclick="roleAndPermissionManager_deletePrimission_selected({{>id}})" class="btn btn-danger btn-sm">移除</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="roleAndPermissionManager_addPermission_content_tr">
+<!--
+	<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="10%" align="center">{{>functionName}}</td>
+								<td width="20%" align="center">{{>marks}}</td>
+								<td width="10%" align="center">
+										<button type="button" onclick="roleAndPermissionManager_addPermission_selected({{>id}})" class="btn btn-danger btn-sm">添加</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="roleAndPermissionManager_addPermission_content_tr_main">
+<!--
+	<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>functionName}}</td>
+								<td width="30%" align="center">{{>marks}}</td>
+								<td width="40%" align="center">
+										<button type="button" onclick="roleAndPermissionManager_addPermission_selected_main({{>id}})" class="btn btn-danger btn-sm">查看子权限</button>
+										<button type="button" onclick="roleAndPermissionManager_addPermission_selected({{>id}},true)" class="btn btn-danger btn-sm">添加全部子权限</button>
+								</td>
+							</tr>
+-->
+</script>

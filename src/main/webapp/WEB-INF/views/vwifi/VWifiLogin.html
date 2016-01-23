@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/css/zhenghe/model.css}" />
+<link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/js/libs/video/video-js.css}" />
+<script type="text/javascript" src="../../js/libs/jquery-1.9.1.js" th:src="@{/js/libs/zhenghe/model.js}"></script>
+<script src="" th:src="@{/js/libs/video/video.js}"></script>
+<script src="" th:src="@{/js/libs/jsrender.min.js}"></script>
+<script src="" th:src="@{/js/libs/pagejs/itemPage/weixin/wifi/VWifiLogin.js}" th:if="${macIsLogin==false}"></script>
+<script th:inline="javascript" th:if="${macIsLogin==true}">
+
+var ctx = /*[[${#httpServletRequest.contextPath}+'/']]*/'/';
+var link = /*[[${link}]]*/'/';
+var time=10;
+$(function () {
+
+	$(document).ready(function(){
+
+	$("#times").html(time);
+	remainTime();  
+
+	})
+
+	
+})
+function remainTime(){  
+	    if(time==0){  
+	    	login();
+	    }else{
+	    	time=time-1;
+	    	$("#times").html(time);
+	   		setTimeout("remainTime()",1000);  
+	    }
+	}  
+	function login(){
+		alert("跳转完毕后再关闭此页。请点击确定");
+		window.location.href =link;
+	}
+</script>
+<script th:inline="javascript" th:if="${macIsLogin==false}">
+	var timeTestMessage=0;
+	var timeTestMessageTimeobj;
+	var ctx = /*[[${#httpServletRequest.contextPath}+'/']]*/'/';
+	function weixin_model_row_delete(id){
+		$("#row_"+id).remove();
+	}
+	$(function () {
+		$(document).ready(function(){
+			$("#start").bind("click",function (){
+				var gw_address=$("#gw_address1").val();
+				var gw_port=$("#gw_port1").val();
+				var phone=$("#gw_id1").val();
+				var mac=$("#mac1").val();
+				var url=$("#url1").val();
+				var dev_id=$("#dev_id1").val();
+				var conpanyId=$("#conpanyId1").val();
+				var tokens=$("#tokens1").val();
+				var phone=$("#phone1").val();
+				var password=$("#password1").val();
+				var i=$.layer({
+				    type : 3
+				});
+				$.ajax({
+					type : "POST",
+					url : ctx+"wifidogController/loginValidate",
+					data:{
+						gw_address:gw_address,
+						gw_port:gw_port,
+						phone:phone,
+						mac:mac,
+						url:url,
+						dev_id:dev_id,
+						conpanyId:conpanyId,
+						tokens:tokens,
+						phone:phone,
+						password:password
+					},
+					success : function(msg) {
+						layer.close(i);
+						if(msg.success==null||msg.success==undefined||msg.success==true){
+							
+							alert(msg.info,4000,false);
+							window.location.href =msg.link;
+						}else{
+							alert(msg.info,4000,false);
+						}
+					}
+				});
+			})
+			$("#startRigister").bind("click",function (){
+				var gw_address=$("#gw_address").val();
+				var gw_port=$("#gw_port").val();
+				var phone=$("#gw_id").val();
+				var mac=$("#mac").val();
+				var url=$("#url").val();
+				var dev_id=$("#dev_id").val();
+				var conpanyId=$("#conpanyId").val();
+				var tokens=$("#tokens").val();
+				var phone=$("#phone").val();
+				var name=$("#name").val();
+				var inputTestCode=$("#inputTestCode").val();
+				var i=$.layer({
+				    type : 3
+				});
+				$.ajax({
+					type : "POST",
+					url : ctx+"wifidogController/rigisterWifiVip",
+					data:{
+						gw_address:gw_address,
+						gw_port:gw_port,
+						phone:phone,
+						mac:mac,
+						url:url,
+						dev_id:dev_id,
+						conpanyId:conpanyId,
+						tokens:tokens,
+						phone:phone,
+						name:name,
+						testCode:inputTestCode
+					},
+					success : function(msg) {
+						layer.close(i);
+						if(msg.success==null||msg.success==undefined||msg.success==true){
+							alert(msg.info,4000,false);
+							window.location.href =msg.link;
+						}else{
+							alert(msg.info,4000,false);
+						}
+					}
+				});
+			})
+			$("#getCode").bind("click",function (){
+				var phone=$("#phone").val();
+				var conpanyId=$("#conpanyId").val();
+				
+				var i=$.layer({
+				    type : 3
+				});
+				$.ajax({
+					type : "POST",
+					url : ctx+"wifidogController/phoneTest",
+					data:{
+						phone:phone,
+						conpanyId:conpanyId
+					},
+					success : function(msg) {
+						layer.close(i);
+						if(msg.success==null||msg.success==undefined||msg.success==true){
+							$("#inputTestCode").show()
+							$("#startRigister").show();
+							$("#getCode").attr("disabled","disabled");
+							timeTestMessageTimeobj=setInterval(function(){
+								$("#getCode").val("还剩"+(60-timeTestMessage)+"秒");
+							    	timeTestMessage++;
+							    	if(timeTestMessage==60){
+							    		timeTestMessage=0;
+							    		$("#getCode").val("获取验证码");
+							    		$("#getCode").removeAttr("disabled");
+							    		clearInterval(timeTestMessageTimeobj);
+									}
+							    },1000);
+						}else{
+							alert(msg.info,4000,false);
+						}
+					}
+			    })
+			})
+		})
+	})
+	$.views.converters("JavaSTojsDateTime", function(val) {
+	 var date=new Date(val);
+	 var y=date.getFullYear();
+	 var m=date.getMonth();
+	 var d=date.getDate();
+	 var h=date.getHours();
+	 var m2=date.getMinutes();
+	 var s=date.getSeconds();
+	 
+	 var s=y+"年"+(m+1)+"月"+d+"日"+h+"时"+m2+"分"+s+"秒";
+	 if(s=='1970年1月1日8时0分0秒'){
+		return '未签写';
+	}else{
+		 return s;
+	}
+});
+	</script>
+
+</head>
+<body class="skin-blue" style="background-color: rgb(249, 249, 249);" th:if="${macIsLogin==true}">
+<div style="width: 100%;text-align: center;">
+		您已经是会员请等待跳转.....<label id="times"></label>
+		</div>
+		
+</body>
+<body class="skin-blue" style="background-color: rgb(249, 249, 249);"  th:if="${macIsLogin==false}">
+	<div id="content">
+
+		<ul id="myTab" class="nav nav-tabs" role="tablist">
+
+			<li role="presentation" class="" onclick="loadImage()"><a href="#image" role="tab" id="profile-tab" data-toggle="tab"
+				aria-controls="profile" aria-expanded="true">图片</a></li>
+			<li role="presentation" class="" onclick="loadVideo()"><a href="#video" role="tab" id="profile-tab" data-toggle="tab"
+				aria-controls="profile" aria-expanded="true">视频</a></li>
+			<li role="presentation" class="" onclick="loadText()"><a href="#text" role="tab" id="profile-tab" data-toggle="tab"
+				aria-controls="profile" aria-expanded="true">文字</a></li>
+			<li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab"
+				aria-controls="home" aria-expanded="false">登录</a></li>
+			<li role="presentation" th:if="${iswebrigister==true}" class=""><a href="#profile" role="tab" id="profile-tab"
+				data-toggle="tab" aria-controls="profile" aria-expanded="true">注册</a></li>
+		</ul>
+		<div id="myTabContent" class="tab-content">
+				<section class="content invoice" th:if="${gonggao!=null}"  >
+				<div class="row">
+								<div class="col-md-12" style="text-align: center;" th:text="${gonggao.GonggaoContent}">
+									
+								</div>
+							</div>
+				</section>
+			<div role="tabpanel" class="tab-pane fade  active in" id="home" aria-labelledby="home-tab"
+				style="background-color: white;">
+				
+				<form th:action="@{/wifidogController/loginValidate}">
+					<input type="hidden" id="gw_address1" name="gw_address" th:value="${gw_address}" /> <input type="hidden"
+						id="gw_port1" name="gw_port" th:value="${gw_port}" /> <input type="hidden" id="gw_id1" name="gw_id"
+						th:value="${gw_id}" /> <input type="hidden" id="mac1" name="mac" th:value="${mac}" /> <input type="hidden"
+						id="url1" name="url" th:value="${url}" /> <input type="hidden" id="dev_id1" name="dev_id" th:value="${dev_id}" />
+					<input type="hidden" id="conpanyId1" name="conpanyId" th:value="${conpanyId}" /> <input type="hidden" id="tokens1"
+						name="tokens" th:value="${tokens}" /> <input name="phone" id="phone1" placeholder="请输入加入会员时手机号。"
+						class="form-control" /> <input name="password" id="password1" placeholder="请输入密码，默认0000或00000。"
+						class="form-control" /> <input class="btn btn-primary" id="start" style="width: 100%;" type="button" value="开始上网" />
+				</form>
+				
+			</div>
+			<div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab" th:if="${iswebrigister==true}"
+				style="background-color: white;">
+				<section class="content invoice">
+				
+				</section>
+				<form th:action="@{/wifidogController/rigisterWifiVip}">
+					<input type="hidden" id="gw_address" name="gw_address" th:value="${gw_address}" /> <input type="hidden"
+						id="gw_port" name="gw_port" th:value="${gw_port}" /> <input type="hidden" id="gw_id" name="gw_id"
+						th:value="${gw_id}" /> <input type="hidden" id="mac" name="mac" th:value="${mac}" /> <input type="hidden"
+						id="url" name="url" th:value="${url}" /> <input type="hidden" id="dev_id" name="dev_id" th:value="${dev_id}" />
+					<input type="hidden" id="conpanyId" name="conpanyId" th:value="${conpanyId}" /> <input type="hidden" id="tokens"
+						name="tokens" th:value="${tokens}" /> <input name="name" id="name" placeholder="请输姓名。" class="form-control" /> <input
+						name="phone" id="phone" placeholder="请输入手机号。" class="form-control" /> <input id="getCode" class="btn btn-primary"
+						style="width: 100%;" type="button" value="获取验证码" /> <input id="inputTestCode" name="testCode"
+						style="display: none;" placeholder="请输入发送到手机的验证码。" class="form-control" /> <input id="startRigister"
+						class="btn btn-primary" style="width: 100%; display: none;" type="button" value="成为会员并上网" />
+				</form>
+			</div>
+			<div role="tabpanel" class="tab-pane fade " id="image" aria-labelledby="home-tab">
+				<div class="row"></div>
+				<div class="row" id="imageMessageContent">
+					
+					
+				</div>
+				<section class="content invoice">查看更多请登录
+				</section>
+			</div>
+
+			<div role="tabpanel" class="tab-pane fade " id="video" aria-labelledby="home-tab" style="background-color: white;">
+				<div class="row"></div>
+				<div class="row" id="videpMessageContent">
+					
+				</div>
+				<section class="content invoice">查看更多请登录
+				</section>
+			</div>
+			<div role="tabpanel" class="tab-pane fade " id="text" aria-labelledby="home-tab" style="background-color: white;">
+				<div class="row"></div>
+				<div class="row" id="textMessageContent">
+
+				</div>	
+				<section class="content invoice">查看更多请登录
+				</section>
+			</div>
+		</div>
+
+	</div>
+		
+</body>
+</html>
+<script type="text/x-jsrender" id="image_item" th:if="${macIsLogin==false}">
+<!--
+<div class="col-md-12">
+						<div class="nav-tabs-custom">
+							<ul class="nav nav-tabs pull-right">
+
+								<li class="pull-left header"><i class="fa fa-th"></i> {{>title}}</li>
+							</ul>
+							<div class="tab-content">
+								{{>message}}
+								<img src="{{>imageLink}}" width="100%" />
+								{{for oneMsg}}
+									<div class="callout callout-info" style="margin-top: 20px;">
+                                        <h4>{{>createVipName}}</h4>
+                                        <p>{{>message}}</p>
+                                        <div class="row"><small class="text-muted pull-right"><i class="fa fa-clock-o"></i>  {{JavaSTojsDateTime:createDate}}</small></div>
+                              	    </div>
+								{{/for}}
+							</div>
+							
+						</div>
+					</div>
+-->
+</script>
+<script type="text/x-jsrender" id="video_item" th:if="${macIsLogin==false}">
+<!--
+<div class="col-md-12">
+						<div class="nav-tabs-custom">
+							<ul class="nav nav-tabs pull-right">
+
+								<li class="pull-left header"><i class="fa fa-th"></i> {{>title}}</li>
+							</ul>
+							<div class="tab-content">
+								{{>message}}
+								<video class="video-js vjs-default-skin " controls="" preload="none" width="100%" height="264" data-setup="{}">
+									<source src="{{>videoLink}}" type="video/mp4"/>
+								</video>
+								{{for oneMsg}}
+									<div class="callout callout-info" style="margin-top: 20px;">
+                                        <h4>{{>createVipName}}</h4>
+                                        <p>{{>message}}</p>
+                                        <div class="row"><small class="text-muted pull-right"><i class="fa fa-clock-o"></i>  {{JavaSTojsDateTime:createDate}}</small></div>
+                              	    </div>
+								{{/for}}
+							</div>
+
+						</div>
+					</div>
+-->
+</script>
+<script type="text/x-jsrender" id="text_item" th:if="${macIsLogin==false}">
+<!--
+					<div class="col-md-12">
+						<div class="nav-tabs-custom">
+							<ul class="nav nav-tabs pull-right">
+
+								<li class="pull-left header"><i class="fa fa-th"></i> {{>title}}</li>
+							</ul>
+							<div class="tab-content">
+								{{>message}}
+								{{for oneMsg}}
+									<div class="callout callout-info" style="margin-top: 20px;">
+                                        <h4>{{>createVipName}}</h4>
+                                        <p>{{>message}}</p>
+                                        <div class="row"><small class="text-muted pull-right"><i class="fa fa-clock-o"></i>  {{JavaSTojsDateTime:createDate}}</small></div>
+                              	    </div>
+								{{/for}}
+							</div>
+
+						</div>
+					</div>
+					-->
+</script>

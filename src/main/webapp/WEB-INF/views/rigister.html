@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<div th:include="mainTemplate::guanjianzi" th:remove="tag"></div>
+<title>光云协同办公平台</title>
+<div th:include="mainTemplate::jscss" th:remove="tag"></div>
+<script type="text/javascript" src="../../js/libs/area.js"
+	th:src="@{/js/libs/area.js}"></script>
+<script type="text/javascript" src="../../js/libs/pagejs/rigister.js" th:src="@{/js/libs/pagejs/rigister.js}"></script>
+
+</head>
+<body>
+	<div id="header" th:include="mainTemplate::header"></div>
+	<div class="container" style="min-height: 680px;">
+		<div style="height: 30px;"></div>
+		<div class="row">
+			<div class="col-lg-6" style="text-align: center;">
+
+
+				<h4>光云协同办公平台saas应用--注册</h4>
+				欢迎来到光云协同办公平台网络。在这里您可以更好更快的完成您的工作 <img alt="" th:src="@{/img/rigisterImage.jpg}" />
+				<div class="alert alert-block" style="text-align: center;">
+					领导:可以更好的掌控公司各个员工的状态。<br /> 职员:可以更好的为公司创造效益<br /> 光云协同办公平台网络使您的做出更精准的判断
+				</div>
+			</div>
+			<div class="col-lg-6" style="min-width: 480px;">
+				<div class="form-signin" style="text-align: center;min-width: 480px;" id="loginWindow" >
+					<h2 class="form-signin-heading">注册用户</h2>
+					<input type="text" class="form-control input-sm " id="conpanyName" placeholder="公司名称" /> 
+					<input type="text" class="form-control input-sm " id="softAdminName" placeholder="应用管理人姓名" />
+					 <input type="text" class="form-control input-sm " id="softAdminPhone" placeholder="应用管理人电话" />
+					 <button class="form-control input-sm " id="getTest">获取验证码</button>
+					 <input type="text" class="form-control input-sm " id="testcode" placeholder="填写手机验证码" />
+					  <input type="text" class="form-control input-sm " disabled="disabled" id="conpanyType" placeholder="公司所属行业" />
+					  <button class="form-control input-sm " id="conpanyType_but">选择行业</button>
+					  <br/>
+					  <input type="text" style="display: none;" class="form-control input-sm " id="conpanyType_id" placeholder="公司所属行业" />
+					    <input type="text" class="form-control input-sm " id="conpanyAdminEmail" placeholder="请输入email" />
+					    <select id="s_province"  class="form-control input-sm " name="s_province"></select>
+									<select  class="form-control input-sm " id="s_city" name="s_city" ></select>
+									<select  class="form-control input-sm " id="s_county" name="s_county"></select>
+					<br />
+					
+					<br />
+
+					<button class="btn btn-large btn-primary" id="rigister">注册</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer" th:include="mainTemplate::footer" th:remove="tag"></div>
+<script type="text/x-jsrender" id="rigister_success">
+<!--
+	请去您所填写的email内点击或复制链接访问地址后填写管理员信息
+-->
+</script>
+<div class="modal fade" id="AddLinkMan_window_add_but" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" >
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">行业选择</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<div class="row" id="rigister_a_content">
+					
+				</div>
+				<br/>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+<script type="text/x-jsrender" id="rigister_a">
+<!--
+<div class="col-xs-2">
+<a href="javascript:rigister_select_a({{>id}},'{{>hangyeName}}')" style="cursor: hand;">{{>hangyeName}}</a> 
+</div>
+-->
+</script>

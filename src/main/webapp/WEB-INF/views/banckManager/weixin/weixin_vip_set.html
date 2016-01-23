@@ -1,0 +1,616 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/weixin/weixin_vip_set.js}"></script>
+<section class="content-header">
+	<h1>
+		微信管理 <small id="bankuai_title">会员制度设置</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+		<li class="active" id="bankuai_title2">会员制度设置</li>
+	</ol>
+</section>
+
+<section class="content" id="content">
+
+	<div class="row">
+		<div class="col-lg-4" onclick="weixin_vip_queryVIP(1)">
+			<!-- small box -->
+			<div class="small-box bg-aqua">
+				<div class="inner">
+					<h3>1</h3>
+					<p>会员管理</p>
+				</div>
+				<div class="icon">
+					<i class="ion ion-person-add"></i>
+				</div>
+				<a href="#" class="small-box-footer"> 点击开启 <i class="fa fa-arrow-circle-right"></i>
+				</a>
+			</div>
+		</div>
+		<!-- ./col -->
+		<div class="col-lg-4" onclick="weixin_vip_createViPLevel()">
+			<!-- small box -->
+			<div class="small-box bg-red">
+				<div class="inner">
+					<h3>2</h3>
+					<p>会员等级管理</p>
+				</div>
+				<div class="icon">
+					<i class="ion-icecream"></i>
+				</div>
+				<a href="#" class="small-box-footer"> 点击开启 <i class="fa fa-arrow-circle-right"></i>
+				</a>
+			</div>
+		</div>
+		<!-- ./col -->
+		<div class="col-lg-4" onclick="weixin_vip_score_convert()">
+			<!-- small box -->
+			<div class="small-box bg-yellow">
+				<div class="inner">
+					<h3>3</h3>
+					<p>会员积分兑换</p>
+				</div>
+				<div class="icon">
+					<i class="ion-icecream"></i>
+				</div>
+				<a href="#" class="small-box-footer"> 点击开启 <i class="fa fa-arrow-circle-right"></i>
+				</a>
+			</div>
+		</div>
+		<!-- ./col -->
+	</div>
+	<!-- /.row -->
+	<!-- Main row -->
+	<div class="row">
+		<!-- Left col -->
+		<div id="alert_Vip"></div>
+		<section class="col-lg-12 connectedSortable" id="weixin_vip_layout"></section>
+		<!-- right col -->
+
+	</div>
+	<!-- /.row (main row) -->
+</section>
+<!-- /.content -->
+<script type="text/x-jsrender" id="weixin_vip_queryVIP">
+<!--
+<section class="col-lg-12 connectedSortable" id="right_layout"> 
+<div class="box box-primary">
+	<div class="box-header">
+		<div class="pull-right box-tools">
+			<div class="input-group">
+											<input type="text" name="table_search" id="weixin_vip_queryVip_iphone" class="form-control input-sm pull-right" style="width: 150px;" placeholder="微信手机号">
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="weixin_vip_queryVIP()">
+													<i class="fa fa-search"></i>
+												</button>
+												
+											</div>
+
+										</div>
+		</div>
+		
+	</div>
+	<div class="box-body">
+		<div class="row">
+			<div class="col-sm-12">
+													<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">客户名称</th>
+												<th style="text-align: center;">会员名称(联系人)</th>
+												<th style="text-align: center;">联系人电话</th>
+												<th style="text-align: center;">积分</th>
+<th style="text-align: center;">余额</th>
+												<th style="text-align: center;">操作</th>
+
+											</tr>
+										</thead>
+										<tbody id="weixin_tbody">
+											
+										</tbody>
+									</table>
+			</div>
+		</div>
+	</div>
+	<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="weixin_tbody_page"></ul>
+								</div>
+</div>
+</section>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_vip_createViPLevel">
+<!--
+<section class="col-lg-12 connectedSortable" id="right_layout"> 
+<div class="box box-primary" >
+	<div class="box-header">
+		<div class="pull-right box-tools">
+			<button class="btn btn-danger btn-sm" onclick="weixin_vip_create_viplevel()">
+													创建新等级 <i class="fa fa-plus-square"></i>
+												</button>
+		</div>
+	</div>
+	<div class="box-body">
+		<div class="row">
+			<div class="col-sm-12">
+													<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">等级名称</th>
+												<th style="text-align: center;">简介</th>
+												<th style="text-align: center;">积分到达</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="weixin_tbody">
+											
+										</tbody>
+									</table>
+			</div>
+		</div>
+	</div>
+	<div class="box-footer">
+		<div class="row">
+			
+		</div>
+	</div>
+</div>
+</section>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_vip_score_convert">
+<!--
+<section class="col-lg-12 connectedSortable" id="right_layout"> 
+<div class="box box-primary" >
+	<div class="box-header">
+		<div class="pull-right box-tools">
+				<button class="btn btn-danger btn-sm" onclick="weixin_vip_score_convert_tr_add()">
+													创建新兑换物 <i class="fa fa-plus-square"></i>
+												</button>
+		</div>
+	</div>
+	<div class="box-body">
+		<div class="row">
+			<div class="col-sm-12">
+									<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">物名</th>
+												<th style="text-align: center;">积分</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="weixin_tbody">
+											
+										</tbody>
+									</table>
+			</div>
+		</div>
+	</div>
+	<div class="box-footer">
+		<div class="row">
+			
+		</div>
+	</div>
+</div>
+</section>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_vip_queryVIP_tr">
+<!--
+<tr>
+								<td width="8%" align="center">{{>#index+1}}</td>
+								<td width="15%" align="center">{{>chanceListName}}</td>
+								<td width="15%" align="center">{{>linkManName}}</td>
+								<td width="15%" align="center">{{>linkManPhone}}</td>
+								<td width="10%" align="center">{{>linkManScore}}</td>
+<td width="8%" align="center">{{>money}}</td>
+								<td width="39%" align="center">
+									<button type="button" onclick="weixin_vip_queryVIP_tr_addprice({{>id}})" class="btn btn-danger btn-sm">储值</button>
+									<button type="button" onclick="weixin_vip_queryVIP_tr_jianprice({{>id}})" class="btn btn-danger btn-sm">减储值</button>	
+									<button type="button" onclick="weixin_vip_queryVIP_tr_addscore({{>id}})" class="btn btn-danger btn-sm">添加积分</button>
+									<button type="button" onclick="weixin_vip_queryVIP_tr_jianscore({{>id}})" class="btn btn-danger btn-sm">减积分</button>
+									<button type="button" onclick="weixin_vip_queryVIP_tr_favourable({{>id}})" class="btn btn-danger btn-sm">优惠</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_vip_createViPLevel_tr">
+<!--
+<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>name}}</td>
+								<td width="30%" align="center">{{>marks}}</td>
+								<td width="20%" align="center">{{>score}}</td>
+								<td width="20%" align="center">
+									<button type="button" onclick="weixin_vip_createViPLevel_tr_update({{>id}})" class="btn btn-danger btn-sm">修改</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_vip_score_convert_tr">
+<!--
+<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>name}}</td>
+								<td width="30%" align="center">{{>score}}</td>
+								<td width="20%" align="center">
+									<button type="button" onclick="weixin_vip_score_convert_tr_update({{>id}})" class="btn btn-danger btn-sm">修改</button>
+									<button type="button" onclick="weixin_vip_score_convert_tr_delete({{>id}})" class="btn btn-danger btn-sm">删除</button>
+								</td>
+							</tr>
+-->
+</script>
+<div class="modal fade" id="weixin_vip_queryVIP_tr_addscore" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加积分</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" id="weixin_vip_queryVIP_tr_addscore_enter" onclick="">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<input type="text" name="table_search" id="weixin_vip_addScore_num" class="form-control input-sm pull-right"
+										placeholder="积分" />
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="weixin_vip_queryVIP_tr_addprice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">储值</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" id="weixin_vip_queryVIP_tr_addprice_enter" onclick="">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<input type="text" name="table_search" id="weixin_vip_addprice_num" class="form-control input-sm pull-right"
+										placeholder="钱数" />
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="weixin_vip_queryVIP_tr_favourable" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">优惠策略</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right">确认</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" id="weixin_vip_queryVIP_tr_favourable_content" style="max-height: 800px;">
+									<div class="alert alert-block">
+										<h4>会员级别</h4>
+										<p id="huiyuanjibie"></p>
+										<br />
+										<hr />
+										<h4>享受制度</h4>
+										<p id="xiangshouzhidu"></p>
+										<br />
+										<hr />
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="weixin_vip_createViPLevel_tr_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加新vip等级策略</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" onclick="create_VIPLevel_enter()">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" id="weixin_vip_createViPLevel_tr_add_content" style="max-height: 800px;">
+									<div class="alert alert-warning alert-dismissable no-print">
+										<i class="fa fa-check"></i>
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<b>提示：</b>每次给用户添加积分的时候检测.<a>帮助</a>
+									</div>
+									<div class="form-group" id="input_vip_name">
+										<input type="text" class="form-control input-sm" id="vip_name" placeholder="名字" /><br />
+									</div>
+									<div class="form-group" id="input_vip_sroce">
+										<input type="text" class="form-control input-sm " id="vip_sroce" placeholder="用户所需要积分达到的级别" /><br />
+									</div>
+									<div class="form-group" id="input_vip_marks">
+										<input type="text" class="form-control input-sm" id="vip_marks" placeholder="备注：如所享受的优惠" /><br />
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="weixin_vip_createViPLevel_tr_update" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">修改vip等级策略</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" id="weixin_vip_createViPLevel_tr_update_enter">
+													确认修改 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" id="weixin_vip_createViPLevel_tr_add_content" style="max-height: 800px;">
+									<div class="alert alert-warning alert-dismissable no-print">
+										<i class="fa fa-check"></i>
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<b>提示：</b>目前修改后以前已有会员等级数据不变. <a>帮助</a>
+									</div>
+									<div class="form-group" id="update_input_vip_name">
+										<input type="text" class="form-control input-sm " id="update_vip_name" placeholder="名字" /><br />
+									</div>
+									<div class="form-group" id="update_input_vip_sroce">
+										<input type="text" class="form-control input-sm " id="update_vip_sroce" placeholder="用户所需要积分达到的级别" /><br />
+									</div>
+									<div class="form-group" id="update_input_vip_marks">
+										<input type="text" class="form-control input-sm" id="update_vip_marks" placeholder="备注：如所享受的优惠" /><br />
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="weixin_vip_score_convert_tr_add" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加新的兑换物</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" onclick="weixin_vip_score_convert_tr_add_enter()">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" id="weixin_vip_createViPLevel_tr_add_content" style="max-height: 800px;">
+									<div class="alert alert-warning alert-dismissable no-print">
+										<i class="fa fa-check"></i>
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<b>提示：</b>添加积分兑换的东西. <a>帮助</a>
+									</div>
+									<div class="form-group" id="input_score_name">
+										<input type="text" class="form-control input-sm " id="score_name"  placeholder="名字" /><br />
+									</div>
+									<div class="form-group"  id="input_score_image">
+										
+										<div class="input-group" id="weixin_goods_add_input_image1">
+														<input type="text" class="form-control input-sm " id="score_image"  placeholder="图片链接" /><br />
+														<div class="input-group-btn">
+															<button class="btn btn-sm btn-default" onclick="onImageManagerUpload('score_image')">
+																<i class="fa fa-search"></i>
+															</button>
+														</div>
+													</div>
+									</div>
+									<div class="form-group" id="input_score_sroce">
+										<input type="text" class="form-control input-sm " id="score_sroce"  placeholder="所需积分" /><br />
+									</div>
+									<div class="form-group" id="input_score_marks">
+										<input type="text" class="form-control input-sm " id="score_marks"  placeholder="详细介绍" /><br />
+									</div>
+									<div class="form-group" id="input_score_num">
+										<input type="text" class="form-control input-sm " id="score_num"  placeholder="数量" /><br />
+									</div>
+
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="weixin_vip_score_convert_tr_update" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">修改兑换物</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" id="weixin_vip_score_convert_tr_update_enter">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" id="weixin_vip_createViPLevel_tr_add_content" style="max-height: 800px;">
+									<div class="alert alert-warning alert-dismissable no-print">
+										<i class="fa fa-check"></i>
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<b>提示：</b>添加积分兑换的东西. <a>帮助</a>
+									</div>
+									<div class="form-group" id="update_input_score__name">
+										<input type="text" class="form-control input-sm " id="update_score_name"  placeholder="名字" /><br />
+									</div>
+									<div class="form-group"  id="update_input_score_image">
+										<input type="text" class="form-control input-sm " id="update_score_image"  placeholder="图片" /><br />
+									</div>
+									<div class="form-group" id="update_input_score_sroce">
+										<input type="text" class="form-control input-sm " id="update_score_sroce"  placeholder="所需积分" /><br />
+									</div>
+									<div class="form-group" id="update_input_score_marks">
+										<input type="text" class="form-control input-sm " id="update_score_marks"  placeholder="详细介绍" /><br />
+									</div>
+									<div class="form-group" id="update_input_score_num">
+										<input type="text" class="form-control input-sm " id="update_score_num"  placeholder="数量" /><br />
+									</div>
+
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>

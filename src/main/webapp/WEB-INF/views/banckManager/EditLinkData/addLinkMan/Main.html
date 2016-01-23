@@ -1,0 +1,124 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/EditLinkDate/addLinkMan/main.js}"></script>
+<div class="modal fade" id="Edit_AddLinkMan_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">联系人管理</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+						<div id="Edit_AddLinkManWindow_AlertDiv"></div>
+						<section class="col-lg-6 connectedSortable">
+							
+							<div class="box box-primary" id="Edit_AddLinkManWindow_customer_Body">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<input type="text" name="table_search" id="Custmor_Edit_AddLinkMan_window_query_Name"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="客户名称" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="Custmor_Edit_AddLinkManList_query_function_window()">
+													<i class="fa fa-search"></i>
+												</button>
+
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 800px;">
+									<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">客户</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="Custmor_Edit_AddLinkMan_window_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="Custmor_Edit_AddLinkMan_window_tbody_page">
+
+									</ul>
+								</div>
+							</div>
+						</section>
+						<section class="col-lg-6 connectedSortable">
+							<div class="box box-primary" id="Edit_AddLinkManWindow_Body">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<input type="text" name="table_search" id="Edit_AddLinkMan_window_query_Name"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="联系人名" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="Edit_AddLinkManList_query_function_window()">
+													<i class="fa fa-search"></i>
+												</button>
+
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 800px;">
+									<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">姓名</th>
+												<th style="text-align: center;">性别</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="Edit_AddLinkMan_window_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="Edit_AddLinkMan_window_tbody_page">
+
+									</ul>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="Edit_AddLinkMan_window_add_window_div"></div>
+<script type="text/x-jsrender" id="Edit_AddLinkMan_window_tbody_tr">
+<!--
+	<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>linkManName}}</td>
+								<td width="10%" align="center">{{>linkManSex}}</td>
+								<td width="30%" align="center">
+										<button type="button" onclick="Edit_enter_LinkMan({{>id}},'{{>linkManName}}')" class="btn btn-danger btn-sm">选中</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="Custmor_Edit_AddLinkMan_window_tbody_tr">
+<!--
+							<tr>
+								<td width="20%" align="center">{{>customerName}}</td>
+								<td width="30%" align="center">
+										<button type="button" onclick="Edit_enter_customer({{>id}},'{{>customerName}}')" class="btn btn-danger btn-sm">选中此项</button>
+										<button type="button" onclick="Edit_queryLinkMan({{>id}})" class="btn btn-danger btn-sm">联系人列表</button>
+								</td>
+							</tr>
+-->
+</script>

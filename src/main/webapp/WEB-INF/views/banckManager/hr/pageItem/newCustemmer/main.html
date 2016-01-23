@@ -1,0 +1,48 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/hr/pageItem/newCustemmer/main.js}"></script>
+<div class="box box-primary" id="hr_window_custemmer_top">
+	<div class="box-header">
+		<div class="pull-right box-tools">
+			<button onclick="window_layout_close(this,'hr/window/newCustemmer')" class="btn btn-danger btn-sm refresh-btn"
+				data-toggle="tooltip" title="Reload">
+				<i class="fa fa-times"></i>
+			</button>
+		</div>
+		<!-- /. tools -->
+		<i class="ion ion-clipboard"></i>
+		<h3 class="box-title">最新员工</h3>
+	</div>
+								<div id="hr_window_custemmer_look"></div>
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 350px;min-height: 350px;">
+															<table id="example1" class="table table-bordered table-hover input-sm">
+							<thead>
+								<tr>
+									<th style="text-align: center;">序号</th>
+									<th style="text-align: center;">姓名</th>
+									<th style="text-align: center;">邮箱</th>
+									<th style="text-align: center;">时间</th>
+									<th style="text-align: center;">可用</th>
+									<th style="text-align: center;">电话</th>
+									<th style="text-align: center;">性别</th>
+								</tr>
+							</thead>
+							<tbody id="hr_window_custemmer_look_tbody"></tbody>
+						</table>
+								</div>
+
+	<!-- /.box-body -->
+
+</div>
+<script type="text/x-jsrender" id="hr_window_custemmer_look_tr">
+<!--
+	<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="10%" align="center">{{>trueName}}</td>
+								<td width="10%" align="center">{{>email}}</td>
+								<td width="20%" align="center">{{JavaSTojsDate:accuntStartDate}}</td>
+								<td width="10%" align="center">{{>useLogin?"可用":"不可用"}}</td>
+								<td width="20%" align="center">{{>phone}}</td>
+								<td width="10%" align="center">{{>sex?"男":"女"}}</td>
+								
+							</tr>
+-->
+</script>

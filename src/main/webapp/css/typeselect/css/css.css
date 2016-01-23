@@ -1,0 +1,63 @@
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, input, textarea, p{margin:0;padding:0}
+img{border:0}
+
+.clearfix:after{content:"\200B";display:block;height:0;clear:both}
+.clearfix{*zoom:1}
+.clear{clear:both;visibility:hidden}
+a:link, a:visited{color:#039;text-decoration:none}
+a:hover{color:#db4f33;text-decoration:underline}
+a,area{blr:expression(this.onFocus=this.blur())}
+
+
+/* sidebar */
+.sidebar_top, .sidebar_bottom, .sidebar_item_icon01, .sidebar_item_icon02, .sidebar_item_icon03, .sidebar_item_icon04, .sidebar_item dd s{background:none}
+.sidebar{background:#fff;border:1px solid #cacaca;border-top:3px solid #cacaca;width:204px;}
+.sidebar_top{position:relative;padding:0 20px;height:40px;line-height:40px;font-weight:bold;font-size:16px;font-family:"微软雅黑";color:#000;background:#ececec;cursor:pointer;border-bottom:none}
+.sidebar_top_tc{text-align:left}
+.sidebar_con{width:204px;padding:0;background:none}
+.sidebar_item{padding-bottom:5px;border-top:1px solid #ccc}
+.sidebar_item dt{height:34px;background:url(../images/f_sypic_19.jpg) repeat-x;margin-bottom:11px}
+.sidebar_item dt i{display:inline-block;float:left;width:17px;height:17px;margin:8px 4px 0 23px}
+.sidebar_item dt span{float:left;height:34px;line-height:34px;font-size:13px;font-family:"微软雅黑";color:#000;font-weight:bold}
+.sidebar_item dd{height:30px;position:relative}
+.sidebar_item dd h3{position:absolute;z-index:11;width:200px;height:30px;line-height:30px;font-size:13px;font-weight:normal;font-family:"微软雅黑";border:none;padding:0}
+.sidebar_item dd h3 a{display:block;padding:0 0 0 15px}
+.sidebar_item dd h3 a:link{color:#000;text-decoration:none}
+.sidebar_item dd h3 a:visited{color:#000;text-decoration:none}
+.sidebar_item dd h3 a:hover{color:#000;text-decoration:underline}
+.sidebar_item dd s{display:block;width:4px;height:8px;background:url(../images/f_sypic_icon.png) no-repeat 0 -32px;position:absolute;top:11px;right:16px;z-index:9}
+.sidebar_bottom{height:10px;position:relative;bottom:0;z-index:-1}
+.sidebar_focus{background:#FFF}
+.sidebar_item dd h3.sidebar_focus a{font-weight:bold;border:1px solid #cacaca;border-right:none;-moz-border-radius:5px 5px 5px 5px;-moz-box-shadow:2px 2px 10px #969696;-webkit-box-shadow:-2px 1px 10px #969696;box-shadow:-2px 1px 10px #969696}
+.sidebar_item dd h3.sidebar_focus a:link{color:#dc4f33;text-decoration:none}
+.sidebar_item dd h3.sidebar_focus a:visited{color:#dc4f33;text-decoration:none}
+.sidebar_item dd h3.sidebar_focus a:hover{color:#dc4f33;text-decoration:underline}
+.sidebar_item dd h3 span{color:#000;padding-left:15px}
+.sidebar_item dd h3.sidebar_focus span{display:block;border:1px solid #cacaca;color:#dc4f33;font-weight:bold;padding-left:15px;-moz-border-radius:5px 5px 5px 5px;-moz-box-shadow:2px 2px 10px #969696;-webkit-box-shadow:-2px 1px 10px #969696;box-shadow:-2px 1px 10px #969696}
+.sidebar_popup{position:absolute;left:199px;width:610px;background:#FFF;border:1px solid #cacaca;display:none;border-top-right-radius:2px;border-bottom-right-radius:2px;z-index:10;-moz-border-radius:5px 5px 5px 5px;-moz-box-shadow:2px 2px 10px #969696;-webkit-box-shadow:2px 2px 10px #969696;box-shadow:2px 2px 10px #969696}
+.sidebar_popup_class{padding:0 5px}
+.sidebar_popup_item{width:260px;height:72px;float:left;padding:10px 20px;background:url(../images/dot.gif) bottom repeat-x}
+.sidebar_popup_item.nobg{background:none}
+.sidebar_popup_item strong{display:block;height:24px;line-height:24px;color:#DB4F33}
+.sidebar_popup_item strong span{color:#DB4F33}
+.sidebar_popup_item p{height:48px;overflow:hidden}
+.sidebar_popup_item p span{height:24px;padding-right:7px;margin-right:7px;line-height:24px;display:inline-block}
+.sidebar_popup_item p span a{padding:1px}
+.sidebar_popup_item p span a:link{color:#000;text-decoration:none}
+.sidebar_popup_item p span a:visited{color:#000;text-decoration:none}
+.sidebar_popup_item p span a:hover{color:#fff;text-decoration:none;background:#dc4f33}
+.sidebar_popup_item p span.more{padding-right:9px;background:url(../images/arr_blue.png) right 9px no-repeat}
+.sidebar_popup_all{width:610px;height:48px;line-height:48px;text-align:center;border-top:1px #cbdaea solid}
+.sidebar_popup_all a span{padding-right:11px;background:url(../images/arr_orange.png) right 5px no-repeat}
+.sidebar_popup_all a{display:block;background:#e8f1ff}
+.sidebar_popup_all a:hover{background:#d8e7ff}
+.sidebar_popup_item strong a:link, .sidebar_popup_all a:link{color:#db4f33;text-decoration:none}
+.sidebar_popup_item strong a:visited, .sidebar_popup_all a:visited{color:#db4f33;text-decoration:none}
+.sidebar_popup_item strong a:hover, .sidebar_popup_all a:hover{color:#db4f33;text-decoration:underline}
+.i_header, .i_headtopcon, .i_container, .i_footer{width:1000px;margin:0 auto}
+.sidebar_item_icon01, .sidebar_item_icon02, .sidebar_item_icon03, .sidebar_item_icon04{background:url(../images/f_sypic_icon.png) no-repeat}
+.sidebar_item_icon01{background-position:0 -160px}
+.sidebar_item_icon02{background-position:-40px -160px}
+.sidebar_item_icon03{background-position:-80px -160px}
+.sidebar_item_icon04{background-position:-130px -160px}

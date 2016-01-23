@@ -1,0 +1,417 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+	<div th:fragment="guanjianzi">
+		<meta name="Keywords" content="光云互连协同网络,saas,crm,hr,oa,邢台微信联盟" />
+		<meta name="description" content="光云互连协同网络 从事saas软件事业" />
+	</div>
+	<div th:fragment="jscss_admin">
+		<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
+		<link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap_exc/bootstrap.min.css}" />
+		<link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap_exc/ionicons.min.css}" />
+		<link href="../../css/bootstrap.css" rel="stylesheet"
+			th:href="@{/css/bootstrap_exc/daterangepicker/daterangepicker-bs3.css}" />
+		<link href="../../css/bootstrap.css" rel="stylesheet"
+			th:href="@{/css/bootstrap_exc/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css}" />
+		<link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap_exc/morris/morris.css}" />
+		<link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap_exc/font-awesome.min.css}" />
+		<link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap_exc/AdminLTE.css}" />
+		<link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/js/libs/date/datepicker.css}" />
+		<link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/js/libs/flow/codebase/GooFlow.css}" />
+		<link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/js/libs/clock/bootstrap-clockpicker.css}" />
+		<link href="../../js/libs/alert/js_css/yu.css" rel="stylesheet" th:href="@{/js/libs/alert/js_css/yu.css}" />
+		<link href="../../js/libs/alert/js_css/yu.css" rel="stylesheet" th:href="@{/js/libs/kindediter/themes/default/default.css}" />
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js" th:src="@{/js/libs/jquery-1.9.1.min.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js" th:src="@{/js/libs/ajaxfileupload.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js"
+			th:src="@{/js/libs/bootstrap_exc/jquery-ui-1.10.3.min.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js" th:src="@{/js/libs/bootstrap_exc/bootstrap.min.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js" th:src="@{/js/libs/jquery-migrate-1.1.1.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js" th:src="@{/js/libs/bootstrap_exc/raphael-min.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js"
+			th:src="@{/js/libs/bootstrap_exc/plugins/morris/morris.min.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js"
+			th:src="@{/js/libs/bootstrap_exc/plugins/sparkline/jquery.sparkline.min.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js"
+			th:src="@{/js/libs/bootstrap_exc/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js"
+			th:src="@{/js/libs/bootstrap_exc/plugins/jvectormap/jquery-jvectormap-world-mill-en.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js"
+			th:src="@{/js/libs/bootstrap_exc/plugins/fullcalendar/fullcalendar.min.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js"
+			th:src="@{/js/libs/bootstrap_exc/plugins/jqueryKnob/jquery.knob.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js"
+			th:src="@{/js/libs/bootstrap_exc/plugins/daterangepicker/daterangepicker.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js"
+			th:src="@{/js/libs/bootstrap_exc/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js"
+			th:src="@{/js/libs/bootstrap_exc/plugins/iCheck/icheck.min.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js" th:src="@{/js/libs/bootstrap_exc/AdminLTE/app.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js" th:src="@{/js/libs/bootstrap_exc/AdminLTE/dashboard.js}"></script>
+		<script type="text/javascript" src="../../js/libs/layer.js" th:src="@{/js/libs/layer/layer.min.js}"></script>
+		<script type="text/javascript" src="../../js/libs/layer.js" th:src="@{/js/libs/jsrender.min.js}"></script>
+		<script type="text/javascript" src="../../js/libs/layer.js" th:src="@{/js/libs/date/bootstrap-datepicker.js}"></script>
+		<script type="text/javascript" src="../../js/libs/layer.js" th:src="@{/js/libs/date/bootstrap-datepicker.zh-CN.js}"></script>
+		<script type="text/javascript" src="../../js/libs/layer.js" th:src="@{/js/libs/flow/codebase/GooFlow.js}"></script>
+		<script type="text/javascript" src="../../js/libs/layer.js" th:src="@{/js/libs/flow/GooFunc.js}"></script>
+		<script type="text/javascript" src="../../js/libs/layer.js" th:src="@{/js/libs/flow/json2.js}"></script>
+		<script type="text/javascript" src="../../js/libs/alert/js_css/yu.js" th:src="@{/js/libs/alert/js_css/yu.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js"
+			th:src="@{/js/libs/bootstrap_exc/AdminLTE/EditLinkDataBase.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js" th:src="@{/js/libs/bootstrap_exc/bootstrapx-popoverx.js}"></script>
+		<script type="text/javascript" src="../../js/libs/layer.js" th:src="@{/js/libs/chart/highcharts.min.js}"></script>
+		<script type="text/javascript" src="../../js/libs/layer.js" th:src="@{/js/libs/chart/highcharts-more.min.js}"></script>
+		<script type="text/javascript" src="../../js/libs/layer.js" th:src="@{/js/libs/chart/modules/exporting.min.js}"></script>
+		<script type="text/javascript" src="../../js/libs/layer.js" th:src="@{/js/libs/inputalert/jquery.typeahead.min.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js" th:src="@{/js/libs/bootstrap_exc/AdminLTE/pinyin.js}"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.1.1.js" th:src="@{/js/libs/clock/bootstrap-clockpicker.js}"></script>
+		<script charset="utf-8" th:src="@{/js/libs/kindediter/kindeditor-min.js}"></script>
+		<script charset="utf-8"  th:src="@{/js/libs/kindediter/zh_CN.js}"></script>
+		<script th:inline="javascript">
+var ctx = /*[[${#httpServletRequest.contextPath}+'/']]*/'/';
+var userName = /*[[${user.trueName}]]*/'';
+function ajaxCodeImageHuan(a){
+	a.src=a.src+"?1=1";
+}
+$.views.converters("JavaSTojsDate", function(val) {
+	 var date=new Date(val);
+	 var y=date.getFullYear();
+	 var m=date.getMonth();
+	 var d=date.getDate();
+	 var s=y+"-"+(m+1)+"-"+d;
+	 if(s=='1970-1-1'){
+		return '未设置或未结束';
+	}else{
+		 return s;
+	}
+});
+$.views.converters("JavaSTojsDateTime", function(val) {
+	 var date=new Date(val);
+	 var y=date.getFullYear();
+	 var m=date.getMonth();
+	 var d=date.getDate();
+	 var h=date.getHours();
+	 var m2=date.getMinutes();
+	 var s=date.getSeconds();
+	 
+	 var s=y+"年"+(m+1)+"月"+d+"日"+h+"时"+m2+"分"+s+"秒";
+	 if(s=='1970年1月1日8时0分0秒'){
+		return '未签写';
+	}else{
+		 return s;
+	}
+});
+function JavaSTojsDate(val) {
+	 var date=new Date(val);
+	 var y=date.getFullYear();
+	 var m=date.getMonth();
+	 var d=date.getDate();
+	 var s=y+"-"+(m+1)+"-"+d;
+	 if(s=='1970-1-1'){
+		return '未设置或未结束';
+	}else{
+		 return s;
+	}
+};
+function message_onclick(id){
+	var i=$.layer({
+	    type : 3
+	});
+	$.ajax({
+		type : "POST",
+		url : ctx+"onclickMessage",
+		data:{
+			id:id
+		},
+		success : function(msg) {
+			layer.close(i);
+			if(msg.success){
+				$.ajax({
+					type : "POST",
+					url : ctx+"queryMessage",
+					success : function(msg) {
+						if(msg.success){
+							//从新设定信息
+							var tmpl = $("#message_list_item").html().replace("<!--", "").replace("-->", "");
+							$.templates({
+								message_list_item : tmpl
+							});
+							$("#messageNum").html("您有"+msg.num+"条最新消息")
+							$("#messageNumTop").html(msg.num);
+							$("#messageList").html($.render.message_list_item(msg.data));
+						}else{
+							alertError(msg.info,"content");
+						}
+					}
+				})
+				$("#message_item_content").modal("show");
+				if(msg.obj.types==1){
+					var tmpl = $("#message_content_type_1").html().replace("<!--", "").replace("-->", "");
+					$.templates({
+						message_content_type_1 : tmpl
+					});
+					$("#message_item_content_body").html($.render.message_content_type_1(msg.content1));
+					$("#message_content_type_message").html(msg.obj.content);
+				}else{
+					$("#message_item_content_body").html(msg.obj.content);
+				}
+			}else{
+				alertError(msg.info,"content");
+			}
+		}
+	})
+}
+function onImageManagerUpload(str,str2,str3){
+	var editor = KindEditor.editor({
+		uploadJson : ctx+'fileSrc/uploadImage',
+		fileManagerJson : ctx+'fileSrc/getImageList',
+		allowFileManager : true
+	});
+		editor.loadPlugin('image', function() {
+			editor.plugin.imageDialog({
+				imageUrl : KindEditor('#'+str).val(),
+				
+				clickFn : function(url, title, width, height, border, align) {
+					KindEditor('#'+str).val(url);
+
+					editor.hideDialog();
+					if(str2!=undefined){
+						
+						if(str3!=undefined){
+							$("#"+str3).find('#'+str2).attr("src",url);
+						}else{
+							$('#'+str2).attr("src",url);
+						}
+					}
+				}
+			});
+		});
+}
+</script>
+	</div>
+
+	<div id="header_admin" th:fragment="header_admin">
+		<header class="header">
+
+			<a th:href="@{/backManager}" class="logo" th:text="${conpany.conpanyName}"> <!-- Add the class icon to your logo image or logo icon to add the margining -->
+				海达聚商企业管理
+			</a>
+			<!-- Header Navbar: style can be found in header.less -->
+			<nav class="navbar navbar-static-top" role="navigation">
+				<!-- Sidebar toggle button-->
+				<a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button"> <span class="sr-only">展开/关闭侧菜单</span>
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				</a>
+				<div class="navbar-right">
+					<ul class="nav navbar-nav">
+						<!-- Messages: style can be found in dropdown.less-->
+						<!--
+                        <li class="dropdown messages-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-envelope"></i>
+                                <span class="label label-success">4</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">您有x条最新消息</li>
+                                <li>
+                                 
+                                    <ul class="menu">
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="img/adminimg/avatar3.png" class="img-circle" alt="User Image"/>
+                                                </div>
+                                                <h4>
+                                                    Support Team
+                                                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
+                                     
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">查看全部短消息</a></li>
+                            </ul>
+                        </li>
+                        -->
+						<!-- Notifications: style can be found in dropdown.less -->
+						<li class="dropdown notifications-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i
+								class="fa fa-warning"></i> <span class="label label-warning" id="messageNumTop" th:text="${msgNum}">10</span>
+						</a>
+							<ul class="dropdown-menu">
+								<li class="header" id="messageNum" th:text="${'您有 '+msgNum+'条提示'}">您有x条提示</li>
+								<li>
+									<!-- inner menu: contains the actual data -->
+									<ul class="menu" id="messageList">
+
+										<li th:each="Message,messageStart:${msg}" th:onclick="'message_onclick('+${Message.id}+')'"><a href="#">
+
+												<i class="ion ion-ios7-person danger"></i> <label th:remove="tag" th:utext="${Message.title}"></label>
+										</a></li>
+
+									</ul>
+								</li>
+								<li class="footer"><a href="#">显示全部系统提示</a></li>
+							</ul></li>
+						<li class="dropdown user user-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i
+								class="glyphicon glyphicon-user"></i> <span th:text="${user.trueName}">董成龙 <i class="caret"></i></span>
+						</a>
+							<ul class="dropdown-menu">
+								<!-- User image -->
+								<li class="user-header bg-light-blue"><img src="img/adminimg/avatar3.png" class="img-circle"
+									alt="User Image" />
+									<p>
+									<p th:text="${user.trueName}">董成龙 - 公司成员</p> <small th:text="${'加入公司日期. '+user.accuntStartDate}">2012</small>
+									</p></li>
+
+								<!-- Menu Footer-->
+								<li class="user-footer">
+									<div class="pull-left">
+										<a href="#" class="btn btn-default btn-flat">账户信息</a>
+									</div>
+									<div class="pull-right">
+										<a th:href="@{/exit}" class="btn btn-default btn-flat">退出</a>
+									</div>
+								</li>
+							</ul></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+	</div>
+	<div id="item" th:fragment="item">
+		<aside class="left-side sidebar-offcanvas">
+			<!-- sidebar: style can be found in sidebar.less -->
+			<section class="sidebar">
+				<!-- Sidebar user panel -->
+				<div class="user-panel">
+					<div class="pull-left image">
+						<img src="img/adminimg/avatar3.png" class="img-circle" alt="User Image" />
+					</div>
+					<div class="pull-left info">
+						<p th:text="${'你好,'+user.trueName}">您好,董成龙</p>
+
+						<i class="fa fa-circle text-success"></i> 在线
+					</div>
+				</div>
+				<!-- search form -->
+
+				<!-- /.search form -->
+				<!-- sidebar menu: : style can be found in sidebar.less -->
+				<ul class="sidebar-menu">
+					<li class="active" id="lookAllStu"><a href="javascript:"> <i class="fa fa-dashboard"></i> <span>概览</span>
+					</a></li>
+					<li class="treeview" th:if="${weixin==true}"><a href="#"> <i class="fa fa-bar-chart-o"></i> <span>微信WifiVip管理</span>
+							<i class="fa fa-angle-left pull-right"></i>
+					</a>
+					<ul class="treeview-menu">
+							<li id="weixin_main" th:if="${weixin1!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>概览</a></li>
+							<li id="weixin_UserId_Set" th:if="${weixin2!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>微信公众账号设置</a></li>
+							<li id="weixin_VIP_set" th:if="${weixin3!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>会员管理</a></li>
+							<li id="weixin_Game_set" th:if="${weixin4!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>活动与游戏管理</a></li>
+							<li id="weixin_convert_set" th:if="${weixin5!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>序列号兑换</a></li>
+							<li id="weixin_Model_set" th:if="${weixin6!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>模板设置</a></li>
+							<li id="weixin_Model_set_map" th:if="${weixin7!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>店铺地址设置</a></li>
+							<li id="weixin_Model_goods_list" th:if="${weixin8!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>微信商品与菜单管理</a></li>
+							<li id="weixin_Model_order_list" th:if="${weixin9!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>微信订单管理</a></li>
+							<li id="weixin_Model_wifi_list" th:if="${weixin10!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>会员wifi功能</a></li>
+							<li id="weixin_Model_image" th:if="${weixin11!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>图片交流模块管理</a></li>
+							<li id="weixin_Model_video" th:if="${weixin12!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>视频交流模块管理</a></li>
+							<li id="weixin_Model_text" th:if="${weixin13!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>文本交流模块管理</a></li>
+							<li id="weixin_Model_ershou" th:if="${weixin14!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>格子铺交流模块管理</a></li>
+							<li id="weixin_Model_game" th:if="${weixin15!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>游戏模块</a></li>
+							<li id="weixin_Model_gonggao" th:if="${weixin16!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>公告管理</a></li>
+					</ul></li>
+					<li class="treeview" th:if="${crm==true}"><a href="#"> <i class="fa fa-bar-chart-o"></i> <span>客户管理</span>
+							<i class="fa fa-angle-left pull-right"></i>
+					</a>
+						<ul class="treeview-menu">
+							<li id="crm_main" th:if="${crm1!=null}"><a href="javascript:"><i class="fa fa-angle-double-right"></i>客户机会概览</a></li>
+							<li id="crm_myCreateCustomChance" th:if="${crm2!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>我创建客户机会</a></li>
+							<li id="crm_toMyCustomChance" th:if="${crm3!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>分配给我的客户机会</a></li>
+							<li id="crm_MyCustomManager" th:if="${crm4!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>我的客户管理</a></li>
+							<li id="crm_queryAllChanceList" th:if="${crm5!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>全部客户机会</a></li>
+						</ul></li>
+					<li class="treeview" th:if="${goods==true}"><a href="#"> <i class="fa fa-bar-chart-o"></i> <span>库存管理</span>
+							<i class="fa fa-angle-left pull-right"></i>
+					</a>
+						<ul class="treeview-menu">
+							<li id="goods_main" th:if="${good1!=null}"><a href="javascript:"><i class="fa fa-angle-double-right"></i>库存概况</a></li>
+							<li id="goods_queryData" th:if="${good2!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>库存查询</a></li>
+							<li id="goods_inGoods" th:if="${good3!=null}"><a href="javascript:"><i class="fa fa-angle-double-right"></i>进货管理</a></li>
+							<li id="goods_outGoods" th:if="${good4!=null}"><a href="javascript:"><i class="fa fa-angle-double-right"></i>销售管理</a></li>
+							<li id="goods_storehouse" th:if="${good6!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>仓库信息</a></li>
+							<li id="goods_GoodSource" th:if="${good5!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>进货商信息</a></li>
+						</ul></li>
+					<li class="treeview" th:if="${hr==true}"><a href="#"> <i class="fa fa-bar-chart-o"></i> <span>员工管理</span>
+							<i class="fa fa-angle-left pull-right"></i>
+					</a>
+						<ul class="treeview-menu">
+							<li id="hr_main" th:if="${hr1!=null}"><a href="javascript:"><i class="fa fa-angle-double-right"></i>概览</a></li>
+							<li id="hr_custemr" th:if="${hr2!=null}"><a href="javascript:"><i class="fa fa-angle-double-right"></i>员工账号管理</a></li>
+							<li id="hr_meeting" th:if="${hr4!=null}"><a href="javascript:"><i class="fa fa-angle-double-right"></i>签到管理</a></li>
+							<li id="hr_performance" th:if="${hr3!=null}"><a href="javascript:"><i class="fa fa-angle-double-right"></i>绩效管理</a></li>
+							<li id="hr_waiqin" th:if="${hr5!=null}"><a href="javascript:"><i class="fa fa-angle-double-right"></i>外勤管理</a></li>
+							<li id="hr_kongjian" th:if="${hr6!=null}"><a href="javascript:"><i class="fa fa-angle-double-right"></i>互动空间</a></li>
+						</ul></li>
+					<li class="treeview" th:if="${system==true}"><a href="#"> <i class="fa fa-bar-chart-o"></i> <span>系统权限管理</span>
+							<i class="fa fa-angle-left pull-right"></i>
+					</a>
+						<ul class="treeview-menu">
+							<li id="permissionManager" th:if="${sys1!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>权限管理</a></li>
+						</ul></li>
+					<li class="treeview" ><a href="#"> <i class="fa fa-bar-chart-o"></i> <span>账户管理</span>
+							<i class="fa fa-angle-left pull-right"></i>
+					</a>
+						<ul class="treeview-menu">
+							<li id="passwordChange" ><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>修改密码</a></li>
+						</ul></li>
+						
+					<li th:if="${messageInfo==true}" class="treeview" ><a href="#"> <i class="fa fa-bar-chart-o"></i> <span>短信平台</span>
+							<i class="fa fa-angle-left pull-right"></i>
+					</a>
+						<ul class="treeview-menu">
+							<li id="messageInfo_main" th:if="${message1!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>短信设置</a></li>
+							<li id="messageInfo_vipsend" th:if="${message2!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>会员发信</a></li>
+							<li id="messageInfo_messagetemp" th:if="${message3!=null}"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>短信模板</a></li>
+							<li id="messageInfo_messagelog" th:if="${message4!=null}" style="display: none;"><a href="javascript:"><i
+									class="fa fa-angle-double-right"></i>历史信息</a></li>
+									
+						</ul></li>
+					
+				</ul>
+			</section>
+			<!-- /.sidebar -->
+		</aside>
+	</div>
+</body>
+</html>

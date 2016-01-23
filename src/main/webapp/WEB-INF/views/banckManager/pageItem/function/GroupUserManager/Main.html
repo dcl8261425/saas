@@ -1,0 +1,291 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/function/GroupUserManager/Main.js}"></script>
+<div class="modal fade" id="groupList_lookGroupUser_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 90%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">组员管理</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section class="content" >
+					<div class="row">
+
+						<section class="col-lg-6 connectedSortable">
+
+							<div class="box box-primary" id="lookGroupUser_body">
+								<div class="box-header">
+									<h3 class="box-title">组用户列表</h3>
+									<div class="box-tools">
+
+										<div class="input-group">
+
+											<input type="text" name="table_search" id="group_userTrueName_search_but_input"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="通过用户真实名查找" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" id="group_userTrueName_search_but">
+													<i class="fa fa-search"></i>
+												</button>
+												<button class="btn btn-danger btn-sm" id="groupList_table_userTrueName_addUser">
+													添加用户 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto;max-height: 400px;">
+									<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">用户账号</th>
+												<th style="text-align: center;">真实名</th>
+												<th style="text-align: center;">通讯地址</th>
+												<th style="text-align: center;">联系电话</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="lookGroupUser_table_content_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="lookGroupUser_table_content_page">
+
+									</ul>
+								</div>
+
+							</div>
+
+						</section>
+						<section class="col-lg-6 connectedSortable">
+							<div class="box box-primary" id="lookGroupUserRole_content">
+								<div class="box-header">
+									<h3 class="box-title">用户角色列表</h3>
+									<div class="box-tools">
+
+										<div class="input-group">
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" id="groupList_userRoleName_table_addRole">
+													添加角色 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto;max-height: 400px;">
+									<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">角色名</th>
+												<th style="text-align: center;">备注</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="groupListRole_table_content_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="">
+
+									</ul>
+								</div>
+							</div>
+						</section>
+
+					</div>
+				</section>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="groupList_lookCanManagerUser_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div  class="modal-dialog box" style="width: 80%;">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">选择用户添加到组</h4>
+      </div>
+      <div class="modal-body" id="lookUpGroupUser_body">
+      <section class="content" id="lookUpGroupUser_content">
+     							<div class="box box-primary" id="lookUpGroupUser">
+							
+								<div class="box-header">
+									<h3 class="box-title">上层组用户列表</h3>
+									<div class="box-tools">
+
+										<div class="input-group">
+
+											<input type="text" name="table_search" id="group_lookUpGroupUserTrueName_search_but_input"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="通过用户真实名查找" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" id="lookUpGroupUser_but_search">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto;max-height: 400px;">
+									<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">账号</th>
+												<th style="text-align: center;">姓名</th>
+												<th style="text-align: center;">地址</th>
+												<th style="text-align: center;">电话</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="lookUpGroupUser_table_content_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="lookUpGroupUser_table_content_page">
+
+									</ul>
+								</div>
+
+							</div>
+       	</section>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" id="" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="groupList_lookGroupRole_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">选择角色</h4>
+      </div>
+      <div class="modal-body" id="groupRoleList">
+							<div class="box box-primary" id="groupRoleList_content">
+								<div class="box-header">
+									<h3 class="box-title">本组角色列表</h3>
+									<div class="box-tools">
+
+										<div class="input-group">
+											<input type="text" name="table_search" id="group_lookUpGroupRole_roleName_search_but_input"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="通过角色名查找" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default"  id="lookUpGroupRole_but_search">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto;max-height: 400px;">
+									<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">角色名</th>
+												<th style="text-align: center;">备注</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="lookUpGroupRole_table_content_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="">
+
+									</ul>
+								</div>
+
+							</div>
+       	
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/x-jsrender" id="groupUserList_table_content">
+<!--
+	<tr>
+								<td width="5%" align="center">{{>#index+1}}</td>
+								<td width="10%" align="center">{{>username}}</td>
+								<td width="10%" align="center">{{>trueName}}</td>
+								<td width="30%" align="center">{{>address}}</td>
+								<td width="20%" align="center">{{>phone}}</td>
+								<td width="25%" align="center">
+										<button type="button" onclick="deleteGroupUser_selected({{>id}})" class="btn btn-danger btn-sm">删除</button>
+										<button type="button" onclick="ManagerGroupUserRole_selected({{>id}})" class="btn btn-danger btn-sm">管理角色</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="groupUpUserList_table_content">
+<!--
+	<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="10%" align="center">{{>username}}</td>
+								<td width="20%" align="center">{{>trueName}}</td>
+								<td width="30%" align="center">{{>address}}</td>
+								<td width="20%" align="center">{{>phone}}</td>
+								<td width="10%" align="center">
+										<button type="button" onclick="selectUpGroupUser_selected({{>id}})" class="btn btn-danger btn-sm">添加</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="groupUserRoleList_table_content">
+<!--
+	<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="10%" align="center">{{>name}}</td>
+								<td width="20%" align="center">{{>marks}}</td>
+								<td width="10%" align="center">
+										<button type="button" onclick="deleteGroupUserRole_selected({{>id}})" class="btn btn-danger btn-sm">删除</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="groupRoleList_table_content">
+<!--
+	<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="10%" align="center">{{>name}}</td>
+								<td width="20%" align="center">{{>marks}}</td>
+								<td width="10%" align="center">
+										<button type="button" onclick="addGroupUserRole_selected({{>id}})" class="btn btn-danger btn-sm">添加</button>
+								</td>
+							</tr>
+-->
+</script>

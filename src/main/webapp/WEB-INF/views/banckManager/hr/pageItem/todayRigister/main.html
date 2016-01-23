@@ -1,0 +1,58 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/hr/pageItem/todayRigister/main.js}"></script>
+<div class="box box-primary" id="hr_window_meeting_today">
+	<div class="box-header">
+		<div class="pull-right box-tools">
+			<button onclick="window_layout_close(this,'hr/window/todayRigister')" class="btn btn-danger btn-sm refresh-btn"
+				data-toggle="tooltip" title="Reload">
+				<i class="fa fa-times"></i>
+			</button>
+		</div>
+		<!-- /. tools -->
+		<i class="ion ion-clipboard"></i>
+		<h3 class="box-title">签到状况</h3>
+	</div>
+								<div id="hr_window_meeting_body_today_alert"></div>
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 350px;min-height: 350px;">
+									<table id="example1" class="table table-bordered table-hover input-sm">
+							<thead>
+								<tr>
+									<th style="text-align: center;">序号</th>
+									<th style="text-align: center;">姓名</th>
+									<th style="text-align: center;">上班时间</th>
+									<th style="text-align: center;">下班时间</th>
+									<th style="text-align: center;">状态</th>
+									<th style="text-align: center;">备注</th>
+								</tr>
+							</thead>
+									<tbody id="hr_window_meeting_body_today"></tbody>
+									</table>
+								</div>
+
+	<!-- /.box-body -->
+
+</div>
+<script type="text/x-jsrender" id="hr_window_meeting_body_today_tr">
+<!--
+	<tr>
+								<td width="8%" align="center">{{>#index+1}}</td>
+								<td width="10%" align="center">{{>conpanyUsertrueName}}</td>
+								<td width="27%" align="center">{{JavaSTojsDateTime:startDate}}</td>
+								<td width="27%" align="center">{{JavaSTojsDateTime:endDate}}</td>
+								<td width="12%" align="center">{{if stute==0}}
+								未签到
+							{{else stute==1}}
+								迟到
+							{{else stute==2}}
+								早退
+							{{else stute==3}}
+								迟到和早退
+							{{else stute==4}}
+							        外出
+							{{else stute==5}}
+								正常签到
+							{{/if}}</td>
+								<td width="16%" align="center">{{>stuteMarks}}</td>
+								
+							</tr>
+-->
+</script>

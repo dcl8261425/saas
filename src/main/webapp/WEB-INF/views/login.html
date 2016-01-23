@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>青柠网络</title>
+<div th:include="mainTemplate::jscss" th:remove="tag">
+</div>
+        <link rel="stylesheet" th:href="@{/css/weixin/style.css}"></link>
+		<script type="text/javascript" src="../../js/libs/pagejs/index.js" th:src="@{/js/libs/pagejs/index.js}"></script>
+		<script type="text/javascript"  th:inline="javascript">
+		var message_info = /*[[${message}+'']]*/'/';
+		<!--
+		(function() {
+			$(document).ready(function(){
+				if(message_info!=1){
+					ui.alert(message_info,2000,false);
+				}
+				$("#login").bind("click",function(){
+					var username=$("#username").val();
+					var password=$("#password").val();
+						var i=$.layer({
+						    type : 3
+						});
+						$.ajax({
+							type : "POST",
+							url : ctx+"loginAjax",
+							data:{
+								username:username,
+								password:password
+							},
+							success : function(msg) {
+								layer.close(i);
+								if(msg.success){
+									window.location="backManager";
+								}else{
+									ui.alert(msg.info,2000,false);
+								}
+							}
+						});
+					})
+				})
+				
+		})();
+		-->
+		</script>
+</head>
+<body>
+<div id="header" th:include="mainTemplate::header"></div>
+        <div class="register-container container">
+            <div class="row" style="text-align: center;">
+             
+                <div class="register span12 " style="width: 400px;">
+                    <form th:action="@{/login}" method="post">
+                        <h2>Login <span class="red"><strong>青柠网络</strong></span></h2>
+                        <label for="firstname">账号</label>
+                        <input type="text" data-step="3" data-intro="在这里输入您的账户" id="username" name="username" placeholder="输入您的管理员账号"/>
+                        <label for="lastname">密码</label>
+                        <input type="password"  data-step="4" data-intro="在这里输入您的密码" id="password" name="password" placeholder="输入您的密码"/>
+               			
+                        <button type="button" data-step="2" data-intro="如果您有账户，请在输入账户和密码后登陆，将直接登陆到您的微网站后台。"  id="login">登录</button>
+                 	</form>
+                </div>
+            </div>
+        </div>
+		<script th:src="@{/js/libs/jquery.backstretch.min.js}"></script>
+		<script th:src="@{/js/libs/scripts.js}"></script>
+</body>
+</html>
+

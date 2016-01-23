@@ -1,0 +1,169 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/hr/function/addCustemmer/main.js}"></script>
+<div class="modal fade" id="good_addData_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加员工账户</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div id="Hr_add_window_AlertDiv"></div>
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right"
+													onclick="hr_main_addcustemmer_enter()">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="row">
+										<div class="col-xs-4">
+											<div class="form-group" id="hr_main_addcustemmer_username_text">
+												<input type="text" class="form-control input-sm" id="hr_main_addcustemmer_username" placeholder="账号前缀：如：前缀@编号.com"></input>
+											</div>
+
+										</div>
+										<div class="col-xs-4">
+											<div class="form-group" id="hr_main_addcustemmer_password_text">
+												<input type="text" class="form-control input-sm" id="hr_main_addcustemmer_password" placeholder="密码"></input>
+											</div>
+
+										</div>
+										<div class="col-xs-4">
+											<div class="form-group" id="hr_main_addcustemmer_name_text">
+												<input type="text" class="form-control input-sm" id="hr_main_addcustemmer_name" placeholder="姓名"></input>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-4">
+											<div class="form-group" id="hr_main_addcustemmer_phone_text">
+												<input type="text" class="form-control input-sm" id="hr_main_addcustemmer_phone" placeholder="电话"></input>
+											</div>
+
+										</div>
+										<div class="col-xs-4">
+											<div class="form-group" id="hr_main_addcustemmer_email_text">
+												<input type="text" class="form-control input-sm" id="hr_main_addcustemmer_email" placeholder="email"></input>
+											</div>
+
+										</div>
+										<div class="col-xs-4">
+											<div class="form-group" id="hr_main_addcustemmer_useLogin_text">
+												<select class="form-control input-sm" id="hr_main_addcustemmer_useLogin">
+													<option value="true">启用</option>
+													<option value="false">禁用</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+																				<div class="col-xs-4">
+											<div class="form-group" id="hr_main_addcustemmer_idnum_text">
+												<input type="text" class="form-control input-sm" id="hr_main_addcustemmer_idnum" placeholder="身份证号"></input>
+											</div>
+
+										</div>
+										<div class="col-xs-4">
+											<div class="form-group" id="hr_main_addcustemmer_sex_text">
+													<select class="form-control input-sm" id="hr_main_addcustemmer_sex">
+														<option value="true">男</option>
+														<option value="false">女</option>
+													</select>
+											</div>
+										</div>
+										<div class="col-xs-4">
+											<div class="form-group" id="hr_main_addcustemmer_stute_text">
+												<input type="text" class="form-control input-sm" id="hr_main_addcustemmer_stute" placeholder="员工合同类型"></input>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-4">
+											<div class="form-group" id="hr_main_addcustemmer_address_text">
+												<input type="text" class="form-control input-sm" id="hr_main_addcustemmer_address" placeholder="地址"></input>
+											</div>
+
+										</div>
+										<div class="col-xs-4">
+											<div class="form-group" id="hr_main_addcustemmer_price_text">
+												<input type="text" class="form-control input-sm" id="hr_main_addcustemmer_price" placeholder="薪水"></input>
+											</div>
+										</div>
+										<div class="col-xs-4">
+											<div class="form-group" id="hr_main_addcustemmer_marks_text">
+												<input type="text" class="form-control input-sm" id="hr_main_addcustemmer_marks" placeholder="备注"></input>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-6">
+											<div class="form-group" id="hr_main_addcustemmer_iamge_text">
+											<div id="hr_main_addcustemmer_image"></div>
+												<div class="progress" id="hr_main_addcustemmer_iamge_text_propress" style="display: none;">
+												  <div class="progress-bar" id="hr_main_addcustemmer_iamge_text_propress_val" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+												    0%
+												  </div>
+												</div>
+												<div class="input-group" id="hr_main_addcustemmer_iamge_text_input">
+													<input type="text" name="table_search" id="hr_main_addcustemmer_image_texts" disabled="disabled" class="form-control input-sm" style="width: 300px;" placeholder="员工照片"/>
+													<input type="file" name="table_search" id="hr_main_addcustemmer_image_text_file" onchange="hr_main_addcustemmrt_imageFileChange()" class="form-control input-sm" style="width: 250px;display: none;" placeholder="厂家"/>
+													
+														<button class="btn btn-sm btn-default" onclick="hr_main_addcustemmer_select_imageFile()">
+															<i class="fa fa-search"></i>
+														</button>
+												</div>
+											</div>
+											<a href="#" class="thumbnail" style="display: none" id="hr_main_addcustemmer_iamge_img_a">
+									          <img data-src="holder.js/100%x180" alt="100%x180" id="hr_main_addcustemmer_iamge_img" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzPjwvZGVmcz48cmVjdCB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgZmlsbD0iI0VFRUVFRSI+PC9yZWN0PjxnPjx0ZXh0IHg9IjYwLjUiIHk9IjkwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTcxeDE4MDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;"/>
+									        </a>
+										</div>
+										<div class="col-xs-6">
+											<div class="form-group" id="hr_main_addcustemmer_idimage_text">
+											<div id="hr_main_addcustemmer_idimage"></div>
+												<div class="progress" id="hr_main_addcustemmer_idimage_text_propress" style="display: none;">
+												  <div class="progress-bar" role="progressbar" id="hr_main_addcustemmer_idimage_text_propress_val" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+												    0%
+												  </div>
+												</div>
+												<div class="input-group" id="hr_main_addcustemmer_idimage_text_input">
+													<input type="text" name="table_search" id="hr_main_addcustemmer_idimage_texts" disabled="disabled" class="form-control input-sm" style="width: 300px;" placeholder="身份证照片"/>
+													<input type="file" name="table_search" id="hr_main_addcustemmer_idimage_text_file" onchange="hr_main_addcustemmrt_idimageFileChange()" class="form-control input-sm" style="width: 250px;display: none;" placeholder="厂家"/>
+												
+														<button class="btn btn-sm btn-default" onclick="hr_main_addcustemmer_select_idimageFile()">
+															<i class="fa fa-search"></i>
+														</button>
+												</div>
+											</div>
+											<a href="#" class="thumbnail" style="display: none" id="hr_main_addcustemmer_idimage_img_a">
+									          <img data-src="holder.js/100%x180" alt="100%x180" id="hr_main_addcustemmer_idimage_img" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzPjwvZGVmcz48cmVjdCB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgZmlsbD0iI0VFRUVFRSI+PC9yZWN0PjxnPjx0ZXh0IHg9IjYwLjUiIHk9IjkwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTcxeDE4MDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;"/>
+									        </a>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<div id="addDate_window"></div>
+</div>

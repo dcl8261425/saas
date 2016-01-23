@@ -1,0 +1,176 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/crm/function/addLinkMan/main.js}"></script>
+<div class="modal fade" id="AddLinkMan_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">联系人管理</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div id="AddLinkManWindow_AlertDiv"></div>
+							<div class="box box-primary" id="AddLinkManWindow_Body">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<input type="text" name="table_search" id="AddLinkMan_window_query_Name"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="联系人名" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="AddLinkManList_query_function_window()">
+													<i class="fa fa-search"></i>
+												</button>
+												<button class="btn btn-danger btn-sm" id="" onclick="AddLinkManList_add_function_window()">
+													创建新联系人 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 800px;min-height: 300px;">
+									<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">姓名</th>
+												<th style="text-align: center;">联系人电话</th>
+												<th style="text-align: center;">联系人性别</th>
+												<th style="text-align: center;">联系人职位</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="AddLinkMan_window_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="AddLinkMan_window_tbody_page">
+
+									</ul>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="AddLinkMan_window_add_window_div"></div>
+<script type="text/x-jsrender" id="AddLinkMan_window_tbody_tr">
+<!--
+	<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>linkManName}}</td>
+								<td width="20%" align="center">{{>linkManPhone}}</td>
+								<td width="10%" align="center">{{>linkManSex}}</td>
+								<td width="10%" align="center">{{>linkManJob}}</td>
+								<td width="30%" align="center">
+										<button type="button" onclick="AddLinMan_look({{>id}})" class="btn btn-danger btn-sm">查看</button>
+										<button type="button" onclick="AddLinMan_delete({{>id}})" class="btn btn-danger btn-sm">删除</button>
+										<button type="button" onclick="AddLinMan_update({{>id}})" class="btn btn-danger btn-sm">修改</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="AddLinkMan_window_add_window">
+<!--
+<div class="modal fade" id="AddLinkMan_window_add_but" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">联系人</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div id="AddLinkManWindow_Add_AlertDiv"></div>
+							<div class="box box-primary" id="lookGroupUser_body">
+								<div class="box-header">
+									<h3 class="box-title">填写资料框</h3>
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" id="AddLinkMan_window_enter_add_but"
+													onclick="AddLinkManList_add_function_window_enter_add()">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="AddLinkMan_window_input_CustomerName">
+												<input type="text" class="form-control" id="AddLinkMan_window_linkManName" placeholder="请输入联系人名称" />
+											</div>
+										</div>
+
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="AddLinkMan_window_input_linkManPhone">
+												<input type="text" class="form-control" id="AddLinkMan_window_linkManPhone" placeholder="联系人电话"></input>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-4">
+											<div class="form-group" id="AddLinkMan_window_nput_linkManJob">
+												<input type="text" class="form-control" id="AddLinkMan_window_linkManJob" placeholder="联系人职位"></input>
+											</div>
+
+										</div>
+										<div class="col-xs-4">
+											<div class="form-group" id="AddLinkMan_window_input_linkManSexl">
+												<select class="form-control" id="AddLinkMan_window_linkManSex">
+													<option value="男">男</option>
+													<option value="女">女</option>
+
+												</select>
+											</div>
+
+										</div>
+										<div class="col-xs-4">
+											<div class="form-group" id="AddLinkMan_window_input_linkManBirthday">
+													<div class="input-group date"  id="AddLinkMan_window_linkManBirthday">
+													  <input type="text" value="联系人生日" id="AddLinkMan_window_linkManBirthday_text" disabled="disabled" class="form-control"/><span class="input-group-addon" id="AddLinkMan_window_linkManBirthday_text_button"><i class="glyphicon glyphicon-th"></i></span>
+													</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="AddLinkMan_window_input_linkManMark">
+												<textarea rows="5" cols="80" placeholder="联系人备注信息" id="AddLinkMan_window_linkManMark" class="form-control"></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+-->
+</script>

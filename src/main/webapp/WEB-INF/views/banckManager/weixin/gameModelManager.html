@@ -1,0 +1,155 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/weixin/gameModelManager.js}"></script>
+
+<section class="content-header">
+	<h1>
+		微信管理 <small id="bankuai_title">游戏管理</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+		<li class="active" id="bankuai_title2">游戏管理</li>
+	</ol>
+</section>
+
+<section class="content" id="content">
+	<div class="row">
+		<div id="game_alert"></div>
+		<section class="col-lg-12 connectedSortable ui-sortable">
+			<div class="nav-tabs-custom">
+				<!-- Tabs within a box -->
+				<ul class="nav nav-tabs pull-right" style="cursor: move;">
+					<li class="active" onclick="getConpanyGame(1)"><a href="#revenue-chart" data-toggle="tab">已拥有</a></li>
+					<li onclick="getGame(1)"><a href="#sales-chart" data-toggle="tab">全部</a></li>
+					<li class="pull-left header" ><i class="fa fa-inbox"></i> 游戏</li>
+				</ul>
+				<div class="tab-content no-padding">
+					<!-- Morris chart - Sales -->
+					<div class="chart tab-pane active" id="revenue-chart" style="position: relative; min-height: 600px">
+						<div class="row" id="conpany_game">
+							
+							
+						</div>
+					</div>
+					<div class="chart tab-pane" id="sales-chart" style="position: relative; min-height: 600px;">
+						<div class="row" id="all_game">
+							
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+
+</section>
+<script type="text/x-jsrender" id="conpany_game_item">
+<!--
+					<div class="col-md-4">
+						<div class="nav-tabs-custom">
+							<ul class="nav nav-tabs pull-right">
+
+								<li class="pull-left header"><i class="fa fa-th"></i> {{>name}}</li>
+							</ul>
+							<div class="tab-content">
+								<div id="carousel-example-generic_game{{>id}}" class="carousel slide" data-ride="carousel">
+									<div class="carousel-inner" role="listbox">
+										<div class="item active">
+											<img src="{{>gameImage1}}" style="width: 100%; height: 200px;" />
+										</div>
+										<div class="item">
+											<img src="{{>gameImage2}}" style="width: 100%; height: 200px;" />
+										</div>
+										<div class="item">
+											<img src="{{>gameImage3}}" style="width: 100%; height: 200px;" />
+										</div>
+									</div>
+									<a class="left carousel-control" href="#carousel-example-generic_game{{>id}}" role="button" data-slide="prev"> <span
+										class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+									</a> <a class="right carousel-control" href="#carousel-example-generic_game{{>id}}" role="button" data-slide="next"> <span
+										class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span>
+									</a>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<span class="label label-danger">玩过次数</span><span class="label label-primary">{{>vipRunNum}}</span>
+									</div>
+									<div class="col-md-12">
+										<font color="red">游戏说明:</font><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{>gameInfo}}
+									</div>
+									<div class="col-md-12">
+										<font color="red">游戏规则:</font><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{>gameMarks}}
+									</div>
+								</div>
+								<div class="row">
+								<div class="box-footer clearfix" style="width: 100%">
+									<div class="btn-group" style="width: 100%">
+											
+										<a href="javascript:games_open_game({{>id}})" id="games_open_game{{>id}}" target="_Blank" style="width: 100%" class="btn btn-info btn-flat">
+												 <i class="fa fa-arrow-circle-o-right"></i> {{if openUse==false}}打开{{else}}关闭{{/if}}
+										</a>
+										
+									</div>
+								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+-->
+</script>
+<script type="text/x-jsrender" id="game_item">
+<!--
+					<div class="col-md-4">
+						<div class="nav-tabs-custom">
+							<ul class="nav nav-tabs pull-right">
+
+								<li class="pull-left header"><i class="fa fa-th"></i> {{>name}}</li>
+							</ul>
+							<div class="tab-content">
+								<div id="carousel-example-generic_game{{>id}}" class="carousel slide" data-ride="carousel">
+									<div class="carousel-inner" role="listbox">
+										<div class="item active">
+											<img src="{{>gameImage1}}" style="width: 100%; height: 200px;" />
+										</div>
+										<div class="item">
+											<img src="{{>gameImage2}}" style="width: 100%; height: 200px;" />
+										</div>
+										<div class="item">
+											<img src="{{>gameImage3}}" style="width: 100%; height: 200px;" />
+										</div>
+									</div>
+									<a class="left carousel-control" href="#carousel-example-generic_game{{>id}}" role="button" data-slide="prev"> <span
+										class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+									</a> <a class="right carousel-control" href="#carousel-example-generic_game{{>id}}" role="button" data-slide="next"> <span
+										class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span>
+									</a>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<span class="label label-danger">添加次数</span><span class="label label-primary">{{>shopAddNum}}</span>
+									</div>
+									<div class="col-md-12">
+										<span class="label label-danger">排名功能</span><span class="label label-primary">{{if paming}}有排名{{else}}无排名{{/if}}</span>
+									</div>
+									<div class="col-md-12">
+										<font color="red">游戏说明:</font><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{>gameInfo}}
+									</div>
+									<div class="col-md-12">
+										<font color="red">游戏规则:</font><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{>gameMarks}}
+									</div>
+								</div>
+								<div class="row">
+								<div class="box-footer clearfix" style="width: 100%">
+									<div class="btn-group" style="width: 100%">
+										
+										<a href="javascript:games_add_game({{>id}})" id="games_add_game{{>id}}" target="_Blank" style="width: 100%" class="btn btn-info btn-flat">
+												 <i class="fa fa-arrow-circle-o-right"></i> 添加
+										</a>
+										
+									</div>
+								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+-->
+</script>

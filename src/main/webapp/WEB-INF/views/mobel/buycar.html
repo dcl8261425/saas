@@ -1,0 +1,72 @@
+<script type="text/javascript" src="../../js/libs/layer.js" th:src="@{/js/libs/jsrender.min.js}"></script>
+<script type="text/javascript" src="../../js/libs/jquery-1.9.1.js" th:src="@{/js/libs/pagejs/itemPage/weixin/buycar/buycar.js}"></script>
+<div class="row">
+	<div class="col-lg-12" id="buycar_list">
+
+	</div>
+	<div class="col-lg-12" id="buycar_list">
+		
+	</div>
+	<br/>
+</div>
+<script type="text/x-jsrender" id="buycar_list_item">
+<!--
+<div class="box box-primary" id="buyar_{{>conpany.id}}">
+	<div class="box-header">
+		<div class="pull-right box-tools">
+		</div>
+		<i class="ion ion-clipboard"></i>
+		<h3 class="box-title">{{>conpany.conpanyName}}</h3>
+	</div>
+	<div class="box-body">
+
+	<div class="row">
+			<div class="col-xs-2" style="text-align: center;">品名</div>
+			<div class="col-xs-2" style="text-align: center;">价格</div>
+			<div class="col-xs-2" style="text-align: center;">单位</div>
+			<div class="col-xs-4" style="text-align: center;">数量</div>
+			<div class="col-xs-2" style="text-align: center;">操作</div>
+	</div>
+<br/>
+	{{for data}}
+		<div class="row buyar_row_{{>conpanyId}}" id="buyar_row_{{>inOrderId}}">
+			<div class="col-xs-2" style="text-align: center;">{{>goodsName}}</div>
+			<div class="col-xs-2" style="text-align: center;">{{>price}}</div>
+			<div class="col-xs-2" style="text-align: center;">{{>goodsType}}</div>
+			<div class="col-xs-4" style="text-align: center;"><button type="button" onclick="buycarjiannum({{>inOrderId}},{{>conpanyId}})" class="btn btn-danger btn-sm">-</button> <lable id="buycarNum_{{>inOrderId}}">{{>goodsNum}}</lable> <button type="button" onclick="buycaraddnum({{>inOrderId}},{{>conpanyId}})" class="btn btn-danger btn-sm">+</button></div>
+			<div class="col-xs-2" style="text-align: center;"><button type="button" onclick="buycardelete({{>inOrderId}},{{>conpanyId}})" class="btn btn-danger btn-sm">删除</button></div>
+		</div>
+	{{/for}}
+<br/>
+<div class="row">
+			<div class="col-xs-12" style="text-align: center;"><button type="button" onclick="weixin_buycar_window_open({{>conpany.id}})" class="btn btn-danger btn-sm">提交订单</button></div>
+		</div>
+	</div>
+</div>
+<br/>
+-->
+</script>
+<script type="text/x-jsrender" id="buycar_list_item_null">
+<!--
+<div class="row">
+			<div  class="col-xs-3"></div>
+			<div  class="col-xs-6" style="text-align: center;">物车内没有东西哦</div>
+			<div  class="col-xs-3"></div>
+		</div>
+-->
+</script>
+  <div id="buyCar_alert"  class="cd-popup" role="alert">
+        <div class="cd-popup-container">
+            <p id="good_alert_body">
+            	<input type="text" id="buyCar_address" class="form-control"  placeholder="收货地址"/>
+            	<br/>
+            	<input type="text" id="buyCar_phone" class="form-control"  placeholder="联系电话"/>
+            </p>
+            <ul class="cd-buttons">
+                <li><a id="alert" href="javascript:submitBuyCar_enter()">确定</a></li>
+                <li><a  href="javascript:weixin_buycar_window_close()" >取消</a></li>
+            </ul>
+            <a href="#0" class="cd-popup-close img-replace" onclick="weixin_good_window_close()">Close</a>
+        </div>
+        <!-- cd-popup-container -->
+    </div>

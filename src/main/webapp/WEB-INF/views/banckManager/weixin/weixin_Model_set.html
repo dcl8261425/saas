@@ -1,0 +1,985 @@
+<link href="../../css/main.css" rel="stylesheet" th:href="@{/js/libs/switch/bootstrap-switch.min.css}" />
+<script src="" th:src="@{/js/libs/switch/bootstrap-switch.min.js}"></script>
+<script src="" th:src="@{/js/libs/pagejs/itemPage/weixin/weixin_Model_set.js}"></script>
+<link rel="stylesheet" th:href="@{/css/mobel.css}" />
+<script src="" th:src="@{/js/libs/color/jquery.minicolors.min.js}"></script>
+<link rel="stylesheet" th:href="@{/js/libs/color/jquery.minicolors.css}" />
+
+<section class="content-header">
+	<h1>
+		微信管理 <small id="bankuai_title">模板设置</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+		<li class="active" id="bankuai_title2">模板设置</li>
+	</ol>
+</section>
+
+<section class="content" id="content">
+
+	<div class="row">
+		<div class="col-lg-6" onclick="weixin_model_createModel()">
+			<!-- small box -->
+			<div class="small-box bg-aqua">
+				<div class="inner">
+					<h3>1</h3>
+					<p>创建新的模板</p>
+				</div>
+				<div class="icon">
+					<i class="ion ion-plus"></i>
+				</div>
+				<a href="#" class="small-box-footer"> 点击开启 <i class="fa fa-arrow-circle-right"></i>
+				</a>
+			</div>
+		</div>
+		<!-- ./col -->
+		<div class="col-lg-6" onclick="weixin_model_manager()">
+			<!-- small box -->
+			<div class="small-box bg-red">
+				<div class="inner">
+					<h3>2</h3>
+					<p>模板管理</p>
+				</div>
+				<div class="icon">
+					<i class="ion-icecream"></i>
+				</div>
+				<a href="#" class="small-box-footer"> 点击开启 <i class="fa fa-arrow-circle-right"></i>
+				</a>
+			</div>
+		</div>
+		<!-- ./col -->
+	</div>
+	<!-- /.row -->
+	<!-- Main row -->
+	<div class="row" id="weixin_model_body"></div>
+	<!-- /.row (main row) -->
+</section>
+<!-- /.content -->
+<div></div>
+<script type="text/x-jsrender" id="weixin_model_createNewModel">
+<!--
+                     
+<section class="col-lg-4 connectedSortable" id="right_layout"> 
+		<section class="col-lg-12 connectedSortable sort-highlight" id="main_layout" style="height:480px;overflow-y:auto;overflow-x:hidden;">
+	
+		</section>
+		<section class="col-lg-12">
+			<button class="btn btn-danger btn-sm" style="width:100%;" onclick="weixin_model_save_model()">
+				保存到模板 <i class="fa fa-refresh"></i>
+			</button>
+		</section>
+</section>
+<section class="col-lg-8 connectedSortable" id="left_layout"> 
+	<div class="row">
+		<div class="col-sm-6">
+			        <div class="small-box bg-aqua" onclick="weixin_model_create_layout()">
+                                <div class="inner">
+                                    <h3>
+                                       1
+                                    </h3>
+                                    <p>
+                                     	添加一行布局
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-plus"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                   点击开启 <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+		</div>
+		<div class="col-sm-6">
+			     <div class="small-box bg-aqua" onclick="weixin_model_create_dazhuanpan()">
+                                <div class="inner">
+                                    <h3>
+                                       2
+                                    </h3>
+                                    <p>
+                                     	添加元素块
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-plus"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                   点击开启 <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+               </div>
+		</div>
+	</div>
+	<div class="row">
+<div class="col-sm-12">
+	<div class="alert alert-warning alert-dismissable no-print"><i class="fa fa-check"></i><b>提示：</b>
+           创建微网站首页时，请先添加布局，布局中添加行添加列，行数不限，列数限制4列，
+	创建好布局后，添加元素，目前可添加，大转盘，刮刮卡，会员卡，商店模块，图片模块，到店地图模块。<br/>
+	大转盘：抽奖类游戏，可在平台内设置奖品<br/>
+	刮刮卡：抽奖类游戏，可在平台内设置奖品<br/>
+	会员卡：用户输入手机号以及姓名即可办理，平台内可以设置不同会员级别，也可以设置不同积分自动升级不同会员级别。<br/>
+	商店模块：商品展示，下订单，目前无支付功能。<br/>
+	图片模块：一张图片，可以展示一些内容，设定一个连接，点击后进入该连接，<br/>
+	到店地图：到店的地图，指引客户进入店铺<br/>
+	各种新功能正在不断研发中。。<br/>
+
+</div>
+</div>
+	</div>
+
+</section>
+-->
+</script>
+<div class="modal fade" id="weixin_model_create_layout"  role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">创建布局</h4>
+			</div>
+			<div class="modal-body">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+										<button class="btn btn-danger btn-sm pull-right" onclick="weixin_model_create_layout_enter()">
+											确定创建 <i class="fa fa-plus-square"></i>
+										</button>
+									</div>
+								</div>
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<button class="btn btn-success btn-sm" style="width: 100%;" onclick="weixin_model_create_layout_add_new_row()">
+										添加新行 <i class="fa fa-plus-square"></i>
+									</button>
+								</div>
+								<section class="col-lg-12 connectedSortable" id="weixin_model_create_layout_main_row"></section>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="weixin_model_row">
+<!--
+	<div class="row" style="min-height: 48px;" id="row_{{>num}}">
+			<button class="btn btn-danger delete_col" style="width:100%"  onclick="weixin_model_row_delete({{>num}})">
+											删除行 <i class="fa fa-minus-square"></i>
+			</button>
+			<button class="btn btn-primary create_col" style="width:100%" onclick="weixin_model_row_create_col({{>num}})">
+											创建列 <i class="fa fa-plus-square"></i>
+			</button>
+	</div>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_model_col">
+<!--
+	<div id="col_{{>id}}_{{>num}}" class="col-xs-{{>num2}} row-tr sort-highlight no-padding" style="min-height: 48px;background-color: white;">
+		<button class="btn btn-danger create_col" style="width:100%" onclick="weixin_model_col_delete({{>num}},{{>id}})">
+											删除列 <i class="fa fa-minus-square"></i>
+			</button>
+						      
+	</div>
+-->
+</script>
+<div class="modal fade" id="weixin_model_create_dazhuanpan"  role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">创建模块</h4>
+			</div>
+			<div class="modal-body">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+										<button class="btn btn-danger btn-sm pull-right" onclick="weixin_model_create_dazhuanpan_enter()">
+											确定添加 <i class="fa fa-plus-square"></i>
+										</button>
+									</div>
+								</div>
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="btn-group open" style="width:100%;">
+											      <button type="button" class="btn btn-info dropdown-toggle" id="weixin_model_selet_model_button" style="width:100%;" data-toggle="dropdown" aria-expanded="true">大转盘模块<span class="caret"></span></button>
+											      <ul class="dropdown-menu" role="menu">
+											      	<li onclick="initWeixin_model_dazhuanpan()"><a>大转盘模块</a></li>
+											        <li onclick="initWeixin_model_guaguaka()"><a href="#">刮刮卡模块</a></li>
+											        <li onclick="initWeixin_model_vip()"><a href="#">会员卡模块</a></li>
+											        <li onclick="initWeixin_model_goodsShop()"><a href="#">商店模块</a></li>
+											        <li onclick="initWeixin_model_imageModel()"><a href="#">图片模块</a></li>
+											        <li onclick="initWeixin_model_mapModel()"><a href="#">到店地图模块</a></li>
+											        <li onclick="initWeixin_model_jifenduihuan()"><a href="#">积分兑换模块</a></li>
+											         <li onclick="initWeixin_model_imageList()"><a href="#">循环展示图片</a></li>
+											          <li onclick="initWeixin_model_imageText()"><a href="#">添加图文板块</a></li>
+											           <li onclick="initWeixin_model_music()"><a href="#">添加背景音乐</a></li>
+											      </ul>
+											    </div>
+										</div>
+									</div>
+									<hr/>
+									<div class="row">
+										<div class="col-xs-6" id="weixin_model_web_add_model">
+											<div class="row">
+												<div class="col-xs-12" id="weixin_model_main">
+													
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-xs-12" id="weixin_model_set_input_layout">图标内容调整</div>
+											</div>
+										</div>
+										<div class="col-xs-6" id="weixin_model_set_color">
+											<div class="row">
+												<div class="col-xs-2 ">
+													<div class="small-box bg-red" style="height: 32px; width: 100%;"
+														onclick="weixin_model_change_block_color('bg-red')"></div>
+												</div>
+												<div class="col-xs-2">
+													<div class="small-box bg-yellow" style="height: 32px; width: 100%;"
+														onclick="weixin_model_change_block_color('bg-yellow')"></div>
+												</div>
+												<div class="col-xs-2">
+													<div class="small-box bg-aqua" style="height: 32px; width: 100%;"
+														onclick="weixin_model_change_block_color('bg-aqua')"></div>
+												</div>
+												<div class="col-xs-2">
+													<div class="small-box bg-blue" style="height: 32px; width: 100%;"
+														onclick="weixin_model_change_block_color('bg-blue')"></div>
+												</div>
+												<div class="col-xs-2">
+													<div class="small-box bg-light-blue" style="height: 32px; width: 100%;"
+														onclick="weixin_model_change_block_color('bg-light-blue')"></div>
+												</div>
+												<div class="col-xs-2">
+													<div class="small-box bg-green" style="height: 32px; width: 100%;"
+														onclick="weixin_model_change_block_color('bg-green')"></div>
+												</div>
+											</div>
+											<div class="row" >
+												<div class="col-xs-2">
+													<div class="small-box bg-navy" style="height: 32px; width: 100%;"
+														onclick="weixin_model_change_block_color('bg-navy')"></div>
+												</div>
+												<div class="col-xs-2">
+													<div class="small-box bg-olive" style="height: 32px; width: 100%;"
+														onclick="weixin_model_change_block_color('bg-olive')"></div>
+												</div>
+												<div class="col-xs-2">
+													<div class="small-box bg-orange" style="height: 32px; width: 100%;"
+														onclick="weixin_model_change_block_color('bg-orange')"></div>
+												</div>
+												<div class="col-xs-2">
+													<div class="small-box bg-fuchsia" style="height: 32px; width: 100%;"
+														onclick="weixin_model_change_block_color('bg-fuchsia')"></div>
+												</div>
+
+												<div class="col-xs-2">
+													<div class="small-box bg-maroon" style="height: 32px; width: 100%;"
+														onclick="weixin_model_change_block_color('bg-maroon')"></div>
+												</div>
+												<div class="col-xs-2">
+													<div class="small-box bg-light-purple" style="height: 32px; width: 100%;"
+														onclick="weixin_model_change_block_color('bg-light-purple')"></div>
+												</div>
+											</div>
+											<hr />
+											<div class="row" id="weixin_model_set_icon">
+												<div class="col-xs-12" style="max-height: 180px;overflow:auto; ">
+													<div class="row">
+														<div class="col-xs-2 ">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-loading-b')"
+																class="ion ion-loading-b"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-loading-c')"
+																class="ion ion-loading-c"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-loading-d')"
+																class="ion ion-loading-d"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-loading-a')"
+																class="ion ion-loading-a"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-looping')"
+																class="ion ion-looping"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-refreshing')"
+																class="ion ion-refreshing"></div>
+														</div>
+													</div>
+													<hr />
+													<div class="row">
+														<div class="col-xs-2 ">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-alert')"
+																class="ion ion-alert"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-alert-circled')"
+																class="ion ion-alert-circled"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-add')"
+																class="ion ion-android-add"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-add-contact')"
+																class="ion ion-android-add-contact"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-alarm')"
+																class="ion ion-android-alarm"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-archive')"
+																class="ion ion-android-archive"></div>
+														</div>
+													</div>
+													<hr />
+													<div class="row">
+														<div class="col-xs-2 ">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-arrow-down-left')"
+																class="ion ion-android-arrow-down-left"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-arrow-back')"
+																class="ion ion-android-arrow-back"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;"
+																onclick="weixin_model_change_block_icon('ion ion-android-arrow-down-right')"
+																class="ion ion-android-arrow-down-right"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-arrow-up-left')"
+																class="ion ion-android-arrow-up-left"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-arrow-up-right')"
+																class="ion ion-android-arrow-up-right"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-battery')"
+																class="ion ion-android-battery"></div>
+														</div>
+													</div>
+													<hr />
+													<div class="row">
+														<div class="col-xs-2 ">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-book')"
+																class="ion ion-android-book"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-calendar')"
+																class="ion ion-android-calendar"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;"
+																onclick="weixin_model_change_block_icon('ion ion-android-call')"
+																class="ion ion-android-call"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-camera')"
+																class="ion ion-android-camera"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-chat')"
+																class="ion ion-android-chat"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-checkmark')"
+																class="ion ion-android-checkmark"></div>
+														</div>
+													</div>
+													<hr />
+													<div class="row">
+														<div class="col-xs-2 ">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-clock')"
+																class="ion ion-android-clock"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-close')"
+																class="ion ion-android-close"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;"
+																onclick="weixin_model_change_block_icon('ion ion-android-contact')"
+																class="ion ion-android-contact"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-contacts')"
+																class="ion ion-android-contacts"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-data')"
+																class="ion ion-android-data"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-developer')"
+																class="ion ion-android-developer"></div>
+														</div>
+													</div>
+													<hr />
+													<div class="row">
+														<div class="col-xs-2 ">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-display')"
+																class="ion ion-android-display"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-download')"
+																class="ion ion-android-download"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;"
+																onclick="weixin_model_change_block_icon('ion ion-android-dropdown')"
+																class="ion ion-android-dropdown"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-earth')"
+																class="ion ion-android-earth"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-folder')"
+																class="ion ion-android-folder"></div>
+														</div>
+														<div class="col-xs-2">
+															<div style="font-size: 28px;" onclick="weixin_model_change_block_icon('ion ion-android-forums')"
+																class="ion ion-android-forums"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="weixin_model_dazhuanpan">
+<!--
+													<div class="small-box" id="weixin_model_tem_layout" onclick="weixin_model_returnButton()">
+														<div class="inner">
+															<h3 id="weixin_dazhuanpan_title_input">请输入内容1</h3>
+															<p id="weixin_dazhuanpan_content_input">请输入内容2</p>
+														</div>
+														<div class="icon">
+															<i id="weixin_model_tem_layout_ion" class="ion ion-plus"></i>
+														</div>
+														<a href="#" class="small-box-footer"> <label id="weixin_dazhuanpan_botten_input">请输入内容3</label> <i class="fa fa-arrow-circle-right"></i>
+														</a>
+													</div>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_model_dazhuanpan_set_input">
+<!--
+	<div class="row">
+		<div class="col-xs-12" style="max-height: 200px;overflow:auto;">
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_dazhuanpan_title" class="form-control" style="width: 100%;" placeholder="请输入内容：第一行"/>
+														</div>
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_dazhuanpan_content" class="form-control" style="width: 100%;" placeholder="请输入内容：第二行"/>
+														</div>
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_dazhuanpan_botten" class="form-control" style="width: 100%;" placeholder="请输入内容：第三行"/>
+														</div>
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_dazhuanpan_icon_size" class="form-control" style="width: 100%;" placeholder="设置标示图标大小，输入数字"/>
+														</div>
+			</div>
+		</div>
+	</div>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_model_imageModel">
+<!--
+<div class="small-box" id="weixin_model_tem_layout" style="height:152px;">
+	
+	<div style="position:relative;width:100%;height:100%;">
+    <a id="weixin_model_imageModel_linktoLink"><img id="weixin_model_imageModel_img" class="weixin-model-image-mohu" height="100%" src="http://www.zhangxinxu.com/study/201311/mm1.jpg" width="100%"></img>							
+    <div style="position:absolute;width:100%;height:100px;z-indent:2;left:15px;top:50px;">
+        	<h2 id="weixin_imagemodel_str1_lable" style="">文字1</h2>
+    </div>
+	 <div style="position:absolute;width:100%;height:100px;z-indent:2;left:15px;top:120px;">
+        	<p id="weixin_imagemodel_str2_lable">文字2</p>
+    </div>
+	</a>
+</div>
+</div>
+-->
+</script>
+
+<script type="text/x-jsrender" id="weixin_model_dazhuanpan_set_imageModel">
+<!--
+<hr/>
+	<div class="row">
+		<div class="col-xs-12" style="max-height: 200px;overflow:auto;">
+			<div class="row">
+												<div class="col-xs-4">
+													模糊效果：
+												</div>
+												<div class="col-xs-8 ">
+														<div class="switch" data-on="warning" data-off="danger"  >
+    														<input type="checkbox"  id="open_closs_mohu"/>
+														</div>
+												</div>
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_imagemodel_linkTo" class="form-control" style="width: 100%;" placeholder="点击图片后链接的地址"/>
+														</div>
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_imagemodel_link" class="form-control" style="width: 100%;" placeholder="图片地址"/>
+														</div>
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-1 ">
+															<input type="text" id="weixin_imagemodel_color1" class="form-control" style="width: 100%;" placeholder="图片链接"/>
+														</div>
+														<div class="col-xs-11 ">
+															<input type="text" id="weixin_imagemodel_str1" class="form-control" style="width: 100%;" placeholder="请输入内容：第1行"/>
+														</div>
+
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-1 ">
+															<input type="text" id="weixin_imagemodel_color2" class="form-control" style="width: 100%;" placeholder="图片链接"/>
+														</div>
+														<div class="col-xs-11 ">
+															<input type="text" id="weixin_imagemodel_str2" class="form-control" style="width: 100%;" placeholder="输入内容:第2行"/>
+														</div>
+
+			</div>
+		</div>
+	</div>
+-->
+</script>
+<div>
+
+</div>
+<script type="text/x-jsrender" id="weixin_model_mapModel">
+<!--
+<div class="small-box" id="weixin_model_tem_layout" onclick="weixin_model_map_but()">
+													<div class="small-box" id="weixin_model_tem_layout">
+														<div class="inner">
+															<h3 id="weixin_dazhuanpan_title_input">请输入内容1</h3>
+															<p id="weixin_dazhuanpan_content_input">请输入内容2</p>
+														</div>
+														<div class="icon">
+															<i id="weixin_model_tem_layout_ion" class="ion ion-plus"></i>
+														</div>
+														<a href="#" class="small-box-footer"> <label id="weixin_dazhuanpan_botten_input">请输入内容3</label> <i class="fa fa-arrow-circle-right"></i>
+														</a>
+													</div>
+</div>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_model_dazhuanpan_set_mapModel">
+<!--
+	<div class="row">
+		<div class="col-xs-12" style="max-height: 200px;overflow:auto;">
+<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_dazhuanpan_title" class="form-control" style="width: 100%;" placeholder="请输入内容：第一行"/>
+														</div>
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_dazhuanpan_content" class="form-control" style="width: 100%;" placeholder="请输入内容：第二行"/>
+														</div>
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_dazhuanpan_botten" class="form-control" style="width: 100%;" placeholder="请输入内容：第三行"/>
+														</div>
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_dazhuanpan_icon_size" class="form-control" style="width: 100%;" placeholder="设置标示图标大小，输入数字"/>
+														</div>
+			</div>
+<hr/>
+
+		</div>
+	</div>
+-->
+
+</script>
+<script type="text/x-jsrender" id="weixin_model_managerModel">
+<!--
+<div id="weixin_model_manager_alert"></div>
+            <section class="col-lg-12 connectedSortable" id="right_layout"> 
+		
+			</section>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_model_managerModel_body">
+<!--
+		<div class="col-xs-4" style="background-color: white;">
+			<div class="row">
+				<div class="col-xs-12">
+					<section class="col-lg-12 connectedSortable sort-highlight" id="weixin_model_manager_main_layout" style="height:480px;overflow-y:auto;overflow-x:hidden;">
+						{{:htmls}}
+					</section>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6">
+					<button class="btn btn-danger btn-sm" style="width:100%;" onclick="weixin_model_manager_use({{>id}})">
+						使用此模板 <i class="fa fa-refresh"></i>
+					</button>
+				</div>
+				<div class="col-xs-6">
+					<button class="btn btn-danger btn-sm" style="width:100%;" onclick="weixin_model_manager_delete({{>id}})">
+						删除 <i class="fa fa-times"></i>
+					</button>
+				</div>
+			</div>
+			<hr/>
+		</div>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_model_jifenduihuan">
+<!--
+													<div class="small-box" id="weixin_model_tem_layout" onclick="weixin_model_returnButton()">
+														<div class="inner">
+															<h3 id="weixin_dazhuanpan_title_input">请输入内容1</h3>
+															<p id="weixin_dazhuanpan_content_input">请输入内容2</p>
+														</div>
+														<div class="icon">
+															<i id="weixin_model_tem_layout_ion" class="ion ion-plus"></i>
+														</div>
+														<a href="#" class="small-box-footer"> <label id="weixin_dazhuanpan_botten_input">请输入内容3</label> <i class="fa fa-arrow-circle-right"></i>
+														</a>
+													</div>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_model_jifenduihuan_set_input">
+<!--
+	<div class="row">
+		<div class="col-xs-12" style="max-height: 200px;overflow:auto;">
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_dazhuanpan_title" class="form-control" style="width: 100%;" placeholder="请输入内容：第一行"/>
+														</div>
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_dazhuanpan_content" class="form-control" style="width: 100%;" placeholder="请输入内容：第二行"/>
+														</div>
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_dazhuanpan_botten" class="form-control" style="width: 100%;" placeholder="请输入内容：第三行"/>
+														</div>
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_dazhuanpan_icon_size" class="form-control" style="width: 100%;" placeholder="设置标示图标大小，输入数字"/>
+														</div>
+			</div>
+		</div>
+	</div>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_model_imageList">
+<!--
+<div id="weixin_model_tem_layout">
+<div id="carousel-example-captions{{>num}}" class="carousel slide" data-ride="carousel" data-interval="2000">
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-example-captions{{>num}}" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-captions{{>num}}" data-slide-to="1" class=""></li>
+        <li data-target="#carousel-example-captions{{>num}}" data-slide-to="2" class=""></li>
+		 <li data-target="#carousel-example-captions{{>num}}" data-slide-to="3" class=""></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item  active">
+			<a id="weixin_model_imageList_1_link">
+          <img id="weixin_model_imageList_1_image" data-src="holder.js/900x500/auto/#777:#777" alt="900x500" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDkwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzPjwvZGVmcz48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzc3NyI+PC9yZWN0PjxnPjx0ZXh0IHg9IjM0MS41IiB5PSIyNTAiIHN0eWxlPSJmaWxsOiM3Nzc7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6NDJwdDtkb21pbmFudC1iYXNlbGluZTpjZW50cmFsIj45MDB4NTAwPC90ZXh0PjwvZz48L3N2Zz4=" data-holder-rendered="true" isimagetagToEndTag>
+          <div class="carousel-caption">
+            <h3 id="weixin_model_imageList_1_text_1">第1张图片文字1</h3>
+            <p  id="weixin_model_imageList_1_text_2">第1张图片文字2</p>
+          </div>
+			</a>
+        </div>
+        <div class="item">
+			<a id="weixin_model_imageList_2_link">
+          <img id="weixin_model_imageList_2_image" data-src="holder.js/900x500/auto/#666:#666" alt="900x500" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDkwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzPjwvZGVmcz48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzY2NiI+PC9yZWN0PjxnPjx0ZXh0IHg9IjM0MS41IiB5PSIyNTAiIHN0eWxlPSJmaWxsOiM2NjY7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6NDJwdDtkb21pbmFudC1iYXNlbGluZTpjZW50cmFsIj45MDB4NTAwPC90ZXh0PjwvZz48L3N2Zz4=" data-holder-rendered="true" isimagetagToEndTag>
+          <div class="carousel-caption">
+            <h3 id="weixin_model_imageList_2_text_1">第2张图片文字1</h3>
+            <p id="weixin_model_imageList_2_text_2">第2张图片文字2</p>
+          </div>
+</a>
+        </div>
+        <div class="item">
+			<a id="weixin_model_imageList_3_link">	
+          <img id="weixin_model_imageList_3_image" data-src="holder.js/900x500/auto/#555:#5555" alt="900x500" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDkwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzPjwvZGVmcz48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzU1NSI+PC9yZWN0PjxnPjx0ZXh0IHg9IjM0MS41IiB5PSIyNTAiIHN0eWxlPSJmaWxsOiM1NTU1O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjQycHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+OTAweDUwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" isimagetagToEndTag>
+          <div class="carousel-caption">
+            <h3 id="weixin_model_imageList_3_text_1">第3张图片文字1</h3>
+            <p id="weixin_model_imageList_3_text_2">第3张图片文字2</p>
+          </div>
+</a>
+        </div>
+		<div class="item">
+			<a id="weixin_model_imageList_4_link">
+          <img id="weixin_model_imageList_4_image" data-src="holder.js/900x500/auto/#555:#5555" alt="900x500" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDkwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzPjwvZGVmcz48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzU1NSI+PC9yZWN0PjxnPjx0ZXh0IHg9IjM0MS41IiB5PSIyNTAiIHN0eWxlPSJmaWxsOiM1NTU1O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjQycHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+OTAweDUwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" isimagetagToEndTag>
+          <div class="carousel-caption">
+            <h3 id="weixin_model_imageList_4_text_1">第4张图片文字1</h3>
+            <p id="weixin_model_imageList_4_text_2">第4张图片文字2</p>
+          </div>
+			</a>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#carousel-example-captions{{>num}}" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-captions{{>num}}" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+</div>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_model_dazhuanpan_set_imagetext">
+<!--
+<hr/>
+	<div class="row">
+		<div class="col-xs-12" style="max-height: 200px;overflow:auto;">
+			<div class="row">
+														<div class="col-xs-12 ">
+															<div class="input-group" id="weixin_goods_add_input_image1">					
+																<input type="text" id="weixin_model_imagetext_iamgepath" class="form-control" style="width: 100%;" placeholder="图片地址"/>									
+															<div class="input-group-btn">
+															<button class="btn btn-sm btn-default" onclick="onImageManagerUpload('weixin_model_imagetext_iamgepath','weixin_model_imagetext_iamgepath_layout','weixin_model_main')">
+																<i class="fa fa-search"></i>
+															</button>
+														</div>
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-1">
+													
+															<input type="text" id="weixin_model_imagetext_text_color" class="form-control" style="width: 100%;"/>
+														</div>
+														<div class="col-xs-11">
+															<input type="text" id="weixin_model_imagetext_text" class="form-control" style="width: 100%;" placeholder="名称"/>
+														</div>
+													
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_model_imagetext_linkurl" class="form-control" style="width: 100%;" placeholder="链接地址"/>
+														</div>
+			</div>
+		</div>
+	</div>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_model_imageText">
+<!--												<a id="weixin_model_imagetext_linkurl_layout" href="www.baidu.com">
+													<div class="small-box" id="weixin_model_tem_layout">
+														<div class="row" style="height:80px;">
+															<div class="col-xs-4" style="padding:0px 10px;font-size:16px;font-weight:normal;line-height:26px;text-align:center;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;border:0;" id="weixin_model_imagetext_text_layout">名称</div>
+															<div class="col-xs-8"><img id="weixin_model_imagetext_iamgepath_layout" style="width:100%;height:80px;" src="" isimagetagToEndTag></div>
+														</div>
+													</div>
+</a>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_model_music">
+<!--				
+<div id="audiocontainer"><audio id="bgsound" loop="loop" autoplay="autoplay"> <source id="bgsound_source" src="http://www.zhengzhoutech.com/cus/cam/mp3/Sounds.mp3" isimagetagToEndTag> </audio></div>
+<style>
+
+.on{-webkit-animation: reverseRotataZ 1.2s linear infinite;}
+@-webkit-keyframes reverseRotataZ{
+    0%{-webkit-transform: rotateZ(0deg);}
+    100%{-webkit-transform: rotateZ(-360deg);}
+}}
+</style>
+	<div style="position: fixed; right: 20px; top: 80px;  z-index: 50000; visibility: visible;">								
+	<img src="http://www.xt12306.com/img/music_note_big.png" id="music_icon" onclick="function music_closs_open(){audio = $('#bgsound')[0]; if($('#music_icon').attr('class')=='on'){$('#music_icon').attr('class','');audio.pause();}else{$('#music_icon').attr('class','on');audio.play();}}; music_closs_open()"	class="on" isimagetagToEndTag>
+	</div>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_model_dazhuanpan_set_music">
+<!--
+	<hr/>
+		<input type="text" id="weixin_model_music_link" class="form-control" style="width: 100%;" placeholder="音乐链接"/>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_model_dazhuanpan_set_imageList">
+<!--
+<hr/>
+	<div class="row">
+		<div class="col-xs-12" style="max-height: 200px;overflow:auto;">
+
+			<div class="row">
+														<div class="col-xs-12 ">
+															
+														<input type="text" id="weixin_model_imageList_1_link_input" class="form-control" style="width: 100%;" placeholder="第1张图片点击后进入的链接"/>
+
+
+															
+														</div>
+			</div>
+
+			<div class="row">
+														<div class="col-xs-12 ">
+															<div class="input-group" id="weixin_goods_add_input_image1">					
+																<input type="text" id="weixin_model_imageList_1_image_input" class="form-control" style="width: 100%;" placeholder="第1张图片地址"/>									
+															<div class="input-group-btn">
+															<button class="btn btn-sm btn-default" onclick="onImageManagerUpload('weixin_model_imageList_1_image_input','weixin_model_imageList_1_image')">
+																<i class="fa fa-search"></i>
+															</button>
+														</div>
+													</div>
+														
+														</div>
+			</div>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_model_imageList_1_text_1_input" class="form-control" style="width: 100%;" placeholder="第1张-文字1"/>
+														</div>
+			</div>
+						<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_model_imageList_1_text_2_input" class="form-control" style="width: 100%;" placeholder="第1张-文字2"/>
+														</div>
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_model_imageList_2_link_input" class="form-control" style="width: 100%;" placeholder="第2张图片点击后进入的链接"/>
+														</div>
+			</div>
+
+			<div class="row">
+														<div class="col-xs-12 ">
+<div class="input-group" id="weixin_goods_add_input_image1">					
+																
+																<input type="text" id="weixin_model_imageList_2_image_input" class="form-control" style="width: 100%;" placeholder="第2张图片地址"/>
+<div class="input-group-btn">															
+<button class="btn btn-sm btn-default" onclick="onImageManagerUpload('weixin_model_imageList_2_image_input','weixin_model_imageList_2_image')">
+																<i class="fa fa-search"></i>
+															</button>
+															</div>
+															</div>
+														</div>
+			</div>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_model_imageList_2_text_1_input" class="form-control" style="width: 100%;" placeholder="第2张-文字1"/>
+														</div>
+			</div>
+						<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_model_imageList_2_text_2_input" class="form-control" style="width: 100%;" placeholder="第2张-文字2"/>
+														</div>
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_model_imageList_3_link_input" class="form-control" style="width: 100%;" placeholder="第3张图片点击后进入的链接"/>
+														</div>
+			</div>
+
+			<div class="row">
+														<div class="col-xs-12 ">
+															<div class="input-group" id="weixin_goods_add_input_image1">	
+															<input type="text" id="weixin_model_imageList_3_image_input" class="form-control" style="width: 100%;" placeholder="第3张图片地址"/>
+		<div class="input-group-btn">
+																<button class="btn btn-sm btn-default" onclick="onImageManagerUpload('weixin_model_imageList_3_image_input','weixin_model_imageList_3_image')">
+																<i class="fa fa-search"></i>
+															</button>
+															</div>
+														</div>
+</div>		
+			</div>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_model_imageList_3_text_1_input" class="form-control" style="width: 100%;" placeholder="第3张-文字1"/>
+														</div>
+			</div>
+						<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_model_imageList_3_text_2_input" class="form-control" style="width: 100%;" placeholder="第3张-文字2"/>
+														</div>
+			</div>
+			<hr/>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_model_imageList_4_link_input" class="form-control" style="width: 100%;" placeholder="第4张图片点击后进入的链接"/>
+														</div>
+			</div>
+
+			<div class="row">
+														<div class="col-xs-12 ">
+<div class="input-group" id="weixin_goods_add_input_image1">	
+															<input type="text" id="weixin_model_imageList_4_image_input" class="form-control" style="width: 100%;" placeholder="第4张图片地址"/>
+<div class="input-group-btn">
+			<button class="btn btn-sm btn-default" onclick="onImageManagerUpload('weixin_model_imageList_4_image_input','weixin_model_imageList_4_image')">
+																<i class="fa fa-search"></i>
+															</button>
+															</div>		
+</div>											
+			</div>
+			</div>
+			<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_model_imageList_4_text_1_input" class="form-control" style="width: 100%;" placeholder="第4张-文字1"/>
+														</div>
+			</div>
+						<div class="row">
+														<div class="col-xs-12 ">
+															<input type="text" id="weixin_model_imageList_4_text_2_input" class="form-control" style="width: 100%;" placeholder="第4张-文字2"/>
+														</div>
+			</div>
+			<hr/>
+		</div>
+	</div>
+-->
+</script>

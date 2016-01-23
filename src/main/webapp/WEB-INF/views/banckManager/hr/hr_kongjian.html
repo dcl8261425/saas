@@ -1,0 +1,716 @@
+<link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/js/libs/video/video-js.css}" />
+<link href="../../css/bootstrap.css" rel="stylesheet" th:href="@{/js/libs/img/style.css}" />
+<link href="../../css/main.css" rel="stylesheet" th:href="@{/js/libs/switch/bootstrap-switch.min.css}" />
+<script src="" th:src="@{/js/libs/switch/bootstrap-switch.min.js}"></script>
+<script src="" th:src="@{/js/libs/video/video.js}"></script>
+<script src="" th:src="@{/js/libs/pagejs/itemPage/hr/kongjian.js}"></script>
+<div class="mskeLayBg"></div>
+<div class="mskelayBox">
+	<div class="mske_html"></div>
+	<img class="mskeClaose" src="js/libs/img/images/mke_close.png" width="27" height="27" />
+</div>
+<section class="content-header">
+	<h1>
+		员工管理 <small id="bankuai_title">签到管理</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+		<li class="active" id="bankuai_title2">员工管理</li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content" id="content">
+	<div id="alertDiv"></div>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="btn-group" id="groupDiv"></div>
+		</div>
+
+
+	</div>
+	<div class="box box-primary" id="myCreateCustomChance_div">
+		<div class="box-header">
+			<div class="box-tools">
+				<div class="input-group">
+					<div class="input-group-btn">
+
+						<button class="btn btn-sm btn-danger pull-right" onclick="kongjian_sendMessage_window_show(1)">
+							<i class="fa fa-plus-square"></i> 发表新讨论
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="box-body table-responsive" id="kongjian_content"
+			style="overflow: auto; max-height: 800px; min-height: 600px; background-color: rgb(249, 249, 249);"></div>
+
+		<div class="box-footer clearfix">
+			<button type="button" class="btn btn-success" style="width: 100%" id="kongjian_load_mover" onclick="kongjian_clickGroup('')">加载更多</button>
+		</div>
+	</div>
+
+</section>
+<script type="text/x-jsrender" id="kongjian_group_item">
+<!--
+  <button type="button" class="btn btn-success" onclick="kongjian_clickGroup({{>id}})">{{>groupName}}</button>
+-->
+</script>
+<script type="text/x-jsrender" id="kongjian_content_item">
+<!--
+			<div class="col-md-12" id="kongjian_content_item_{{>id}}">
+				<div class="nav-tabs-custom box box-success">
+					<div class="box-header">
+						<i class="fa fa-bullhorn"></i>
+						<h3 class="box-title">{{>title}}</h3>
+
+						<ul class="nav nav-tabs">
+							
+							<li class="dropdown pull-right"><a title="设置" class="dropdown-toggle" data-toggle="dropdown" href="#"> <i
+									class="fa fa-gear"></i>
+							</a>
+								<ul class="dropdown-menu">
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:kongjian_delete_item({{>id}})">删除</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:kongjian_index_item_window_show({{>id}})">设置置顶</a></li>
+								</ul></li>
+<li class="dropdown pull-right"><a class="dropdown-toggle" title="赞" href="javascript:kongjian_zan_item({{>id}})"> <i
+									class="fa fa-thumbs-o-up"></i> <font style="color:red;"  id="kongjian_zan_item_{{>id}}">{{>zan}}</font></a></li>
+						</ul>
+					</div>
+
+					<div class="tab-content">{{>content}}
+							<small class="text-muted pull-right"><i class="fa fa-clock-o"></i>  {{JavaSTojsDateTime:createDate}}</small>
+	</div>
+					<div class="box-footer clearfix"  id="kongjian_zan_list_{{>id}}">
+						
+
+						{{for zanList}}
+							{{>createUserName}},
+						{{/for}} 
+
+					</div>
+					<div class="box-footer clearfix">
+						{{if touPiao==true}}
+						<button class="btn btn-info" title="有投票哦！" onclick="kongjian_onclick_showItem(1,{{>id}})">投票</button>
+						{{/if}}
+						<button class="btn btn-info" title="回复！" onclick="kongjian_onclick_showItem(2,{{>id}})">回复</button>
+						{{if imageList.length!=0}}					
+						<button class="btn btn-info" title="有图片哦！" onclick="kongjian_onclick_showItem(3,{{>id}})">图片</button>
+						{{/if}}
+						{{if vidioList.length!=0}}		
+							<button class="btn btn-info" title="有视频哦！" onclick="kongjian_onclick_showItem(4,{{>id}})">视频</button>
+						{{/if}}
+						{{if fileList.length!=0}}		
+							<button class="btn btn-info" title="有文件哦！" onclick="kongjian_onclick_showItem(5,{{>id}})">文件</button>
+						{{/if}}
+					</div>
+<div class="box-footer clearfix" id="kongjian_shipin_{{>id}}" style="display: none;text-align: center;">
+						{{for vidioList}}
+						 <video id="example_video_1" class="video-js vjs-default-skin" controls preload="none"  width="100%" height="264"  data-setup="{}">
+							<source src="{{>link}}" type='video/mp4' />
+						</video>
+							{{/for}}
+					</div>
+<div class="box-footer clearfix" id="kongjian_file_{{>id}}" style="display: none;">
+<div class="box-header" style="cursor: move;">
+							<h3 class="box-title">
+								<i class="fa fa-file"></i> 文件
+							</h3>
+							
+						</div>
+{{for fileList}}
+<a href="{{>link}}">{{>fileName}}</a><br/>
+{{/for}}
+</div>
+					<div class="box-footer clearfix" id="kongjian_image_{{>id}}" style="display: none;">
+<div class="box-header" style="cursor: move;">
+							<h3 class="box-title">
+								<i class="fa fa-camera"></i> 图片
+							</h3>
+							
+						</div>
+<div class="msKeimgBox">
+ <ul>
+{{for imageList}}
+	<li>
+  <img src="{{>link}}" width="50" height="50" />
+  <span class="hidden">
+  <img src="{{>link}}" style="width:100%;height:100%"  />
+
+  </span>
+  </li>
+						{{/for}}
+ </ul>
+ <div class="mskeTogBtn"></div>
+</div>
+						
+					</div>
+					{{if touPiao==true}}
+					<div class="box-footer clearfix" id="kongjian_toupiao_{{>id}}" style="display: none;">
+						
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">投票:{{>toupiaoList.title}}</h3>
+							</div>
+							
+							<div class="box-body">
+								<small class="text-muted pull-right"><i class="fa fa-clock-o"></i>  {{JavaSTojsDateTime:toupiaoList.startDate}} ~ {{JavaSTojsDateTime:toupiaoList.endDate}} {{if isDuoXuan}}多选{{else}}单选{{/if}}</small>
+								<table class="table table-bordered">
+									<tbody>
+										<tr>
+											<th style="width: 50px">序号</th>
+											<th>名字</th>
+											<th>票数</th>
+											<th style="width: 60px">百分比</th>
+											<th style="width: 60px">投票</th>
+										</tr>
+									
+										{{for toupiaoItemList}}
+										<tr>
+											<td>{{>#index}}</td>
+											<td>{{>name}}</td>
+											<td>
+												<div class="progress xs">
+													<div class="progress-bar progress-bar-success" role="progressbar" style="width: {{>baifenbi}}%"></div>
+												</div>
+											</td>
+											<td><span class="badge bg-red">{{>baifenbi}}</span></td>
+											<td>
+												<button class="btn btn-info" onclick="">投票</button>
+											</td>
+										</tr>
+										{{/for}}
+									</tbody>
+								</table>
+							</div>
+							
+						</div>
+					</div>
+{{/if}}
+					<div class="box-footer clearfix" id="kongjian_liuyan_{{>id}}" style="display: none;">
+						<div class="box-header" style="cursor: move;">
+							<h3 class="box-title">
+								<i class="fa fa-comments-o"></i> 回复
+							</h3>
+							<div class="box-tools pull-right" data-toggle="tooltip" title="" data-original-title="Status">
+								<div class="btn-group" data-toggle="btn-toggle">
+									<button type="button" class="btn btn-danger btn-sm" onclick="kongjian_sendMessage_window_show('2',{{>id}})">我要发言</button>
+
+								</div>
+							</div>
+						</div>
+						<div class="box-body chat" id="chat_box_group_{{>id}}" style="width: auto; height: auto;">
+							{{for retList}}
+							<div class="item" id="kongjian_huifu_item_{{>id}}">
+								<img src="http://www.xt12306.com/img/wu.jpg" alt="user image" class="online" />
+								<p class="message">
+									<a href="#" class="name"> <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{JavaSTojsDateTime:createDate}}</small>
+										{{>createUserName}}
+									</a> {{>content}}
+								</p>
+								{{for imageList}}
+								<div class="attachment">
+									<h4>图片附件:</h4>
+									<p class="filename"><img src="{{>link}}" width="50px;" /> </p>
+									
+								</div>
+								{{/for}}
+								<br/>
+								{{for vidioList}}
+								<div class="attachment">
+									<h4>视频附件:</h4>
+									 <video id="example_video_{{>id}}" class="video-js vjs-default-skin" controls preload="none"  width="100%" height="264" data-setup="{}">
+							<source src="{{>link}}" type='video/mp4' />
+						</video>
+								</div>
+								{{/for}}
+								<br/>
+								{{for fileList}}
+								<div class="attachment">
+									<h4>文件附件:</h4>
+									<p class="filename">{{>fileName}}</p>
+									<div class="pull-right">
+										<a href="{{>link}}"><button class="btn btn-primary btn-sm btn-flat">下载</button></a>
+									</div>
+								</div>
+								{{/for}}
+							</div>
+							{{/for}}
+							
+							
+						</div>
+					</div>
+
+					
+				</div>
+				
+			</div>
+-->
+</script>
+<div class="modal fade" id="kongjian_sendMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">发布</h4>
+
+			</div>
+			<div class="modal-body">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-12 connectedSortable">
+							<div id="kongjian_sendMessage_alert"></div>
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-danger pull-right" onclick="kongjian_sendMessage_window_send('1')">
+													<i class="fa fa-plus-square"></i> 发布
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body" style="max-height: 800px; min-height: 300px;">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group" id="kongjian_send_title_text">
+												<input type="text" class="form-control" id="kongjian_send_title" placeholder="请输入标题" />
+											</div>
+
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group" id="kongjian_send_text">
+												<input type="text" class="form-control" id="kongjian_send_content" placeholder="输入发表的内容" />
+											</div>
+
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<!-- Custom Tabs (Pulled to the right) -->
+											<div class="nav-tabs-custom">
+												<ul class="nav nav-tabs pull-right">
+
+
+													<li class="pull-left header"><i class="fa fa-th"></i>图片上传</li>
+													<li class="pull-right"><a href="javascript:kongjian_send_updateimage()" class="text-muted"><i
+															class="fa fa-plus-square"></i> 图片上传</a></li>
+													<li class="pull-right"><a href="javascript:kongjian_send_updateimageAddress()" class="text-muted"><i
+															class="fa fa-plus-square"></i> 图片地址</a></li>
+													<li class="pull-right"><a href="javascript:kongjian_send_lookimageAddress()" class="text-muted"><i
+															class="fa fa-plus-square"></i> 个人图片空间</a></li>
+												</ul>
+												<div class="tab-content">
+													<input type="file" name="table_search" id="kongjian_send_image_upload_input" onchange="kongjian_send_image_upload_input_change()" class="form-control input-sm" style="width: 250px;display: none;" placeholder="厂家"/>
+													<div class="tab-pane active" id="tab_1-1" style="text-align: center;">
+														<small class="text-muted">图片预览 后缀为jpg,png 等图片格式</small>
+														<div class="row" id="kongjian_send_image_content"></div>
+													</div>
+													<!-- /.tab-pane -->
+												</div>
+												<!-- /.tab-content -->
+											</div>
+											<!-- nav-tabs-custom -->
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<!-- Custom Tabs (Pulled to the right) -->
+											<div class="nav-tabs-custom">
+												<ul class="nav nav-tabs pull-right">
+
+
+													<li class="pull-left header"><i class="fa fa-th"></i>文件上传</li>
+													<li class="pull-right"><a href="javascript:kongjian_send_updatefile()" class="text-muted"><i
+															class="fa fa-plus-square"></i> 文件上传</a></li>
+													<li class="pull-right"><a href="javascript:kongjian_send_updatefileAddress()" class="text-muted"><i
+															class="fa fa-plus-square"></i> 文件地址</a></li>
+													<li class="pull-right"><a href="javascript:kongjian_send_LookfileAddress()" class="text-muted"><i
+															class="fa fa-plus-square"></i> 个人文件空间</a></li>
+												</ul>
+												<div class="tab-content">
+													<input type="file" name="table_search" id="kongjian_send_file_upload_input" onchange="kongjian_send_file_upload_input_change()" class="form-control input-sm" style="width: 250px;display: none;" placeholder="厂家"/>
+													<div class="tab-pane active" id="tab_1-1" style="text-align: center;">
+														<small class="text-muted">文件名字，pdf,doc,txt,ppt,psd,mm,xls,java,js,jar,war,html,class,xml格式</small>
+														<div class="row" id="kongjian_send_file_content"></div>
+
+													</div>
+													<!-- /.tab-pane -->
+												</div>
+												<!-- /.tab-content -->
+											</div>
+											<!-- nav-tabs-custom -->
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<!-- Custom Tabs (Pulled to the right) -->
+											<div class="nav-tabs-custom">
+												<ul class="nav nav-tabs pull-right">
+
+
+													<li class="pull-left header"><i class="fa fa-th"></i>视频上传</li>
+													<li class="pull-right"><a href="javascript:kongjian_send_updateVideo()" class="text-muted"><i
+															class="fa fa-plus-square"></i> 视频上传</a></li>
+													<li class="pull-right"><a href="javascript:kongjian_send_updateVideoAddress()" class="text-muted"><i
+															class="fa fa-plus-square"></i> 视频地址</a></li>
+													<li class="pull-right"><a href="javascript:kongjian_send_LookVideoAddress()" class="text-muted"><i
+															class="fa fa-plus-square"></i> 个人视频空间</a></li>
+												</ul>
+												<div class="tab-content">
+													<input type="file" name="table_search" id="kongjian_send_video_upload_input" onchange="kongjian_send_video_upload_input_change()" class="form-control input-sm" style="width: 250px;display: none;" placeholder="厂家"/>
+													<div class="tab-pane active" id="tab_1-1" style="text-align: center;">
+														<small class="text-muted">视频上传，后缀为 mp4,mp3,swf,avi</small>
+														<div class="row" id="kongjian_send_video_content"></div>
+
+													</div>
+													<!-- /.tab-pane -->
+												</div>
+												<!-- /.tab-content -->
+											</div>
+											<!-- nav-tabs-custom -->
+										</div>
+									</div>
+									<div class="row" id="hr_komgjian_send_toupiao">
+										<div class="col-md-12" >
+											<!-- Custom Tabs (Pulled to the right) -->
+											<div class="nav-tabs-custom">
+												<ul class="nav nav-tabs pull-right">
+
+
+													<li class="pull-left header"><i class="fa fa-th"></i>投票</li>
+													<li class="pull-right"><a href="javascript:kongjian_send_createItem_window()" class="text-muted"><i
+															class="fa fa-plus-square"></i> 创建投票项</a></li>
+												</ul>
+												<div class="tab-content">
+													<div class="tab-pane active" id="tab_1-1" style="text-align: center;">
+														<div class="row">
+															<div class="col-md-12">
+																<div class="form-group" id="hr_main_addcustemmer_username_text">
+																	<input type="text" class="form-control" id="kongjian_send_toupiao_title" placeholder="请输入标题,不写标题视为不创建投票" />
+																</div>
+
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-4">
+																<div class="form-group">
+																	<div class="input-group date" id="kongjian_toupiao_startDate">
+																		<input type="text" placeholder="开始投票日期-不输入则为不限制" id="kongjian_toupiao_startDate_data" disabled="disabled"
+																			class="form-control" /><span class="input-group-addon" id="crm_window_layout_char_startDate_but"><i
+																			class="glyphicon glyphicon-th"></i></span>
+																	</div>
+																</div>
+															</div>
+															<div class="col-md-4">
+																<div class="form-group">
+																	<div class="input-group date" id="kongjian_toupiao_endDate">
+																		<input type="text" placeholder="结束投票日期-不输入则为不限制" id="kongjian_toupiao_endDate_data" disabled="disabled"
+																			class="form-control" /><span class="input-group-addon" id="crm_window_layout_char_startDate_but"><i
+																			class="glyphicon glyphicon-th"></i></span>
+																	</div>
+																</div>
+															</div>
+															<div class="col-md-4">
+																<small class="text-muted">
+																	<div class="switch" data-on="warning" data-off="danger" style="width: 100%">
+																		多选:<input type="checkbox" id="kongjian_toupiao_move" style="width: 100%" />
+																	</div>
+																</small>
+															</div>
+														</div>
+
+
+														<div class="row" id="kongjian_send_ToupiaoItem_content">
+															
+															
+														</div>
+													</div>
+													<!-- /.tab-pane -->
+												</div>
+												<!-- /.tab-content -->
+											</div>
+											<!-- nav-tabs-custom -->
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="kongjian_sendMessage_imageAddress_window" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">图片地址</h4>
+
+			</div>
+			<div class="modal-body">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-12 connectedSortable">
+							<div id="kongjian_sendMessage_alert"></div>
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-danger pull-right" onclick="kongjian_sendMessage_imageAddress_window_addImage()">
+													<i class="fa fa-plus-square"></i> 确定
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body" style="min-height: 100px;">
+									<div class="col-md-12">
+										<div class="form-group" id="hr_main_addcustemmer_username_text">
+											<input type="text" class="form-control" id="kongjian_sendMessage_imageAddress_window_addImage_url" placeholder="http://输入地址" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						</div>
+						
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="kongjian_sendMessage_fileAddress_window" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">图片地址</h4>
+
+			</div>
+			<div class="modal-body">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-12 connectedSortable">
+							<div id="kongjian_sendMessage_alert"></div>
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-danger pull-right" onclick="kongjian_sendMessage_fileAddress_window_addFile()">
+													<i class="fa fa-plus-square"></i> 确定
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body" style="min-height: 100px;">
+									<div class="col-md-12">
+										<div class="form-group" id="hr_main_addcustemmer_username_text">
+											<input type="text" class="form-control" id="kongjian_sendMessage_fileAddress_window_addfile_url" placeholder="http://输入地址" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						</div>
+						
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="kongjian_sendMessage_videoAddress_window" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">图片地址</h4>
+
+			</div>
+			<div class="modal-body">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-12 connectedSortable">
+							<div id="kongjian_sendMessage_alert"></div>
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-danger pull-right" onclick="kongjian_sendMessage_videoAddress_window_addVideo()">
+													<i class="fa fa-plus-square"></i> 确定
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body" style="min-height: 100px;">
+									<div class="col-md-12">
+										<div class="form-group" id="hr_main_addcustemmer_username_text">
+											<input type="text" class="form-control" id="kongjian_sendMessage_videoAddress_window_addvideo_url" placeholder="http://输入地址" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						</div>
+						
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="kongjian_sendMessage_ToupiaoItem_window" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">投票项</h4>
+
+			</div>
+			<div class="modal-body">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-12 connectedSortable">
+							<div id="kongjian_sendMessage_alert"></div>
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-danger pull-right" onclick="kongjian_send_createItem()">
+													<i class="fa fa-plus-square"></i> 确定
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body" style="min-height: 100px;">
+									<div class="col-md-12">
+										<div class="form-group" id="hr_main_addcustemmer_username_text">
+											<input type="text" class="form-control" id="kongjian_sendMessage_ToupiaoItem_window_input_name" placeholder="输入名字" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						</div>
+						
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="kongjian_setindex_window" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">投票项</h4>
+
+			</div>
+			<div class="modal-body">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-12 connectedSortable">
+							<div id="kongjian_sendMessage_alert"></div>
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<div class="input-group-btn">
+												<button class="btn btn-sm btn-danger pull-right" id="kongjian_index_item_button" onclick="">
+													<i class="fa fa-plus-square"></i> 确定
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body" style="min-height: 100px;">
+									<div class="col-md-12">
+										<div class="form-group" id="hr_main_addcustemmer_username_text">
+											<input type="text" class="form-control" id="kongjian_index_item_index" placeholder="请输入1-999数字，999为最高，则置顶" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						</div>
+						
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="kongjian_huifu_item">
+<!--
+<div class="item" id="kongjian_huifu_item_{{>id}}">
+								<img src="http://www.xt12306.com/img/wu.jpg" alt="user image" class="online" />
+								<p class="message">
+									<a href="#" class="name"> <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{JavaSTojsDateTime:createDate}}</small>
+										{{>createUserName}}
+									</a> {{>content}}
+								</p>
+								{{for imageList}}
+								<div class="attachment">
+									<h4>图片附件:</h4>
+									<p class="filename"><img src="{{>link}}" width="50px;" /> </p>
+									
+								</div>
+								{{/for}}
+								<br/>
+								{{for vidioList}}
+								<div class="attachment">
+									<h4>视频附件:</h4>
+									 <video id="example_video_{{>id}}" class="video-js vjs-default-skin" controls preload="none"  width="100%" height="264" data-setup="{}">
+							<source src="{{>link}}" type='video/mp4' />
+						</video>
+								</div>
+								{{/for}}
+								<br/>
+								{{for fileList}}
+								<div class="attachment">
+									<h4>文件附件:</h4>
+									<p class="filename">{{>fileName}}</p>
+									<div class="pull-right">
+										<a href="{{>link}}"><button class="btn btn-primary btn-sm btn-flat">下载</button></a>
+									</div>
+								</div>
+								{{/for}}
+</div>
+-->
+</script>

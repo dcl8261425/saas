@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<div th:include="mainTemplate::guanjianzi" th:remove="tag"></div>
+<title>光云协同办公平台</title>
+<div th:include="mainTemplate::jscss" th:remove="tag"></div>
+</head>
+<body>
+	<div id="header" th:include="mainTemplate::header"></div>
+	<div class="container" style="min-height: 680px;">
+		<div style="height: 30px;"></div>
+		<div class="row show-grid">
+  			<div class="span6" style="text-align: center;">
+  				 	<img alt="" th:src="@{/img/err01.gif}"/>
+  			</div>
+  			<div class="span6" th:text="${errorInfo}">
+  				     
+  			</div>
+		</div>
+	</div>
+	<div id="footer" th:include="mainTemplate::footer" th:remove="tag"></div>
+</body>
+</html>
+

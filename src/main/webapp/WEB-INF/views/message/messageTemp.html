@@ -1,0 +1,204 @@
+<link href="../../css/main.css" rel="stylesheet" th:href="@{/js/libs/switch/bootstrap-switch.min.css}" />
+<script src="" th:src="@{/js/libs/switch/bootstrap-switch.min.js}"></script>
+<script src="" th:src="@{/js/libs/pagejs/itemPage/message/phonemessage/messageTemp.js}"></script>
+<section class="content-header">
+	<h1>
+		短信平台 <small id="bankuai_title">短信模板</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+		<li class="active" id="bankuai_title2">短信模板</li>
+	</ol>
+</section>
+
+<section class="content" id="content">
+	<!-- Main row -->
+	<div id="message_set_alert"></div>
+	<div class="row">
+		<!-- Left col -->
+		<section class="col-lg-12 connectedSortable" id="right_layout">
+			<div class="box box-primary" id="weixin_wifi_window">
+				<div class="box-header">
+					<div class="pull-right box-tools"></div>
+					<i class="fa fa-cloud"></i>
+					<h3 class="box-title">短信模板</h3>
+					<div class="pull-right box-tools"></div>
+				</div>
+				<div class="box-body no-padding">
+					<div class="row">
+						<div class="col-sm-12">
+							
+								<div class="btn-group" style="width: 100%;">
+									<button type="button" class="btn btn-info dropdown-toggle" id="weixin_model_selet_model_button"
+										style="width: 100%;" data-toggle="dropdown" aria-expanded="true">选择模块模板</button>
+									<ul class="dropdown-menu" role="menu">
+										<li onclick="phonemessageTemp_addScore()"><a>添加积分</a></li>
+										<li onclick="phonemessageTemp_addPrice()"><a href="#">添加储值</a></li>
+										<li onclick="phonemessageTemp_RedouceScore()"><a href="#">减少积分时</a></li>
+										<li onclick="phonemessageTemp_RedoucePrice()"><a href="#">减少储值时</a></li>
+										<li onclick="phonemessageTemp_orderToUser()"><a href="#">用户下订单时发送给商户</a></li>
+									</ul>
+								</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12" id="phone_message_content">
+						</div>
+					</div>
+				</div>
+				<div class="box-footer">
+					<div class="row">
+						<div class="col-sm-12"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- right col -->
+
+	</div>
+	<!-- /.row (main row) -->
+</section>
+<script type="text/x-jsrender" id="phonemessageTemp_addScore">
+<!--
+<br/>
+<div id="message_set_alert">
+<div class="alert alert-warning alert-dismissable no-print">
+<i class="fa fa-check"></i>
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+模板说明 <b>：</b>
+在平台所有给用户添加积分的时候都将发送此信息到用户手机,不得超过240个字，每条短信60个字,请勿使用【】这样的字符，使用后，系统自动替换[]<br/>
+参数说明：<br/>
+@NOW_SCORE,当前积分<br/>
+@ADD_SCORE,添加积分<br/>
+@ADD_BEFORE_SCORE,添加积分之前所剩余积分<br/>
+@ADD_AFTER_SCORE,添加积分后<br/>
+@VIP_NAME,会员名<br/>
+@VIP_PHONE,会员电话<br/>
+</div></div>
+<br/>
+<div style="width:100%;text-align: center;">
+<div class="form-group" id="input_phonemessageTemp_addScore_input_value">
+<textarea rows="10" cols="60" id="phonemessageTemp_addScore_input_value" style="width:80%"></textarea><br/><br/>
+</div>
+<button class="btn btn-danger btn-sm" onclick="phonemessageTemp_submit(1,'phonemessageTemp_addScore_input_value',null,'phonemessageTemp_addScore_input_')">
+													确认 <i class="fa fa-plus-square"></i>
+												</button>
+</div>
+
+-->
+
+</script>
+<div>
+
+</div>
+<script type="text/x-jsrender" id="phonemessageTemp_RedouceScore">
+<!--
+<br/>
+<div id="message_set_alert">
+<div class="alert alert-warning alert-dismissable no-print">
+<i class="fa fa-check"></i>
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+模板说明 <b>：</b>
+在平台所有给用户减少积分的时候都将发送此信息到用户手机,不得超过240个字，每条短信60个字,请勿使用【】这样的字符，使用后，系统自动替换[]<br/>
+参数说明：<br/>
+@NOW_SCORE,当前积分<br/>
+@REDUCE_SCORE,减少积分<br/>
+@REDUCE_BEFORE_SCORE,减少积分之前所剩余积分<br/>
+@REDUCE_AFTER_SCORE,减少积分后<br/>
+@VIP_NAME,会员名<br/>
+@VIP_PHONE,会员电话<br/>
+</div></div>
+<div style="width:100%;text-align: center;">
+<div class="form-group" id="input_phonemessageTemp_RedouceScore_input_value">
+<textarea rows="10" cols="60" id="phonemessageTemp_RedouceScore_input_value" style="width:80%"></textarea><br/><br/>
+</div>
+<button class="btn btn-danger btn-sm" onclick="phonemessageTemp_submit(3,'phonemessageTemp_RedouceScore_input_value',null,'phonemessageTemp_RedouceScore_input_')">
+													确认 <i class="fa fa-plus-square"></i>
+												</button>
+</div>
+-->
+</script>
+<script type="text/x-jsrender" id="phonemessageTemp_RedoucePrice">
+<!--
+<br/>
+<div id="message_set_alert">
+<div class="alert alert-warning alert-dismissable no-print">
+<i class="fa fa-check"></i>
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+模板说明 <b>：</b>
+在平台所有给用户添加储值的时候都将发送此信息到用户手机,不得超过240个字，每条短信60个字,请勿使用【】这样的字符，使用后，系统自动替换[]<br/>
+参数说明：<br/>
+@NOW_PRICE,当前余额<br/>
+@REDUCE_PRICE,减少余额<br/>
+@REDUCE_BEFORE_PRICE ,减少余额之前所剩余余额<br/>
+@REDUCE_AFTER_PRICE,减少余额后<br/>
+@VIP_NAME,会员名<br/>
+@VIP_PHONE,会员电话<br/>
+</div></div>
+<div style="width:100%;text-align: center;">
+<div class="form-group" id="input_phonemessageTemp_RedoucePrice_input_value">
+<textarea rows="10" cols="60" id="phonemessageTemp_RedoucePrice_input_value" style="width:80%"></textarea><br/><br/>
+</div>
+<button class="btn btn-danger btn-sm" onclick="phonemessageTemp_submit(4,'phonemessageTemp_RedoucePrice_input_value',null,'phonemessageTemp_RedoucePrice_input_')">
+													确认 <i class="fa fa-plus-square"></i>
+												</button>
+</div>
+-->
+</script>
+<script type="text/x-jsrender" id="phonemessageTemp_addPrice">
+<!--
+<br/>
+<div id="message_set_alert">
+<div class="alert alert-warning alert-dismissable no-print">
+<i class="fa fa-check"></i>
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+模板说明 <b>：</b>
+在平台所有给用户添加储值的时候都将发送此信息到用户手机,不得超过240个字，每条短信60个字,请勿使用【】这样的字符，使用后，系统自动替换[]<br/>
+参数说明：<br/>
+@NOW_PRICE,当前余额<br/>
+@ADD_PRICE,添加余额<br/>
+@ADD_BEFORE_PRICE ,添加余额之前所剩余余额<br/>
+@ADD_AFTER_PRICE,添加余额后<br/>
+@VIP_NAME,会员名<br/>
+@VIP_PHONE,会员电话<br/>
+</div></div>
+<div style="width:100%;text-align: center;">
+<div class="form-group" id="input_phonemessageTemp_addPrice_input_value">
+<textarea rows="10" id="phonemessageTemp_addPrice_input_value" cols="60" style="width:80%"></textarea><br/><br/>
+</div>
+<button class="btn btn-danger btn-sm" onclick="phonemessageTemp_submit(2,'phonemessageTemp_addPrice_input_value',null,'phonemessageTemp_addPrice_input_')">
+													确认 <i class="fa fa-plus-square"></i>
+												</button>
+</div>
+-->
+</script>
+<script type="text/x-jsrender" id="phonemessageTemp_orderToUser">
+<!--
+<br/>
+<div id="message_set_alert">
+<div class="alert alert-warning alert-dismissable no-print">
+<i class="fa fa-check"></i>
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+模板说明 <b>：</b>
+在平台所有给用户添加积分的时候都将发送此信息到用户手机,不得超过240个字，每条短信60个字,请勿使用【】这样的字符，使用后，系统自动替换[]<br/>
+参数说明：<br/>
+@CONTENT_ORDER_NAME,订单编号<br/>
+@CONTENT_ORDER_DATE,订单时间<br/>
+@CONTENT_ORDER_ITEM_LIST ,订单列表<br/>
+@VIP_NAME,会员名<br/>
+@VIP_PHONE,会员电话<br/>
+ps:还要设置接收人手机号
+</div></div>
+<div style="width:100%;text-align: center;" >
+<div class="form-group" id="input_phonemessageTemp_orderToUser_input_value">
+<textarea rows="10" id="phonemessageTemp_orderToUser_input_value" cols="60" style="width:80%"></textarea><br/>
+</div>
+<div class="form-group" id="input_phonemessageTemp_orderToUser_phone_input_phone">
+<input type="text" class="form-control input-sm " style="width:100%" id="phonemessageTemp_orderToUser_input_phone" placeholder="手机号"/>
+</div><br/>
+<button class="btn btn-danger btn-sm" onclick="phonemessageTemp_submit(6,'phonemessageTemp_orderToUser_input_value','phonemessageTemp_orderToUser_input_phone','phonemessageTemp_orderToUser_input_')">
+													确认 <i class="fa fa-plus-square"></i>
+												</button><br/>
+</div>
+-->
+</script>

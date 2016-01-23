@@ -1,0 +1,1227 @@
+<link href="../../css/main.css" rel="stylesheet" th:href="@{/js/libs/switch/bootstrap-switch.min.css}" />
+<script src="" th:src="@{/js/libs/switch/bootstrap-switch.min.js}"></script>
+<script src="" th:src="@{/js/libs/pagejs/itemPage/weixin/main.js}"></script>
+<section class="content-header">
+	<h1>
+		微信管理 <small id="bankuai_title">概览</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+		<li class="active" id="bankuai_title2">微信管理概览</li>
+	</ol>
+</section>
+
+<section class="content" id="content">
+
+	<div class="row">
+		<div id="weixin_game_alert"></div>
+		<div class="col-lg-3" onclick="weixin_menu_set()">
+			<!-- small box -->
+			<div class="small-box bg-aqua">
+				<div class="inner">
+					<h3>1</h3>
+					<p>管理菜单</p>
+				</div>
+				<div class="icon">
+					<i class="ion ion-plus"></i>
+				</div>
+				<a href="#" class="small-box-footer"> 点击开启 <i class="fa fa-arrow-circle-right"></i>
+				</a>
+			</div>
+		</div>
+		<!-- ./col -->
+
+		<div class="col-lg-3" onclick="weixin_autoResensDate_manager()">
+			<!-- small box -->
+			<div class="small-box bg-light-blue">
+				<div class="inner">
+					<h3>2</h3>
+					<p>自动回复资源管理</p>
+				</div>
+				<div class="icon">
+					<i class="ion-icecream"></i>
+				</div>
+				<a href="#" class="small-box-footer"> 点击开启 <i class="fa fa-arrow-circle-right"></i>
+				</a>
+			</div>
+		</div>
+		<!-- ./col -->
+		<div class="col-lg-3" onclick="weixin_autoResend_manager()">
+			<!-- small box -->
+			<div class="small-box bg-teal">
+				<div class="inner">
+					<h3>3</h3>
+					<p>自动回复定义</p>
+				</div>
+				<div class="icon">
+					<i class="ion-icecream"></i>
+				</div>
+				<a href="#" class="small-box-footer"> 点击开启 <i class="fa fa-arrow-circle-right"></i>
+				</a>
+			</div>
+		</div>
+		<div class="col-lg-3" onclick="weixin_message_manager()">
+			<!-- small box -->
+			<div class="small-box bg-red">
+				<div class="inner">
+					<h3>4</h3>
+					<p>创建文章/投票(图文，链接)</p>
+				</div>
+				<div class="icon">
+					<i class="ion-icecream"></i>
+				</div>
+				<a href="#" class="small-box-footer"> 点击开启 <i class="fa fa-arrow-circle-right"></i>
+				</a>
+			</div>
+		</div>
+		<!-- ./col -->
+	</div>
+	<!-- /.row -->
+	<!-- Main row -->
+	<div class="row">
+		<!-- Left col -->
+		<section class="col-lg-12 connectedSortable" id="weixin_weixin_layout"></section>
+		<!-- right col -->
+	</div>
+	<!-- /.row (main row) -->
+</section>
+<!-- /.content -->
+
+<script type="text/x-jsrender" id="weixin_wenzhang_tr_select">
+<!--
+<tr>
+								<td width="20%" align="center">{{>name}}</td>
+								<td width="10%" align="center">{{JavaSTojsDate:startdate}}</td>
+								<td width="40%" align="center">{{>linkaddress}}</td>
+								<td width="10%" align="center">{{>looknum}}</td>
+								<td width="20%" align="center">
+									<button type="button" onclick="weixin_main_select_wenzhang_enter('{{>linkaddress}}')" class="btn btn-danger btn-sm">选定</button>
+								</td>
+</tr>
+-->
+</script>
+<div class="modal fade" id="weixin_message_manager_add_but" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 860px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加文章</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+
+												<button class="btn btn-danger btn-sm pull-right" id="weixin_message_manager_but_enter"
+													onclick="weixin_message_manager_add_but_enter()">
+													确认 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="form-group" id="input_weixin_Text_wenzhangname">
+										<input type="text" class="form-control input-sm" id="weixin_Text_wenzhangname" placeholder="给资源命名" /><br />
+									</div>
+									<div class="form-group" id="input_weixin_Text_wenzhangname">
+										<button class="btn btn-danger btn-sm " id="weixin_Text_wenzhangname" onclick="addWenzhangVote()">添加投票功能</button><br />
+									</div>
+									<div id="wenzhangVoteDiv" style="display:none;">
+										<div class="row">
+											<div class="col-lg-2">
+												<button class="btn btn-danger btn-sm "  style="width: 100%" onclick="addWenzhangVoteItem()">添加选项</button><br />
+											</div>
+											<div class="col-lg-2">
+												<button class="btn btn-danger btn-sm " onclick="deleteWenzhangVote()"  style="width: 100%" >删除投票</button><br />
+											</div>
+											<div class="col-lg-2">
+													<button class="btn btn-danger btn-sm " onclick="lookVoteLinkMan()" id="lookVoteUser" style="width: 100%" >查看投票人</button><br />
+											</div>
+											<div class="col-lg-3">
+													<div class="switch" data-on="warning" data-off="danger"  style="width: 100%">
+    													会员投票:<input type="checkbox"  id="Vote_open_closs_vip" style="width: 100%"/>
+													</div>
+											</div>
+											<div class="col-lg-3">
+													<div class="switch" data-on="warning" data-off="danger"   style="width: 100%">
+    													多选:<input type="checkbox"  id="Vote_open_closs_more" style="width: 100%"/>
+													</div>
+											</div>
+											
+										</div>
+										<br/>
+										<div class="row">
+											<div class="col-lg-6">
+											<div class="form-group" id="crm_window_layout_char">
+													<div class="input-group date" id="weixin_wenzhang_vote_start_date_g">
+														<input type="text" value="开始投票日期-不输入则为不限制" id="weixin_wenzhang_vote_start_date" disabled="disabled"
+															class="form-control" /><span class="input-group-addon" id="crm_window_layout_char_startDate_but"><i
+															class="glyphicon glyphicon-th"></i></span>
+													</div>
+												</div>
+												</div>
+												<div class="col-lg-6">
+											<div class="form-group" id="crm_window_layout_char">
+													<div class="input-group date" id="weixin_wenzhang_vote_end_date_g">
+														<input type="text" value="结束投票日期-不输入则为不限制" id="weixin_wenzhang_vote_end_date" disabled="disabled"
+															class="form-control" /><span class="input-group-addon" id="crm_window_layout_char_startDate_but"><i
+															class="glyphicon glyphicon-th"></i></span>
+													</div>
+												</div>
+												</div>
+										</div>
+										<br/>
+										<div class="row" style=" overflow-y:scroll;max-height: 240px;">
+											<div class="col-lg-12" >
+												<table class="table table-bordered table-hover" >
+													<thead>
+														<tr>
+															<th>名称</th>
+															<th>票数</th>
+															<th>管理</th>
+														</tr>
+													</thead>
+													
+													<tbody id="wenzhang_vote_body" >
+														
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div><br />
+									<div class="form-group" id="input_weixin_Text_wenzhangcontent">
+										<textarea rows="100" cols="15" id="weixin_Text_wenzhangcontent" placeholder="内容"
+											style="width: 100%; height: 400px; visibility: hidden;"></textarea>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="weixin_message_manager_look_toupiaoRen" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 860px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">查看投票人</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<table class="table table-bordered table-hover" >
+													<thead>
+														<tr>
+															<th>名称</th>
+															<th>电话</th>
+															<th>投票</th>
+														</tr>
+													</thead>
+													
+													<tbody id="wenzhang_vote_linkMan_body" >
+														
+													</tbody>
+												</table>
+												
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+			<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="wenzhang_vote_linkMan_body_page">
+
+									</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="wenzhang_vote_linkMan_body_tr">
+<!--
+<tr>
+								<td width="20%" align="center">{{>name}}</td>
+								<td width="10%" align="center">{{>phone}}</td>
+								<td width="40%" align="center">{{>voteItemName}}</td>
+								
+</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_wenzhang_Vote_tr">
+<!--
+														<tr id="wenzhang_vote_tr_{{>num}}">
+															<td style="display: none" id="wenzhang_vote_tr_{{>num}}_input_id">{{>id}}</td>
+															<td style="width:33%;"><input name="" id="wenzhang_vote_tr_{{>num}}_input" value="{{>name}}" style="width:100%;"/></td>
+															<td style="width:33%;">{{>nums}}</td>
+															<td style="width:33%;"><button class="btn btn-danger btn-sm "  style="width: 100%" onclick="deleteWenzhangVoteItem({{>num}},{{>id}})">删除</button><br /></td>
+														</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_wenzhang_tr">
+<!--
+<tr>
+								<td width="20%" align="center">{{>name}}</td>
+								<td width="10%" align="center">{{JavaSTojsDate:startdate}}</td>
+								<td width="40%" align="center">{{>linkaddress}}</td>
+								<td width="10%" align="center">{{>looknum}}</td>
+								<td width="20%" align="center">
+									<button type="button" onclick="weixin_message_manager_update_but({{>id}})" class="btn btn-danger btn-sm">修改</button>
+									<button type="button" onclick="weixin_message_manager_delete_but_enter({{>id}})" class="btn btn-danger btn-sm">删除</button>
+								</td>
+</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_message_manager">
+<!--
+	<section class="col-lg-12 connectedSortable" id="right_layout"> 
+<div class="box box-primary" >
+	<div class="box-header">
+
+		<div class="pull-right box-tools">
+			<div class="input-group">
+											<input type="text" name="table_search" id="weixin_wenzhang_name" class="form-control input-sm pull-right" style="width: 150px;" placeholder="文章名"/>
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="weixin_message_manager_query_but()">
+													<i class="fa fa-search"></i>
+												</button>
+												<button class="btn btn-danger btn-sm" id="" onclick="weixin_message_manager_add_but()">
+													创建新文章 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+		</div>
+	</div>
+	<div class="box-body">
+		<div class="row">
+			<div class="col-sm-12">
+													<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;" width="20%">文章名</th>
+												<th style="text-align: center;" width="10%">创建日期</th>
+												<th style="text-align: center;" width="40%">链接</th>
+												<th style="text-align: center;" width="10%">阅读数</th>
+												<th style="text-align: center;"  width="20%">操作</th>
+											</tr>
+										</thead>
+										<tbody id="weixin_wenzhang_tbody">
+											
+										</tbody>
+									</table>
+			</div>
+		</div>
+	</div>
+	<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="weixin_wenzhang_tbody_page">
+
+									</ul>
+								</div>
+</div>
+</section>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_menu_set">
+<!--
+<section class="col-lg-12 connectedSortable" id="right_layout"> 
+<div class="box box-primary" id="crm_window_layout_char_window">
+	<div class="box-header">
+		<div class="pull-right box-tools">
+			<button class="btn btn-danger btn-sm" onclick="weixin_menu_reflash()">
+				更新到微信公众账号 <i class="fa fa-refresh"></i>
+			</button>
+		</div>
+		<i class="fa fa-cloud"></i>
+		<h3 class="box-title">微信平台菜单栏设置</h3>
+	</div>
+	<div class="box-body">
+		<div class="row">
+	<div class="col-sm-4">
+</div>
+			<div class="col-sm-4">
+				<ul class="nav nav-pills" role="tablist" >
+      				<li  id="weixin_menu_body"><a href="javascript:weixin_menu_set_addMainMenu()">添加主菜单</a></li>
+    			</ul>
+			<br/>
+			</div>
+	<div class="col-sm-4">
+		
+	</div>
+		</div>
+<div class="row" id="weixin_menu_add_main_content">
+	
+
+		</div>
+			<br/>
+	</div>
+</div>
+</section>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_autoResensDate_manager">
+<!--
+<section class="col-lg-12 connectedSortable" id="right_layout"> 
+<div class="box box-primary" id="crm_window_layout_char_window">
+	<div class="box-header">
+		<div class="pull-right box-tools">
+
+		</div>
+		<i class="fa fa-cloud"></i>
+		<h3 class="box-title">自动回复资源管理</h3>
+	</div>
+	<div class="box-body" style="max-height: 500px;min-height: 500px;">
+		<div class="row">
+			<div class="col-sm-12">
+				<nav class="navbar navbar-default" role="navigation">
+					 <div class="container-fluid">
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          					<ul class="nav navbar-nav" id="weixin_info_list">
+            					<li onclick="weixin_main_ResourceManage('image')"><a href="#">图片资源管理</a></li>
+           						<li onclick="weixin_main_ResourceManage('voice')"><a href="#">语音资源管理</a></li>
+          						<li onclick="weixin_main_ResourceManage('video')"><a href="#">视频资源管理</a></li>
+ 								<li onclick="weixin_main_ResourceManage('text')"><a href="#">文本资源管理</a></li>
+								<li onclick="weixin_main_ResourceManage('music')"><a href="#">音乐资源管理</a></li>
+								<li onclick="weixin_main_ResourceManage('imageText')"><a href="#">图文资源管理</a></li>
+          					</ul>
+        				</div>
+					 </div>
+				</nav>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12" id="weixin_main_resource_manager_body">
+			</div>
+		</div>
+	</div>
+
+</div>
+</section>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_autoResend_manager">
+<!--
+<section class="col-lg-12 connectedSortable" id="right_layout"> 
+<div class="box box-primary" id="crm_window_layout_char_window">
+	<div class="box-header">
+		<div class="pull-right box-tools">
+
+		</div>
+		<i class="fa fa-cloud"></i>
+		<h3 class="box-title">微信平台自动回复定义</h3>
+	</div>
+	<div class="box-body" style="max-height: 500px;min-height: 500px;">
+		<div class="row" >
+			<div class="col-sm-12" >
+				<nav class="navbar navbar-default" role="navigation">
+					 <div class="container-fluid">
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          					<ul class="nav navbar-nav"  id="weixin_info_list">
+            					<li onclick="weixin_main_ResendManage('image')"><a href="#">图片自动回复管理</a></li>
+           						<li onclick="weixin_main_ResendManage('text')"><a href="#">文本自动回复管理</a></li>
+          						<li onclick="weixin_main_ResendManage('voice')"><a href="#">语音自动回复管理</a></li>
+ 								<li onclick="weixin_main_ResendManage('video')"><a href="#">录像自动回复管理</a></li>
+								<li onclick="weixin_main_ResendManage('location')"><a href="#">地理位置自动回复管理</a></li>
+								<li onclick="weixin_main_ResendManage('event')"><a href="#">事件自动回复管理</a></li>
+								<li onclick="weixin_main_ResendManage('link')"><a href="#">链接地址自动回复管理</a></li>
+          					</ul>
+        				</div>
+					 </div>
+				</nav>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12" id="weixin_main_resource_manager_body">
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_main_menu_main">
+<!--
+ <li role="presentation" class="dropdown" >
+        <a class="dropdown-toggle" data-toggle="dropdown" href="" onclick="weixin_menu_set_child({{>id}})" aria-expanded="false">
+          {{>name}}<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li class="divider" id="weixin_menu_item_body_{{>id}}"></li>
+          <li onclick="weixin_menu_set_addMainMenu({{>id}})"><a href="#">添加子菜单</a></li>
+		  <li onclick="weixin_menu_main_delete({{>id}})"><a href="#">删除主菜单</a></li>
+		  <li onclick="weixin_menu_main_edit({{>id}})"><a href="#">修改主菜单</a></li>
+        </ul>
+      </li>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_main_menu_Item">
+<!--
+          <li onclick="weixin_menu_main_edit({{>id}})" class="weixin_menu_items_item"><a href="#">{{>name}}<div class="pull-right" style="color:red;">[编辑]</div></a></li>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_main_menu_content_tr">
+<!--
+			<div class="col-sm-3">
+				<input type="text" class="form-control input-sm" id="weixin_Menu_name" placeholder="名称">
+			</div>
+			<div class="col-sm-3">
+				<input type="hidden" id="weixin_Menu_pid" value="0">
+
+				<input type="text" class="form-control input-sm" id="weixin_Menu_key" placeholder="key">
+			</div>
+			<div class="col-sm-3">
+								<div class="input-group">
+											<input type="text" name="table_search" id="weixin_Menu_url" class="form-control input-sm pull-right"  placeholder="url">
+											<div class="input-group-btn">
+												<button class="btn btn-sm btn-default" onclick="weixin_main_select_wenzhang_show('weixin_Menu_url')">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+										</div>
+			</div>
+			<div class="col-sm-3">
+				<button class="btn btn-danger btn-sm" style="width:100%" onclick="weixin_menu_set_addMainMenu_enter()">
+				确定 <i class="fa fa-plus-square"></i>
+			</button>
+			</div>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_main_menu_content_tr_edit">
+<!--
+			<div class="col-sm-3">
+				<input type="text" class="form-control input-sm" id="weixin_Menu_name" placeholder="名称">
+			</div>
+			<div class="col-sm-3">
+				<input type="hidden" id="weixin_Menu_pid" value="0">
+				<input type="text" class="form-control input-sm" id="weixin_Menu_key" placeholder="key">
+			</div>
+			<div class="col-sm-3">
+				<input type="text" class="form-control input-sm" id="weixin_Menu_url" placeholder="url">
+			</div>
+			<div class="col-sm-3">
+				<button class="btn btn-danger btn-sm" style="width:100%" onclick=" weixin_menu_main_edit_enter()">
+				确定 <i class="fa fa-plus-square"></i>
+			</button>
+			</div>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_autoResensDate_manager_table">
+<!--
+			<div class="row">
+					<div class="col-sm-12">
+						<button class="btn btn-danger" style="width:100%;" id="weixin_main_addNewResouse">
+							添加新资源 <i class="fa fa-plus-square"></i>
+						</button>
+					</div>
+					<div class="col-sm-12">
+<br/>
+								<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">名字</th>
+												<th style="text-align: center;">操作</th>
+
+											</tr>
+										</thead>
+										<tbody id="weixin_autoResensDate_manager_table_tbody">
+											
+										</tbody>
+									</table>
+					</div>
+			</div>
+			
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_autoResensDate_manager_table_tr">
+<!--
+<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>name}}</td>
+								<td width="20%" align="center">
+									<button type="button" onclick="weixin_main_ResourceManage_update({{>id}})" class="btn btn-danger btn-sm">修改</button>
+									<button type="button" onclick="weixin_main_Resouse_delete({{>id}})" class="btn btn-danger btn-sm">删除</button>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_autoResend_manager_table">
+<!--
+			<div class="row">
+					<div class="col-sm-12">
+						<button class="btn btn-danger" style="width:100%;" id="weixin_main_addNewResouse">
+							添加新回复<i class="fa fa-plus-square"></i>
+						</button>
+					</div>
+					<div class="col-sm-12">
+<br/>
+								<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">名字</th>
+												<th style="text-align: center;">操作</th>
+												<th style="text-align: center;">开关</th>
+											</tr>
+										</thead>
+										<tbody id="weixin_autoResendDate_manager_table_tbody">
+											
+										</tbody>
+									</table>
+					</div>
+			</div>
+			
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_autoResend_manager_table_tr">
+<!--
+<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>name}}</td>
+								<td width="20%" align="center">
+									<button type="button" onclick="weixin_main_ResendManage_add_addItem_window({{>id}})" class="btn btn-danger btn-sm">添加回复项</button>
+									<button type="button" onclick="weixin_main_Resend_delete({{>id}})" class="btn btn-danger btn-sm">删除</button>
+									<button type="button" onclick="weixin_main_autoResend_addAutoReSend_update_window({{>type}},'image',{{>id}})" class="btn btn-danger btn-sm">修改</button>
+								</td>
+								<td width="20%" align="center">
+									<div class="switch" data-on="warning" data-off="danger"  >
+    											{{if uses==true}}
+    												<input type="checkbox" value="{{>id}}" checked />
+												{{else}}
+													<input type="checkbox" value="{{>id}}" />
+												{{/if}}
+									</div>
+								</td>
+							</tr>
+-->
+</script>
+<div class="modal fade" id="weixin_main_ResourceManage_addImage" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加图片资源</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" onclick="weixin_main_ResourceManage_addImage_enter()">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="form-group" id="input_weixin_iamge_name">
+										<input type="text" class="form-control input-sm" id="weixin_iamge_name" placeholder="给资源命名" /><br />
+									</div>
+									<div class="form-group" id="input_weixin_iamge_mediaId">
+										<input type="text" class="form-control input-sm" id="weixin_iamge_mediaId" placeholder="通过上传多媒体文件，得到的id" /><br />
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="weixin_main_ResourceManage_addVoice" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加语音资源</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" onclick="weixin_main_ResourceManage_addVoice_enter()">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="form-group" id="input_weixin_voice_name">
+										<input type="text" class="form-control input-sm" id="weixin_voice_name" placeholder="给资源命名" /><br />
+									</div>
+									<div class="form-group" id="input_weixin_voice_mediaId">
+										<input type="text" class="form-control input-sm" id="weixin_voice_mediaId" placeholder="通过上传多媒体文件，得到的id" /><br />
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="weixin_main_ResourceManage_addVideo" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加视频资源</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" onclick="weixin_main_ResourceManage_addVideo_enter()">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="form-group" id="input_weixin_Video_name">
+										<input type="text" class="form-control input-sm" id="weixin_Video_name" placeholder="给资源命名" /><br />
+									</div>
+									<div class="form-group" id="input_weixin_Video_mediaId">
+										<input type="text" class="form-control input-sm" id="weixin_Video_mediaId" placeholder="通过上传多媒体文件，得到的id" /><br />
+									</div>
+									<div class="form-group" id="input_weixin_Video_title">
+										<input type="text" class="form-control input-sm" id="weixin_Video_title" placeholder="标题" /><br />
+									</div>
+									<div class="form-group" id="input_weixin_Video_description">
+										<input type="text" class="form-control input-sm" id="weixin_Video_description" placeholder="说明" /><br />
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="weixin_main_ResourceManage_addMusic" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加音乐资源</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" onclick="weixin_main_ResourceManage_addMusic_enter()">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="form-group" id="input_weixin_Music_name">
+										<input type="text" class="form-control input-sm" id="weixin_Music_name" placeholder="给资源命名" /><br />
+									</div>
+									<div class="form-group" id="input_weixin_Music_title">
+										<input type="text" class="form-control input-sm" id="weixin_Music_title" placeholder="标题" /><br />
+									</div>
+									<div class="form-group" id="input_weixin_Music_description">
+										<input type="text" class="form-control input-sm" id="weixin_Music_description" placeholder="说明" /><br />
+									</div>
+									<div class="form-group" id="input_weixin_Music_musicURL">
+										<input type="text" class="form-control input-sm" id="weixin_Music_musicURL" placeholder="音乐的链接地址" /><br />
+									</div>
+									<div class="form-group" id="input_weixin_Music_hQMusicUrl">
+										<input type="text" class="form-control input-sm" id="weixin_Music_hQMusicUrl"
+											placeholder="高质量音乐链接，用户在无线网络下优先使用" /><br />
+									</div>
+									<div class="form-group" id="input_weixin_Music_thumbMediaId">
+										<input type="text" class="form-control input-sm" id="weixin_Music_thumbMediaId"
+											placeholder="音乐图，通过上传多媒体文件，得到的id" /><br />
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="weixin_main_ResourceManage_addImageText" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加图文资源</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" onclick="weixin_main_ResourceManage_addImageText_enter()">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="form-group" id="input_weixin_ImageText_name">
+										<input type="text" class="form-control input-sm" id="weixin_ImageText_name" placeholder="给资源命名" /><br />
+									</div>
+									<div class="form-group" id="input_weixin_ImageText_title">
+										<input type="text" class="form-control input-sm" id="weixin_ImageText_title" placeholder="标题" /><br />
+									</div>
+									<div class="form-group" id="input_weixin_ImageText_description">
+										<input type="text" class="form-control input-sm" id="weixin_ImageText_description" placeholder="说明" /><br />
+									</div>
+									<div class="form-group" id="input_weixin_ImageText_picUrl">
+										<div class="input-group">
+											<input type="text" name="table_search" id="weixin_ImageText_picUrl" class="form-control input-sm pull-right"
+												placeholder="图片地址" />
+											<div class="input-group-btn">
+												<button class="btn btn-sm btn-default" onclick="onImageManagerUpload('weixin_ImageText_picUrl')">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+										</div>
+										<br />
+									</div>
+									<div class="form-group" id="input_weixin_ImageText_url">
+										<div class="input-group">
+											<input type="text" name="table_search" id="weixin_ImageText_url" class="form-control input-sm pull-right"
+												placeholder="点击图片后链接的地址" />
+											<div class="input-group-btn">
+												<button class="btn btn-sm btn-default" onclick="weixin_main_select_wenzhang_show('weixin_ImageText_url')">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+										</div>
+										<br />
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="weixin_main_ResourceManage_addText" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加文本资源</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" onclick="weixin_main_ResourceManage_addText_enter()">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="form-group" id="input_weixin_Text_name">
+										<input type="text" class="form-control input-sm" id="weixin_Text_name" placeholder="给资源命名" /><br />
+									</div>
+									<div class="form-group" id="input_weixin_Text_mediaId">
+										<input type="text" class="form-control input-sm" id="weixin_Text_content" placeholder="内容" /><br />
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="weixin_main_ResendManage_add_window" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加新回复</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div id="weixin_main_ResendManage_add_window_alert"></div>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" id="weixin_main_resend_add_window_enter">
+													确认 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="form-group" id="input_weixin_main_resend_Text_name">
+										<input type="text" class="form-control input-sm" id="weixin_main_resend_Text_name" placeholder="名称" /><br />
+									</div>
+									<div class="form-group" id="input_weixin_main_resend_Text_content">
+										<input type="text" class="form-control input-sm" id="weixin_main_resend_Text_content"
+											placeholder="需要检测用户发过来的内容" /><br />
+									</div>
+									<div class="form-group" id="input_weixin_main_resend_Text_event">
+										<div class="alert alert-warning alert-dismissable no-print">
+											<i class="fa fa-check"></i>
+											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+											<b>提示：</b>请选择类型，如果是菜单点击事件则上边的检测内容就是点击菜单时检测的。<a>帮助</a>
+										</div>
+										<select class="form-control input-sm" id="weixin_main_resend_Text_event">
+											<option value="1" id="weixin_main_resend_Text_event_1">关注账号事件</option>
+											<option value="2" id="weixin_main_resend_Text_event_2">取消关注事件</option>
+											<option value="3" id="weixin_main_resend_Text_event_3">用户地理位置</option>
+											<option value="4" id="weixin_main_resend_Text_event_4">菜单点击事件</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="weixin_main_ResendManage_add_addItem_window" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加新回复</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+
+										<div class="input-group"></div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+									<div class="alert alert-warning alert-dismissable no-print">
+										<i class="fa fa-check"></i>
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<b>提示：</b>当检测用户发送的字是一样的时候。如果发送的内容是图文，则会一起发送合成一条消息，不是图文的话随机发送一条. <a>帮助</a>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="input-group">
+												<input type="text" name="table_search" id="weixin_main_select_resendDate_name"
+													class="form-control pull-right" disabled="disabled" placeholder="从资源库选择一定义好的回复资源" /> <input type="text"
+													name="table_search" id="weixin_main_select_resendDate_id" style="display: none;"
+													class="form-control pull-right" placeholder="" />
+												<div class="input-group-btn">
+													<button class="btn btn-default" onclick="weixin_main_select_resendDate()">
+														<i class="fa fa-search"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" id="weixin_main_add_newResendItem">
+													添加新回复项 <i class="fa fa-plus-square"></i>
+												</button>
+												<button class="btn btn-danger btn-sm pull-right" style="display: none;" id="weixin_main_add_reflash">
+													刷新 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+									<br />
+									<div class="row">
+										<div class="col-sm-12">
+											<table id="example1" class="table table-bordered table-hover">
+												<thead>
+													<tr>
+														<th style="text-align: center;">序号</th>
+														<th style="text-align: center;">名字</th>
+														<th style="text-align: center;">操作</th>
+													</tr>
+												</thead>
+												<tbody id="weixin_main_resend_addResendItem_tbody">
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="weixin_main_ResendManage_add_addItem_window_tbody_tr">
+<!--
+<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>name}}</td>
+								<td width="20%" align="center">
+									<button type="button" onclick="weixin_main_ResendManage_add_addItem_window_tbody_tr_delete({{>id}})" class="btn btn-danger btn-sm">删除</button>
+								</td>
+							</tr>
+-->
+</script>
+<div class="modal fade" id="weixin_main_ResendManage_add_addItem_queryItem_window" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">选择回复</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools"></div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;">
+
+									<div class="row">
+										<div class="col-sm-12">
+											<nav class="navbar navbar-default" role="navigation">
+												<div class="container-fluid">
+													<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+														<ul class="nav navbar-nav" id="weixin_select_item_info_list">
+															<li onclick="weixin_main_addItem_query('image')"><a href="#">图片资源</a></li>
+															<li onclick="weixin_main_addItem_query('voice')"><a href="#">语音资源</a></li>
+															<li onclick="weixin_main_addItem_query('video')"><a href="#">视频资源</a></li>
+															<li onclick="weixin_main_addItem_query('text')"><a href="#">文本资源</a></li>
+															<li onclick="weixin_main_addItem_query('music')"><a href="#">音乐资源</a></li>
+															<li onclick="weixin_main_addItem_query('imageText')"><a href="#">图文资源</a></li>
+														</ul>
+													</div>
+												</div>
+											</nav>
+										</div>
+									</div>
+									<br />
+									<div class="row">
+										<div class="col-sm-12">
+											<table id="example1" class="table table-bordered table-hover">
+												<thead>
+													<tr>
+														<th style="text-align: center;">序号</th>
+														<th style="text-align: center;">名字</th>
+														<th style="text-align: center;">选择</th>
+													</tr>
+												</thead>
+												<tbody id="weixin_main_ResendManage_add_addItem_queryItem_window_tbody">
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="weixin_main_ResendManage_add_addItem_queryItem_window_tbody_tr">
+<!--
+<tr>
+								<td width="10%" align="center">{{>#index+1}}</td>
+								<td width="20%" align="center">{{>name}}</td>
+								<td width="20%" align="center">
+									<button type="button" onclick="weixin_main_select_resendDate_enter('{{>name}}',{{>id}})" class="btn btn-danger btn-sm">选定</button>
+								</td>
+							</tr>
+-->
+</script>
+<div class="modal fade" id="weixin_main_wenzhang_select" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">选择文章</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div class="box box-primary">
+								<div class="box-header">
+									<div class="box-tools">
+										<div class="input-group">
+											<input type="text" name="table_search" id="weixin_wenzhang_name_select" class="form-control input-sm pull-right"
+												style="width: 150px;" placeholder="文章名"/>
+											<div class="input-group-btn">
+												<button class="btn btn-sm btn-default" onclick="weixin_message_manager_query_but(1,'select')">
+													<i class="fa fa-search"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body">
+									<div class="row">
+										<div class="col-sm-12">
+											<table id="example1" class="table table-bordered table-hover">
+												<thead>
+													<tr>
+														<th style="text-align: center;" width="20%">文章名</th>
+														<th style="text-align: center;" width="10%">创建日期</th>
+														<th style="text-align: center;" width="40%">链接</th>
+														<th style="text-align: center;" width="10%">阅读数</th>
+														<th style="text-align: center;" width="20%">操作</th>
+													</tr>
+												</thead>
+												<tbody id="weixin_wenzhang_tbody_select">
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="weixin_wenzhang_tbody_page_select">
+
+									</ul>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>

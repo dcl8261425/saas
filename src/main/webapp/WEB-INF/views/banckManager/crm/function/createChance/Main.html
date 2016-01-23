@@ -1,0 +1,122 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/crm/function/createChance/main.js}"></script>
+<div class="modal fade" id="createChance_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">销售机会窗口</h4>
+			</div>
+			<div class="modal-body" id="lookGroupUser_content">
+				<section>
+					<div class="row">
+
+						<section class="col-lg-13 connectedSortable">
+							<div id="createChanceWindowAlertDiv"></div>
+							<div class="box box-primary" id="lookGroupUser_body">
+								<div class="box-header">
+									<h3 class="box-title">填写资料框</h3>
+									<div class="box-tools">
+
+										<div class="input-group">
+
+
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-sm pull-right" id="createChance_window_enter_add_but" onclick="createChanceAdd()">
+													确认添加 <i class="fa fa-plus-square"></i>
+												</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="max-height: 800px;min-height: 300px">
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="createChance_input_CustomerName">
+												<input type="text" class="form-control"  id="createChance_CustomerName" placeholder="请输入客户名称" />
+											</div>
+										</div>
+
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="createChance_input_CustomerAddress">
+												<input type="text" class="form-control" id="createChance_CustomerAddress" placeholder="客户地址"></input>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-6">
+											<div class="form-group" id="createChance_input_CustomerType">
+												<input type="text" class="form-control" id="createChance_CustomerType" placeholder="客户类别"></input>
+											</div>
+
+										</div>
+										<div class="col-xs-6">
+											<div class="form-group" id="createChance_input_CustomerLevel">
+												<select class="form-control" id="createChance_CustomerLevel">
+													<option value="">客户级别</option>
+													<option value="1">普通客户</option>
+													<option value="2">中等客户</option>
+													<option value="3">重级客户</option>
+													<option value="4">特级客户</option>
+												</select>
+											</div>
+
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="createChance_input_CustomerMark">
+												<textarea rows="5" cols="80" placeholder="客户备注信息" id="createChance_CustomerMark" class="form-control"></textarea>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group" id="createChance_input_CreateManMark">
+												<textarea rows="5" cols="80" placeholder="创建人 简介，介绍客户描述客户" id="createChance_CreateManMark"
+													class="form-control"></textarea>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-6">
+											<div class="form-group" id="createChance_input_NotesUserId">
+											<div id="createChance_NotesUserId"></div>
+												<div class="input-group">
+													<input type="text" name="table_search" id="createChance_NotesUserId_text" disabled="disabled" class="form-control input-sm"
+														style="width: 150px;" placeholder="指派人" />
+													<input type="text" name="table_search"  id="createChance_NotesUserId_id" class="form-control input-sm"
+														style="width: 150px;display: none;" placeholder="指派人Id" />
+														<button class="btn btn-sm btn-default" id="createChance_NotesUserId_id_but" onclick="queryGroupUser('createChance_NotesUserId_id','createChance_NotesUserId_text')">
+															<i class="fa fa-search"></i>
+														</button>
+														<button class="btn btn-sm btn-default" id="createChance_NotesUserId_id_clear" onclick="queryGroupUser_clear()">
+															<i class="fa fa-power-off"></i>
+														</button>
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-6">
+											<div class="form-group" id="createChance_input_State">
+												<select class="form-control" id="createChance_State">
+													<option value="1">普通机会</option>
+													<option value="2">优质机会</option>
+													<option value="3">已成客户</option>
+												</select>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>

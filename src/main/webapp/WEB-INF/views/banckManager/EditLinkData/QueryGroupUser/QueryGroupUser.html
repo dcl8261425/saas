@@ -1,0 +1,139 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/EditLinkDate/QueryGroupUser/Main.js}"></script>
+<div class="modal fade" id="Edit_queryGroupUser_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog box" style="width: 90%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" >查询选取所在组用户</h4>
+			</div>
+			<div class="modal-body" >
+				<section class="content">
+					<div class="row">
+						<div id="Edit_queryGroupUser_window_alert"></div>
+						<section class="col-lg-6 connectedSortable">
+						
+							<div class="box box-primary" id="Edit_queryGroupUser_window_Group_box">
+								<div class="box-header">
+									<h3 class="box-title">组列表</h3>
+									<div class="box-tools">
+
+										<div class="input-group">
+
+											<input type="text" name="table_search" id="Edit_queryGroupUser_window_queryGroupName"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="查找组名" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="Edit_queryGroupUser_window_queryGroupName_but()" id="Edit_queryGroupUser_window_queryGroupName_but">
+													<i class="fa fa-search"></i>
+												</button>
+												
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 800px;">
+									<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">组名</th>
+											
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="Edit_queryGroupUser_window_group_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix"></div>
+
+							</div>
+
+						</section>
+						<section class="col-lg-6 connectedSortable">
+							<div class="box box-primary" id="Edit_queryGroupUser_window_User_box">
+								<div class="box-header">
+									<h3 class="box-title">成员列表</h3>
+									<div class="box-tools">
+
+										<div class="input-group">
+
+											<input type="text" name="table_search" id="Edit_queryGroupUser_window_queryGroupUserName"
+												class="form-control input-sm pull-right" style="width: 150px;" placeholder="查找用户名" />
+											<div class="input-group-btn">
+
+												<button class="btn btn-sm btn-default" onclick="Edit_queryGroupUser_window_queryGroupUserName_but()" id="Edit_queryGroupUser_window_queryGroupUserName_but">
+													<i class="fa fa-search"></i>
+												</button>
+												
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="box-body table-responsive" style="overflow: auto; max-height: 800px;">
+									<table id="example1" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th style="text-align: center;">序号</th>
+												<th style="text-align: center;">姓名</th>
+												<th style="text-align: center;">电话</th>
+												<th style="text-align: center;">操作</th>
+											</tr>
+										</thead>
+										<tbody id="Edit_queryGroupUser_window_user_tbody">
+
+										</tbody>
+									</table>
+								</div>
+
+								<div class="box-footer clearfix">
+									<ul class="pagination pagination-sm no-margin pull-right" id="">
+
+									</ul>
+								</div>
+							</div>
+						</section>
+
+					</div>
+				</section>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/x-jsrender" id="Edit_queryGroupUser_window_queryGroup_tr">
+<!--
+	<tr>
+								<td width="5%" align="center">{{>#index+1}}</td>
+								<td width="10%" align="center">{{>groupName}}</td>
+								<td width="20%" align="center">
+									<div class="btn-group">
+										<button type="button" onclick="Edit_queryGroupUser_window_queryGroupUserName_but({{>id}})" class="btn btn-danger btn-sm">查看组员</button>
+									</div>
+								</td>
+							</tr>
+-->
+</script>
+<script type="text/x-jsrender" id="Edit_queryGroupUser_window_queryGroupUserName_tr">
+<!--
+	<tr>
+								<td width="5%" align="center">{{>#index+1}}</td>
+								<td width="10%" align="center">{{>trueName}}</td>
+								<td width="10%" align="center">{{>phone}}</td>
+								<td width="20%" align="center">
+									<div class="btn-group">
+										<button type="button" onclick="Edit_queryGroupUser_window_enter_select({{>id}},'{{>trueName}}')" class="btn btn-danger btn-sm">选中</button>
+									</div>
+								</td>
+							</tr>
+-->
+</script>

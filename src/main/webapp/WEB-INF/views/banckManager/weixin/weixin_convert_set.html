@@ -1,0 +1,137 @@
+<script src="" th:src="@{/js/libs/pagejs/itemPage/weixin/weixin_convert_set.js}"></script>
+<section class="content-header">
+	<h1>
+		微信管理 <small id="bankuai_title">序列号兑换</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+		<li class="active" id="bankuai_title2">序列号兑换</li>
+	</ol>
+</section>
+
+ <section class="content" id="content">
+                    <!-- Main row -->
+                     <div class="row">
+                     <div id="weixin_convert_alert"></div>
+                        <div class="col-lg-6" onclick="weixin_convert_score()">
+                            <!-- small box -->
+                            <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <h3>
+                                       1
+                                    </h3>
+                                    <p>
+                                     	积分序列号兑换
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-ios7-infinite"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                   点击开启 <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div><!-- ./col -->
+                        <div class="col-lg-6" onclick="weixin_convert_game()">
+                            <!-- small box -->
+                            <div class="small-box bg-red">
+                                <div class="inner">
+                                    <h3>
+                                       	2
+                                    </h3>
+                                    <p>
+                                        	活动序列号兑换
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion-ios7-infinite"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                   点击开启 <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div><!-- ./col -->
+                    </div><!-- /.row -->
+                    <div class="row">
+                        <!-- Left col -->
+                        <section class="col-lg-12 connectedSortable" id="right_layout"> 
+ 
+                            
+                        </section><!-- right col -->
+                    </div><!-- /.row (main row) -->
+    </section><!-- /.content -->
+<script type="text/x-jsrender" id="weixin_convert_score">
+<!--
+<div class="box box-primary" >
+	<div class="box-header">
+		<div class="pull-right box-tools">
+
+		</div>
+		<i class="fa fa-cloud"></i>
+		<h3 class="box-title">积分兑换的序列号-序列号兑换窗口</h3>
+	</div>
+	<div class="box-body">
+		<div class="row">
+			<div class="col-sm-12" style="text-align: center;">
+<div id="score_num_input">
+		<input type="text" id="score_num" class="form-control input-sm" placeholder="请输入序列号"><br><br>
+</div>
+<button class="btn btn-danger btn-sm" onclick="weixin_convert_score_but()" type="button">兑换</button>
+			</div>
+		</div>
+	</div>
+	<div class="box-footer">
+		<div class="row">
+			<div class="col-sm-12" style="text-align: center;">
+				<p id="num_name"></p>
+			</div>
+			<div class="col-sm-12" style="text-align: center;">
+				<p id="num_content"></p>
+			</div>
+			<div class="col-sm-12" style="text-align: center;">
+				<p id="num_num"></p>
+			</div>
+		</div>
+	</div>
+</div>
+-->
+</script>
+<script type="text/x-jsrender" id="weixin_convert_game">
+<!--
+<div class="box box-primary" >
+	<div class="box-header">
+		<div class="pull-right box-tools">
+
+		</div>
+		<i class="fa fa-cloud"></i>
+		<h3 class="box-title">活动获得的序列号-序列号兑换窗口</h3>
+	</div>
+	<div class="box-body">
+		<div class="row">
+			<div class="col-sm-12" style="text-align: center;">
+<div id="huodong_num_input">
+				<input type="text" class="form-control input-sm" id="huodong_num" placeholder="请输入序列号"/><br/><br/>
+</div>
+				<button class="btn btn-danger btn-sm" onclick="weixin_convert_game_but()" type="button">兑换</button>
+			</div>
+		</div>
+	</div>
+	<div class="box-footer">
+		<div class="row" id="weixin_convert_game_content">
+		<div class="col-sm-12" style="text-align: center;">
+			<p id="num_name"></p>
+		</div>
+		<div class="col-sm-12" style="text-align: center;">
+			<p id="num_content"></p>
+		</div>
+		<div class="col-sm-12" style="text-align: center;">
+			<p id="num_startDate"></p>
+		</div>
+		<div class="col-sm-12" style="text-align: center;">
+			<p id="num_endDate"></p>
+		</div>
+		</div>
+	</div>
+</div>
+-->
+</script>

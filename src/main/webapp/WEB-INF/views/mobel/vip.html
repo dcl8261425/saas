@@ -1,0 +1,141 @@
+<script type="text/javascript" src="../../js/libs/jquery-1.9.1.js" th:src="@{/js/libs/pagejs/itemPage/weixin/vip/vip.js}"></script>
+<div class="small-box bg-red" th:if="${success==true}">
+														<div class="inner">
+															<h3 >会员中心</h3>
+															<p th:if="${success==false}">加入会员，享受积分，折扣</p>
+															<p th:if="${success==true}" id="weixin_vip_level" th:text='${"vip等级:"+linkman.vipLevel}'></p>
+															<p th:if="${success==true}" id="weixin_vip_marks" th:text='${"待遇:"+linkman.vipMarks}'></p>
+															<p th:if="${success==true}" id="weixin_vip_price" th:text='${"余额:"+linkman.money}'></p>
+														</div>
+														<div class="icon">
+															<i id="weixin_model_tem_layout_ion" class="ion ion-android-contact"></i>
+														</div>
+														<a href="#" class="small-box-footer"> 
+														<label th:if="${success==false}">您还没有加入会员</label>
+														<label th:if="${success==true}">您的当前积分：<label id="weixin_vip_score" th:text="${linkman.linkManScore}"></label>
+															 <button class="btn btn-sm btn-default" onclick="weixin_vip_reflash()">
+																	<i class="fa fa-refresh"></i>
+																</button>
+														</label> 
+														</a>
+</div>
+<div class="small-box bg-yellow" onclick="weixin_vip_num()" th:if="${success==true}">
+														<div class="inner">
+															<h3 >我的中奖卷</h3>
+															<p >活动抽奖的奖品</p>
+														</div>
+														<div class="icon">
+															<i id="weixin_model_tem_layout_ion" style="font-size: 45px;" class="ion ion-android-calendar"></i>
+														</div>
+
+
+</div>
+<div class="small-box bg-fuchsia" onclick="weixin_vip_order()" th:if="${success==true}">
+														<div class="inner">
+															<h3 >我的订单</h3>
+															<p >在本商店下过的订单</p>
+														</div>
+														<div class="icon">
+															<i id="weixin_model_tem_layout_ion" style="font-size: 45px;" class="ion ion-android-book"></i>
+														</div>
+
+
+</div>
+<div class="small-box bg-fuchsia" onclick="weixin_vip_Score()" th:if="${success==true}">
+														<div class="inner">
+															<h3 >我的兑换券</h3>
+															<p >兑换奖品的序列号在此</p>
+														</div>
+														<div class="icon">
+															<i id="weixin_model_tem_layout_ion" style="font-size: 45px;" class="ion ion-android-book"></i>
+														</div>
+
+
+</div>
+<div class="small-box bg-fuchsia" onclick="weixin_vip_setPassWord_show()" th:if="${success==true}">
+														<div class="inner">
+															<h3 >设置密码</h3>
+															<p >设置您的密码，在线购物积分兑换需要密码</p>
+														</div>
+														<div class="icon">
+															<i id="weixin_model_tem_layout_ion" style="font-size: 45px;" class="ion ion-android-book"></i>
+														</div>
+
+
+</div>
+
+<div class="small-box bg-fuchsia" onclick="weixin_vip_rigister_window_open()" th:if="${success==false}">
+														<div class="inner">
+															<h3 >加入会员</h3>
+															<p >输入您的手机和姓名就可以加入会员啦</p>
+														</div>
+														<div class="icon">
+															<i id="weixin_model_tem_layout_ion" style="font-size: 45px;" class="ion ion-android-book"></i>
+														</div>
+
+
+</div>
+
+ <div id="weixin_vip_rigister_alert"  class="cd-popup" role="alert" th:if="${success==false}">
+        <div class="cd-popup-container">
+            <p id="good_alert_body">
+            	<input type="text" id="vip_name" class="form-control"  placeholder="姓名"/>
+            	<br/>
+            	<input type="text" id="vip_phone" class="form-control"  placeholder="电话"/>
+            </p>
+            <ul class="cd-buttons">
+                <li><a id="alert" href="javascript:weixin_vip_rigister_window_open_enter()">确定</a></li>
+                <li><a  href="javascript:weixin_vip_rigister_window_close()" >取消</a></li>
+            </ul>
+            <a href="#0" class="cd-popup-close img-replace" onclick="weixin_vip_rigister_window_close()">Close</a>
+        </div>
+        <!-- cd-popup-container -->
+    </div>
+     <div id="weixin_vip_rigister_message_alert"  class="cd-popup" role="alert" th:if="${success==false}">
+        <div class="cd-popup-container">
+            <p id="weixin_viprigister_alert_body">
+            	
+            </p>
+            <ul class="cd-buttons">
+                <li><a id="alert" href="javascript:weixin_vip_rigister_message_window_close()">确定</a></li>
+                <li><a  href="javascript:weixin_vip_rigister_message_window_close()" >取消</a></li>
+            </ul>
+            <a href="#0" class="cd-popup-close img-replace" onclick="weixin_vip_rigister_message_window_close()">Close</a>
+        </div>
+        <!-- cd-popup-container -->
+    </div>
+<div id="weixin_vip_password_alert"  class="cd-popup" role="alert" th:if="${success==true}">
+        <div class="cd-popup-container">
+        	
+            <p >
+            	
+            	<input type="text" id="oldpassword" class="form-control"  placeholder="旧密码:原始密码:0000或00000"/>
+            	<br/>
+            	<input type="text" id="newpassword" class="form-control"  placeholder="新密码"/>
+            	<br/>
+            	<input type="text" id="renewpassword" class="form-control"  placeholder="再次输入新密码"/>
+            </p>
+            <p id="weixin_vip_password_text"></p>
+            <ul class="cd-buttons">
+                <li><a id="alert" href="javascript:weixin_vip_setPassWord_enter()">确定</a></li>
+                <li><a  href="javascript:weixin_vip_setPassWord_close()" >取消</a></li>
+            </ul>
+            <a href="#0" class="cd-popup-close img-replace" onclick="weixin_vip_rigister_window_close()">Close</a>
+        </div>
+        <!-- cd-popup-container -->
+    </div>
+    <div id="weixin_vip_password_login_alert"  class="cd-popup" role="alert" th:if="${success==false}">
+        <div class="cd-popup-container">
+            <p id="good_alert_body">
+           		<br/>
+            	<input type="text" id="password" class="form-control"  placeholder="输入密码默认密码是0000或00000"/>
+            </p>
+             <p id="weixin_vip_login_text"></p>
+            <ul class="cd-buttons">
+                <li><a id="alert" href="javascript:weixin_vip_login_enter()">确定</a></li>
+                <li><a  href="javascript:weixin_vip_login_close()" >取消</a></li>
+            </ul>
+            <a href="#0" class="cd-popup-close img-replace" onclick="weixin_vip_rigister_window_close()">Close</a>
+        </div>
+        <!-- cd-popup-container -->
+    </div>

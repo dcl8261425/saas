@@ -1,0 +1,67 @@
+<script type="text/javascript" src="../../js/libs/jquery-1.9.1.js" th:src="@{/js/libs/pagejs/itemPage/weixin/guaguaka/main.js}"></script>
+
+<div class="col-lg-12">
+	<br/>
+	<div class="thumbnail">
+		<div class="ly-plate">
+			<div class="rotate-bg"></div>
+			<div class="lottery-star" style="text-align: center;">
+				<canvas/>
+			</div>
+		</div>
+		<div class="caption">
+			<h3>
+				<span class="label label-primary">刮刮卡说明:</span>
+			</h3>
+			<div class="row">
+				<div class="col-xs-12">
+					刮出奖品，刮完后会获得序列号，并存入您的奖券列表，在会员中心查看
+              	注意：<br/>
+              	1.序列号到期日期。逾期不用视为作废。<br/>
+              	2.请先注册并绑定账户后使用。
+              	<label id="x"></label>
+              		<label id="y"></label>
+				</div>
+			</div>
+			<hr/>
+			<h3>
+				<span class="label label-primary">当前奖品列表:</span>
+			</h3>
+						<div th:each="item2:${jiangpin}">
+				<div class="row" >
+					<div class="col-xs-6">
+						<p>
+							<span class="label label-success" th:text="${'名称:'+item2.content}"></span>
+						</p>
+					</div>
+					<div class="col-xs-6">
+						<span class="label label-success" th:text='${"数量:"+item2.num}'></span>
+					</div>
+				</div>
+				<div class="row" >
+					<div class="col-xs-12">
+						<span class="label label-success" th:text='${"兑换起时间:"+item2.startDate}'></span>
+					</div>
+				</div>
+				<div class="row" >
+					<div class="col-xs-12">
+						<span class="label label-success" th:text='${"兑换止时间:"+item2.endDate}'></span>
+					</div>
+				</div>
+				<hr/>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<div class="cd-popup" role="alert">
+	<div class="cd-popup-container">
+		<p id="jifenduihuan_duihuan_alert_body"></p>
+		<ul class="cd-buttons">
+			<li><a id="weixin_jifenduihuan_duihuan_window_enter" href="">确定</a></li>
+			<li><a href="javascript:weixin_jifenduihuan_duihuan_window_close()">取消</a></li>
+		</ul>
+		<a href="#0" class="cd-popup-close img-replace" onclick="weixin_jifenduihuan_duihuan_window_close()">Close</a>
+	</div>
+	<!-- cd-popup-container -->
+</div>

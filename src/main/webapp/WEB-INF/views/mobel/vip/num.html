@@ -1,0 +1,56 @@
+<script type="text/javascript" src="../../js/libs/layer.js" th:src="@{/js/libs/jsrender.min.js}"></script>
+<script type="text/javascript" src="../../js/libs/jquery-1.9.1.js"
+	th:src="@{/js/libs/pagejs/itemPage/weixin/vip/num.js}"></script>
+<div class="row" id="weixin_vip_num">
+	<div class="col-xs-12">
+		<div class="box box-primary">
+			<div class="box-header">
+				<div class="pull-right box-tools"></div>
+				<i class="ion ion-clipboard"></i>
+				<h3 class="box-title">抽奖序列号</h3>
+			</div>
+			<div class="box-body">
+
+				<table id="example1" class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th style="text-align: center;">名称</th>
+							<th style="text-align: center;">序列号</th>
+							<th style="text-align: center;">开始</th>
+							<th style="text-align: center;">结束</th>
+							<th style="text-align: center;">已用</th>
+						</tr>
+					</thead>
+					<tbody id="weixin_vip_content">
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<br />
+	</div>
+</div>
+<div class="row" id="weixin_vip_page">
+	<div class="col-xs-6">
+		<button class="btn btn-primary" style="width: 100%;" onclick="weixin_vip_up()">上一页</button>
+	</div>
+	<div class="col-xs-6">
+		<button class="btn btn-primary" style="width: 100%;" onclick="weixin_vip_next()">下一页</button>
+	</div>
+</div>
+<script type="text/x-jsrender" id="weixin_vip_list_item">
+<!--
+		<tr >
+			<td width="20%" style="text-align: center;">{{>content}}</td>
+			<td width="30%" style="text-align: center;">{{>xuliehao}}</td>
+			<td width="20%" style="text-align: center;">{{JavaSTojsDate:startDate}}</td>
+			<td width="20%" style="text-align: center;">{{JavaSTojsDate:endDate}}</td>
+			{{if uses}}
+			<td width="10%" style="text-align: center;">已用</td>
+{{else}}
+<td width="10%" style="text-align: center;">未用</td>
+{{/if}}
+		</tr>
+	
+-->
+</script>
