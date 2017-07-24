@@ -811,7 +811,7 @@ public class DaoImpl extends BaseHibernateDao implements Dao {
 								+ "' and '"
 								+ endDate
 								+ "' and conpanyId="
-								+ conpanyId + " group by chanceId").list();
+								+ conpanyId + " group by chanceId,goodsName,chanceName").list();
 		return list;
 	}
 
@@ -832,7 +832,7 @@ public class DaoImpl extends BaseHibernateDao implements Dao {
 								+ "' and '"
 								+ endDate
 								+ "' and conpanyId="
-								+ conpanyId + " group by goodsSourceId").list();
+								+ conpanyId + " group by goodsSourceId,goodsName,goodsSourceName").list();
 		return list;
 	}
 

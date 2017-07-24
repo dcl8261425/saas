@@ -11,7 +11,7 @@
 		<hibernate.version>3.3.2.GA</hibernate.version>
 		<java-version>1.6</java-version>
 		<org.springframework-version>3.2.2.RELEASE</org.springframework-version>
-		<org.slf4j-version>1.5.10</org.slf4j-version>
+		<org.slf4j-version>1.7.5</org.slf4j-version>
 		<jackson.version>1.9.13</jackson.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -329,7 +329,7 @@
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
+			<version>1.2.16</version>
 			<exclusions>
 				<exclusion>
 					<groupId>javax.mail</groupId>
@@ -403,11 +403,6 @@
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-ehcache</artifactId>
 			<version>1.2.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.googlecode</groupId>
-			<artifactId>hibernate-memcached</artifactId>
-			<version>1.2.2</version>
 		</dependency>
 		<!-- memcached -->
 		<dependency>

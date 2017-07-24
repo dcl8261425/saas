@@ -74,7 +74,7 @@ public class WeiXinMainController {
 	@RequestMapping(value = "/weixin_Game_set")
 	public String weixin_Game_set(Model model, HttpServletRequest req,
 			HttpServletResponse res) {
-		return "banckManager/weixin/ weixin_game_set";
+		return "banckManager/weixin/weixin_game_set";
 	}
 	/**	
 	 *序列号兑换

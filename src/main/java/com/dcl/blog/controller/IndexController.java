@@ -4352,7 +4352,7 @@ public class IndexController {
 			map.put("success", true);
 			map.put("info", "完成，您的账户名为:"+username+",也可以去邮箱内检查.");
 			map.put("username",username);
-			email.sendInfoDateEmail(conpany.getConpanyAdminEmail(), EmailUtil.EmailContent("您的账户名为:"+username));
+			//email.sendInfoDateEmail(conpany.getConpanyAdminEmail(), EmailUtil.EmailContent("您的账户名为:"+username));
 			WeiXinAutoReSendMenu menu=new WeiXinAutoReSendMenu();
 			menu.setConpanyId(conpany.getId());
 			menu.setType(WeiXinAutoReSendMenu.TYPE_EVENT);

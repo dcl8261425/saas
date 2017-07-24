@@ -32,30 +32,30 @@ http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		destroy-method="close">
 		<!--其它数据库的url和driver参看tools\generator.xml -->
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost/saas" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/saas?useUnicode=true&amp;characterEncoding=UTF-8" />
 		<property name="username" value="root" />
-		<property name="password" value="dcl1300185" />
+		<property name="password" value="dcl1300185"/>
 	</bean>
 	<!-- binernate 的注解，以及引用数据源 -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.dcl.blog.model."></property>
+		<property name="packagesToScan" value="com.dcl.blog.model"></property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<!-- 开启二级缓存 -->
-			<prop key="hibernate.cache.use_second_level_cache">true</prop>
+			<prop key="hibernate.cache.use_second_level_cache">false</prop>
 				<prop key="hibernate.cache.use_structured_entries">true</prop>
-				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.use_query_cache">false</prop>
 				<prop key="hibernate.cache.region_prefix">h3test</prop>
-				<prop key="hibernate.cache.provider_class">
+<!--				<prop key="hibernate.cache.provider_class">
 					com.googlecode.hibernate.memcached.MemcachedCacheProvider
 				</prop>
 				<prop key="hibernate.memcached.servers">127.0.0.1:11211</prop>
-				<prop key="hibernate.memcached.operationTimeout">60000</prop>
+				<prop key="hibernate.memcached.operationTimeout">60000</prop>-->
 			</props>
 		</property>
 	</bean>
@@ -102,7 +102,7 @@ http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		</property>
 	</bean>  
 			<!-- 缓存注解 -->
-<cache:annotation-driven cache-manager="cacheManager" />
+<!--<cache:annotation-driven cache-manager="cacheManager" />
 	<bean name="cacheManager"
 		class="com.google.code.ssm.spring.SSMCacheManager">
 		<property name="caches">
@@ -119,7 +119,7 @@ http://www.springframework.org/schema/task/spring-task-3.0.xsd
 			</set>
 		</property>
 
-	</bean>
+	</bean>-->
 			<!-- 配置载入属性文件的组件 -->  
     <bean id="propertyConfigurer"  
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
@@ -150,26 +150,26 @@ http://www.springframework.org/schema/task/spring-task-3.0.xsd
     <import resource="appServlet/simplesm-context.xml" />
 	<aop:aspectj-autoproxy />
 	<context:component-scan base-package="com.google.code.ssm,com.dcl.blog.service.impl,com.dcl.blog.dao.impl" />
-	<bean name="defaultCache" class="com.google.code.ssm.CacheFactory">
-		<property name="cacheName" value="defaultCache" />
-		<property name="cacheClientFactory">
-			<bean name="cacheClientFactory"
-				class="com.google.code.ssm.providers.xmemcached.MemcacheClientFactoryImpl" />
-		</property>
-		<property name="addressProvider">
-			<bean class="com.google.code.ssm.config.DefaultAddressProvider">
-				<property name="address" value="127.0.0.1:11211" />
-			</bean>
-		</property>
-		<property name="configuration">
-			<bean class="com.google.code.ssm.providers.CacheConfiguration">
-				<property name="consistentHashing" value="true" />
-			</bean>
-		</property>
+	<!--	<bean name="defaultCache" class="com.google.code.ssm.CacheFactory">
+            <property name="cacheName" value="defaultCache" />
+            <property name="cacheClientFactory">
+                <bean name="cacheClientFactory"
+                    class="com.google.code.ssm.providers.xmemcached.MemcacheClientFactoryImpl" />
+            </property>
+            <property name="addressProvider">
+                <bean class="com.google.code.ssm.config.DefaultAddressProvider">
+                    <property name="address" value="127.0.0.1:11211" />
+                </bean>
+            </property>
+            <property name="configuration">
+                <bean class="com.google.code.ssm.providers.CacheConfiguration">
+                    <property name="consistentHashing" value="true" />
+                </bean>
+            </property>
 
-	</bean>
+        </bean>
 
-	<bean class="com.google.code.ssm.Settings">
-		<property name="order" value="500" />
-	</bean>
+        <bean class="com.google.code.ssm.Settings">
+            <property name="order" value="500" />
+        </bean>-->
 </beans>

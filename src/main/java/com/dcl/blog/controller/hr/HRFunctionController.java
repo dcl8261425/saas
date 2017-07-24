@@ -680,7 +680,7 @@ public class HRFunctionController {
 		}
 		List<Object> list=dao.getObjectList("SoftPermission", "where url='/hr/function/waiqinGroupManager'");
 		SoftPermission s=(SoftPermission) list.iterator().next();
-		List<Object> groups=dao.getObjectListByeSql("select * from conpanygroup where id in (select conpanyuserlinkrole.groupId from conpanyuserlinkrole inner join softpermissionlinkconpanyrole on softpermissionlinkconpanyrole.softPermissionId="+s.getId()+" and conpanyuserlinkrole.conpanyId="+users.getConpanyId()+" and conpanyuserlinkrole.userId="+users.getId()+" and conpanyuserlinkrole.groupId=softpermissionlinkconpanyrole.groupid)");
+		List<Object> groups=dao.getObjectListByeSql("select * from ConpanyGroup where id in (select conpanyuserlinkrole.groupId from Conpanyuserlinkrole inner join softpermissionlinkconpanyrole on softpermissionlinkconpanyrole.softPermissionId="+s.getId()+" and conpanyuserlinkrole.conpanyId="+users.getConpanyId()+" and conpanyuserlinkrole.userId="+users.getId()+" and conpanyuserlinkrole.groupId=softpermissionlinkconpanyrole.groupid)");
 		map.put("success", true);
 		map.put("data", groups);
 		return map;
